@@ -1,5 +1,12 @@
 # alpha
 
+> I am Alpha, I am Omega
+
+[![Build Status](https://travis-ci.com/Jeff-Tian/alpha.svg?branch=master)](https://travis-ci.com/Jeff-Tian/alpha)
+[![codecov](https://codecov.io/gh/Jeff-Tian/alpha/branch/master/graph/badge.svg)](https://codecov.io/gh/Jeff-Tian/alpha)
+[![Build status](https://ci.appveyor.com/api/projects/status/ghg9xa44co8h025p?svg=true)](https://ci.appveyor.com/project/Jeff-Tian/alpha)
+
+
 [Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
 
 ## QuickStart
