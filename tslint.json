@@ -5,5 +5,54 @@
     "tslint-config-prettier",
     "tslint:recommended",
     "tslint-sonarts"
-  ]
+  ],
+  "rules": {
+    "quotemark": [
+      true,
+      "single",
+      "jsx-double"
+    ],
+    "no-console": [
+      true,
+      "dir",
+      "log",
+      "error",
+      "warn"
+    ],
+    "no-this-assignment": false,
+    "no-object-literal-type-assertion": true,
+    "space-before-function-paren": false,
+    "interface-name": [
+      true
+    ],
+    "adjacent-overload-signatures": true,
+    "member-access": [
+      false
+    ],
+    "member-ordering": [
+      true,
+      {
+        "order": "fields-first"
+      }
+    ],
+    "object-literal-sort-keys": false,
+    "max-classes-per-file": [
+      true,
+      10
+    ],
+    "variable-name": [
+      true,
+      "allow-leading-underscore",
+      "allow-snake-case"
+    ],
+    "align": [
+      true,
+      "statements"
+    ],
+    "no-implicit-dependencies": [
+      true,
+      "dev"
+    ],
+    "semicolon": false
+  }
 }
