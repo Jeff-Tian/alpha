@@ -1,0 +1,1 @@
+web: egg-scripts start
