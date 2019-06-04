@@ -37,6 +37,11 @@ Automatically. If failed by token expired then you can update the token by
 travis encrypt $(heroku auth:token) --add deploy.api_key --pro
 ```
 
+### Check logs
+```bash
+heroku logs --tail -a uniheart
+```
+
 ### Npm Scripts
 
 - Use `npm run lint` to check code style
