@@ -6,7 +6,6 @@
 [![codecov](https://codecov.io/gh/Jeff-Tian/alpha/branch/master/graph/badge.svg)](https://codecov.io/gh/Jeff-Tian/alpha)
 [![Build status](https://ci.appveyor.com/api/projects/status/ghg9xa44co8h025p?svg=true)](https://ci.appveyor.com/project/Jeff-Tian/alpha)
 
-
 [Hacker News](https://news.ycombinator.com/) showcase using typescript && egg
 
 ## QuickStart
@@ -23,9 +22,19 @@ Don't tsc compile at development mode, if you had run `tsc` then you need to `np
 
 ### Deploy
 
+- to localhost
+
 ```bash
 $ npm run tsc
 $ npm start
+```
+
+- to heroku
+
+Automatically. If failed by token expired then you can update the token by
+
+```bash
+travis encrypt $(heroku auth:token) --add deploy.api_key --pro
 ```
 
 ### Npm Scripts
