@@ -1,1 +1,1 @@
-web: npm install && npm run ci && egg-scripts start
+web: egg-scripts start
