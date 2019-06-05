@@ -9,7 +9,7 @@ const plugin: EggPlugin = {
 
     passport: {
         enable: true,
-        package: 'egg-passport',
+        package: 'egg-passport-x',
     },
 
     passportGithub: {

@@ -6,7 +6,7 @@ export default () => {
   config.passportGithub = {
     key: process.env['passport-github-key'] || '',
     secret: process.env['passport-github-secret'] || '',
-    callbackURL: '/passport/github/callback',
+    callbackURL: 'https://uniheart.herokuapp.com/passport/github/callback',
     proxy: false,
   }
 

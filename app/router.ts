@@ -7,7 +7,7 @@ export default (app: Application) => {
   router.get('/', controller.home.render)
   app.router.get('/user', 'home.render')
 
-  app.passport.mount('github')
+  app.passport.mount('github', app.config.passportGithub)
 
   app.router.get('/logout', 'user.logout')
 }

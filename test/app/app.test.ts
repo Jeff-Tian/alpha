@@ -65,7 +65,7 @@ describe('test/app.test.ts', () => {
         .httpRequest()
         .get('/passport/github')
         .expect(/Found/)
-        .expect('Location', /https:\/\//)
+        .expect('Location', /https:\/\/github.com\/login\/oauth\/authorize\?response_type=code&redirect_uri=https/)
         .expect(302)
     })
 

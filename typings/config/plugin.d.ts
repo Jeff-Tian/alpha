@@ -14,7 +14,7 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
-import 'egg-passport';
+import 'egg-passport-x';
 import 'egg-passport-github';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
