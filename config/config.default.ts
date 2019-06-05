@@ -18,7 +18,7 @@ export default (appInfo: EggAppInfo) => {
   config.passportGithub = {
     key: 'your_clientID',
     secret: 'your_clientSecret',
-    callbackURL: '/passport/github/callback',
+    callbackURL: 'https://uniheart.herokuapp.com/passport/github/callback',
     proxy: false,
   }
 
