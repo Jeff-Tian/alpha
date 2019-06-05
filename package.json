@@ -45,7 +45,8 @@
     "tslint-config-prettier": "^1.15.0",
     "tslint-microsoft-contrib": "^6.0.0",
     "tslint-plugin-prettier": "^2.0.0",
-    "tslint-sonarts": "^1.8.0"
+    "tslint-sonarts": "^1.8.0",
+    "runscript": "latest"
   },
   "engines": {
     "node": ">=8.9.0"
