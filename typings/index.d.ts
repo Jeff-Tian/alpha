@@ -52,6 +52,8 @@ declare module 'egg' {
     passportGithub?: {
       key: string
       secret: string
+      callbackURL?: string
+      proxy?: boolean
     }
   }
 }

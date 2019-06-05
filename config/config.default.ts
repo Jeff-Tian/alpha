@@ -18,8 +18,8 @@ export default (appInfo: EggAppInfo) => {
   config.passportGithub = {
     key: 'your_clientID',
     secret: 'your_clientSecret',
-    // callbackURL: '/passport/github/callback',
-    // proxy: false,
+    callbackURL: '/passport/github/callback',
+    proxy: false,
   }
 
   // the return config will combines to EggAppConfig
