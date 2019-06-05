@@ -10,4 +10,13 @@ describe('test/app/controller/home.test.ts', () => {
       .expect(200)
     assert(result.text.match(/Home/))
   })
+
+  it('should be health', async () => {
+    const result = await app
+      .httpRequest()
+      .get('/health-check')
+      .expect(200)
+
+    assert(result.text.startsWith('hi, egg'))
+  })
 })
