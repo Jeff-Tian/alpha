@@ -11,6 +11,6 @@ export default class Test extends Service {
   public async sayHi(name: string) {
     return `hi, ${name}, current env = ${
       process.env.NODE_ENV
-    }, current SERVER_ENV=${process.env.EGG_SERVER_ENV}`
+      }, current SERVER_ENV=${process.env.EGG_SERVER_ENV}, github callback = ${this.config.passportGithub!.callbackURL}`
   }
 }
