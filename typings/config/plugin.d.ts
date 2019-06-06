@@ -16,7 +16,7 @@ import 'egg-jsonp';
 import 'egg-view';
 import 'egg-passport-x';
 import 'egg-passport-github';
-import 'egg-passport-wechat';
+import 'egg-passport-wechat-ts';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {

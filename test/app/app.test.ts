@@ -65,7 +65,10 @@ describe('test/app.test.ts', () => {
         .httpRequest()
         .get('/passport/github')
         .expect(/Found/)
-        .expect('Location', /https:\/\/github.com\/login\/oauth\/authorize\?response_type=code&redirect_uri=https/)
+        .expect(
+          'Location',
+          /https:\/\/github.com\/login\/oauth\/authorize\?response_type=code&redirect_uri=https/
+        )
         .expect(302)
     })
 
@@ -76,6 +79,13 @@ describe('test/app.test.ts', () => {
         .get('/passport/github/callback')
         .expect(/Found/)
         .expect('Location', /https:\/\//)
+        .expect(302)
+    })
+
+    it('should redirect to wechat oauth url', () => {
+      return app
+        .httpRequest()
+        .get('/passport/wechat')
         .expect(302)
     })
   })

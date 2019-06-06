@@ -19,7 +19,7 @@ const plugin: EggPlugin = {
 
   passportWechat: {
     enable: true,
-    package: 'egg-passport-wechat',
+    package: 'egg-passport-wechat-ts',
   },
 }
 
