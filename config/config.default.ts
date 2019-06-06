@@ -27,6 +27,21 @@ export default (appInfo: EggAppInfo) => {
     secret: 'secret',
   }
 
+  config.onerror = {
+    all(err, ctx) {
+      ctx.body = {err}
+      ctx.status = 500
+    },
+    json(err, ctx) {
+      ctx.body = err
+      ctx.status = 500
+    },
+    html(err, ctx) {
+      ctx.body = '<h3>error</h3><p>' + JSON.stringify(err) + '</p>'
+      ctx.status = 500
+    },
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
