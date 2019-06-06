@@ -22,6 +22,11 @@ export default (appInfo: EggAppInfo) => {
     proxy: false,
   }
 
+  config.passportWechat = {
+    key: 'key',
+    secret: 'secret',
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

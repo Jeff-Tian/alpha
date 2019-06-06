@@ -4,10 +4,15 @@ export default () => {
   const config: PowerPartial<EggAppConfig> = {}
 
   config.passportGithub = {
-    key: process.env['passport-github-key'] || 'prod_clientID',
-    secret: process.env['passport-github-secret'] || 'prod_clientSecret',
+    key: process.env['passport-github-key']!,
+    secret: process.env['passport-github-secret']!,
     callbackURL: 'https://uniheart.herokuapp.com/passport/github/callback',
     proxy: false,
+  }
+
+  config.passportWechat = {
+    key: process.env['passport-wechat-key']!,
+    secret: process.env['passport-wechat-secret']!,
   }
 
   return config

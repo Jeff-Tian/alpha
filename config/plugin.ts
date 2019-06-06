@@ -1,21 +1,26 @@
-import { EggPlugin } from 'egg';
+import {EggPlugin} from 'egg'
 
 const plugin: EggPlugin = {
-    // static: true,
-    // nunjucks: {
-    //   enable: true,
-    //   package: 'egg-view-nunjucks',
-    // },
+  // static: true,
+  // nunjucks: {
+  //   enable: true,
+  //   package: 'egg-view-nunjucks',
+  // },
 
-    passport: {
-        enable: true,
-        package: 'egg-passport-x',
-    },
+  passport: {
+    enable: true,
+    package: 'egg-passport-x',
+  },
 
-    passportGithub: {
-        enable: true,
-        package: 'egg-passport-github',
-    },
-};
+  passportGithub: {
+    enable: true,
+    package: 'egg-passport-github',
+  },
 
-export default plugin;
+  passportWechat: {
+    enable: true,
+    package: 'egg-passport-wechat',
+  },
+}
+
+export default plugin
