@@ -13,6 +13,7 @@ export default () => {
   config.passportWechat = {
     key: process.env['passport-wechat-key']!,
     secret: process.env['passport-wechat-secret']!,
+    callbackURL: 'https://uniheart.herokuapp.com/passport/wechat/callback',
   }
 
   return config
