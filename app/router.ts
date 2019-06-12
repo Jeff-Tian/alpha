@@ -9,6 +9,7 @@ export default (app: Application) => {
 
   app.passport.mount('github', app.config.passportGithub)
   app.passport.mount('wechat', app.config.passportWechat)
+  app.passport.mount('citi', app.config.passportCiti)
 
   app.router.get('/logout', 'user.logout')
 }

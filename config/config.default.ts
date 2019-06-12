@@ -27,6 +27,11 @@ export default (appInfo: EggAppInfo) => {
     secret: 'secret',
   }
 
+  config.passportCiti = {
+    key: 'key',
+    secret: 'secret',
+  }
+
   config.onerror = {
     all(err, ctx) {
       ctx.body = {err}

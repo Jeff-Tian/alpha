@@ -17,6 +17,7 @@ import 'egg-view';
 import 'egg-passport-x';
 import 'egg-passport-github';
 import 'egg-passport-wechat-ts';
+import 'egg-passport-citi';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -35,5 +36,6 @@ declare module 'egg' {
     passport?: EggPluginItem;
     passportGithub?: EggPluginItem;
     passportWechat?: EggPluginItem;
+    passportCiti?: EggPluginItem;
   }
 }

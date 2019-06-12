@@ -21,6 +21,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-passport-wechat-ts',
   },
+
+  passportCiti: {
+    enable: true,
+    package: 'egg-passport-citi',
+  },
 }
 
 export default plugin
