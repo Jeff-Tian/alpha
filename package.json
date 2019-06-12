@@ -25,7 +25,7 @@
     "egg": "^2.6.1",
     "egg-passport-github": "^1.0.0",
     "egg-passport-wechat-ts": "latest",
-    "egg-passport-citi": "0.0.4",
+    "egg-passport-citi": "0.0.5",
     "egg-passport-x": "^2.0.1",
     "egg-scripts": "^2.6.0"
   },
