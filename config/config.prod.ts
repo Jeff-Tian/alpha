@@ -16,5 +16,11 @@ export default () => {
     callbackURL: 'https://uniheart.herokuapp.com/passport/wechat/callback',
   }
 
+  config.passportCiti = {
+    key: process.env['passport-citi-key']!,
+    secret: process.env['passport-citi-secret']!,
+    callbackURL: 'https://uniheart.herokuapp.com/passport/citi/callback',
+  }
+
   return config
 }
