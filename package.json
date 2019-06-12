@@ -25,7 +25,7 @@
     "egg": "^2.6.1",
     "egg-passport-github": "^1.0.0",
     "egg-passport-wechat-ts": "latest",
-    "egg-passport-citi": "latest",
+    "egg-passport-citi": "0.0.2",
     "egg-passport-x": "^2.0.1",
     "egg-scripts": "^2.6.0"
   },
@@ -35,20 +35,20 @@
     "@types/supertest": "^2.0.0",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
+    "egg-bin": "^4.13.1",
     "egg-ci": "^1.8.0",
-    "egg-bin": "^4.11.0",
     "egg-mock": "^3.16.0",
+    "prettier": "1.15.3",
+    "prettier-tslint": "^0.4.0",
+    "runscript": "latest",
     "tslib": "^1.9.0",
     "tslint": "^5.0.0",
     "tslint-config-egg": "^1.0.0",
-    "typescript": "^3.0.0",
-    "prettier": "1.15.3",
-    "prettier-tslint": "^0.4.0",
     "tslint-config-prettier": "^1.15.0",
     "tslint-microsoft-contrib": "^6.0.0",
     "tslint-plugin-prettier": "^2.0.0",
     "tslint-sonarts": "^1.8.0",
-    "runscript": "latest"
+    "typescript": "^3.0.0"
   },
   "engines": {
     "node": ">=8.9.0"
