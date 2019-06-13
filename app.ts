@@ -7,13 +7,16 @@ export default (app: Application) => {
     // assert(user.id, 'user.id should exists')
 
     ctx.logger.info('user = ', user)
+
+    return user
   })
 
-  app.passport.serializeUser(async (ctx, user) => {
-    ctx.logger.info('serialzing User: ', user)
-  })
-
-  app.passport.deserializeUser(async (ctx, user) => {
-    ctx.logger.info('deserializing User: ', user)
-  })
+  // tslint:disable-next-line:no-commented-code
+  // app.passport.serializeUser(async (ctx, user) => {
+  //   ctx.logger.info('serialzing User: ', user)
+  // })
+  //
+  // app.passport.deserializeUser(async (ctx, user) => {
+  //   ctx.logger.info('deserializing User: ', user)
+  // })
 }
