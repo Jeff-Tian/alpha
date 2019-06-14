@@ -22,5 +22,10 @@ export default () => {
     callbackURL: 'https://uniheart.herokuapp.com/passport/citi/callback',
   }
 
+  config.sequelize = {
+    dialect: 'mysql',
+    connectionUri: process.env.CLEARDB_DATABASE_URL,
+  }
+
   return config
 }

@@ -6,6 +6,7 @@ export default (app: Application) => {
     assert(user.provider, 'user.provider should exists')
     // assert(user.id, 'user.id should exists')
 
+    ctx.logger.info('============================================')
     ctx.logger.info('user = ', user)
 
     return user

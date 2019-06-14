@@ -9,7 +9,7 @@ const plugin: EggPlugin = {
 
   passport: {
     enable: true,
-    package: 'egg-passport-x',
+    package: 'egg-passport',
   },
 
   passportGithub: {
@@ -25,6 +25,11 @@ const plugin: EggPlugin = {
   passportCiti: {
     enable: true,
     package: 'egg-passport-citi',
+  },
+
+  sequelize: {
+    enable: true,
+    package: 'egg-sequelize',
   },
 }
 

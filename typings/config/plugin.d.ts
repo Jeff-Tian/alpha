@@ -14,10 +14,11 @@ import 'egg-schedule';
 import 'egg-static';
 import 'egg-jsonp';
 import 'egg-view';
-import 'egg-passport-x';
+import 'egg-passport';
 import 'egg-passport-github';
 import 'egg-passport-wechat-ts';
 import 'egg-passport-citi';
+import 'egg-sequelize';
 import { EggPluginItem } from 'egg';
 declare module 'egg' {
   interface EggPlugin {
@@ -37,5 +38,6 @@ declare module 'egg' {
     passportGithub?: EggPluginItem;
     passportWechat?: EggPluginItem;
     passportCiti?: EggPluginItem;
+    sequelize?: EggPluginItem;
   }
 }
