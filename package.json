@@ -16,10 +16,11 @@
     "test": "npm run lint -- --fix && npm run test-local",
     "cov": "egg-bin cov",
     "tsc": "ets && tsc -p tsconfig.json",
-    "ci": "npm run lint && npm run cov && npm run tsc",
+    "ci": "npm run lint && npm run migrate && npm run cov && npm run tsc",
     "autod": "autod",
     "lint": "tslint --project . -c tslint.json",
-    "clean": "ets clean"
+    "clean": "ets clean",
+    "migrate": "npx sequelize db:migrate"
   },
   "dependencies": {
     "egg": "^2.6.1",
@@ -40,9 +41,11 @@
     "egg-bin": "^4.13.1",
     "egg-ci": "^1.8.0",
     "egg-mock": "^3.16.0",
+    "factory-girl": "^5.0.4",
     "prettier": "1.15.3",
     "prettier-tslint": "^0.4.0",
     "runscript": "latest",
+    "sequelize-cli": "^5.5.0",
     "tslib": "^1.9.0",
     "tslint": "^5.0.0",
     "tslint-config-egg": "^1.0.0",

@@ -2,16 +2,20 @@ sudo: false
 language: node_js
 node_js:
   - '8'
+  - '10'
+before_install:
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
 install:
   - npm i npminstall && npminstall
 script:
   - npm run ci
 after_script:
   - npminstall codecov && codecov
+services:
+  - mysql
 deploy:
   provider: heroku
   api_key:
     secure: ltVu6NxV6u6XHCV3MiCnH9ZHJp3TjOMYWrIWuljPfF2WDq4ha/c6bIUwkj6X/SJSvu6n6oX0cQJ0pS6r2CFDH3hnHznXVQc+9K+zqO2FUPLlPH+MmJe4EX3nnmE5FblEr9Ov8H2wPiyJ12zIbnyl6tUsIwyMrD/YoRlykaJ7vB6UnmXap9TIT3pJuXqC7an1z08Kql9s9VsnOiRerhU8Swv/0147RG90YJVW//BaP53PcsPGF7C+u96GJWnVjvUyuIZRUxK6DBxPpZDvLs/do2wP+I1PMISOhfcSVHRoFIu16uTtByAuNbgagiamNYFdbqA7tntk/owS4PPOUrPjx80bySJhL3rl10J5WNt0fgVyN6JLORHfGUwjp8kFNXiuzQHPqjVr4Xdi6PkMONhbg5WSdXZX5+QgBUxc27CWKxikTXuo9sJEJRT8TejuypE+Sb8aW22vb8H0tikRv6CwkzIaMATqjC7/+LUDS44Y5xcbkSSXkTQ99MLI8d1Ll9rwo/Y2kISSqiEfiDBF8tHqnAXg6ZxzUXAsp6Bd71ndj+gfbCJGHegUuMhK0ar8RZ9vlS5RuCT+FydTDaEUEEeotmLLmDF+MY3ltIem5t+AdfyxmIMvhONWcbov5x+H1O0DVMJWR+H6C4KFQ9ERJTTpYPPeV4x0XgBMbQ7FX8Wptgc=
   app: uniheart
   skip_cleanup: true
-

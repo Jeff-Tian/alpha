@@ -29,6 +29,10 @@ declare module 'egg' {
         options?: passport.AuthenticateOptions
       ): any
     }
+
+    factory: any
+
+    model: any
   }
 
   // tslint:disable-next-line:interface-name

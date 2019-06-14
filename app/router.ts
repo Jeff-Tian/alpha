@@ -12,4 +12,7 @@ export default (app: Application) => {
   app.passport.mount('citi', app.config.passportCiti)
 
   app.router.get('/logout', 'user.logout')
+
+  app.router.resources('users', '/users', controller.users)
+  // app.router.get('/users', controller.users.index)
 }
