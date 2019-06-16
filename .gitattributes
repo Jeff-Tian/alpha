@@ -1,1 +1,2 @@
 *.yml text eol=text
+.travis.yml text eol=text
