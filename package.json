@@ -24,10 +24,11 @@
   },
   "dependencies": {
     "egg": "^2.6.1",
+    "egg-alinode": "^2.0.1",
+    "egg-passport": "^2.0.2",
     "egg-passport-citi": "0.2.3",
     "egg-passport-github": "^1.0.0",
     "egg-passport-wechat-ts": "latest",
-    "egg-passport": "^2.0.2",
     "egg-scripts": "^2.6.0",
     "egg-sequelize": "^5.1.0",
     "mysql2": "^1.6.5"

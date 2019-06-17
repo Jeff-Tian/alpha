@@ -47,6 +47,12 @@ export default (appInfo: EggAppInfo) => {
     },
   }
 
+  config.alinode = {
+    enable: true,
+    appid: process.env['alinode-appid']!,
+    secret: process.env['alinode-secret']!,
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

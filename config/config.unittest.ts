@@ -20,5 +20,11 @@ export default () => {
     connectionUri: 'mysql://root:@127.0.0.1:3306/alpha',
   }
 
+  config.alinode = {
+    enable: true,
+    appid: 'xxx',
+    secret: 'yyy',
+  }
+
   return config
 }

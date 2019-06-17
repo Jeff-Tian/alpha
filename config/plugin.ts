@@ -31,6 +31,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-sequelize',
   },
+
+  alinode: {
+    enable: true,
+    package: 'egg-alinode',
+  },
 }
 
 export default plugin
