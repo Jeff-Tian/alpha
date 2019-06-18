@@ -22,8 +22,8 @@ export default () => {
 
   config.alinode = {
     enable: true,
-    appid: 'xxx',
-    secret: 'yyy',
+    appid: process.env['alinode-appid']!,
+    secret: process.env['alinode-secret']!,
   }
 
   return config

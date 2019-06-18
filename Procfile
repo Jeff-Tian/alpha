@@ -1,1 +1,1 @@
-web: egg-scripts start
+web: npm run migrate && egg-scripts start
