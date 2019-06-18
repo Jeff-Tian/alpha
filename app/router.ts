@@ -5,6 +5,8 @@ export default (app: Application) => {
 
   router.get('/health-check', controller.home.index)
   router.get('/', controller.home.render)
+  router.get('/os', controller.os.info)
+
   app.router.get('/user', 'home.render')
 
   app.passport.mount('github', app.config.passportGithub)
