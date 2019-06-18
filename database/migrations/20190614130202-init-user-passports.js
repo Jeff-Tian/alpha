@@ -10,14 +10,14 @@ module.exports = {
       return queryInterface.createTable('users', { id: Sequelize.INTEGER });
     */
 
-    const {INTEGER, DATE, STRING, JSON} = Sequelize
+    const {INTEGER, DATE, STRING, TEXT} = Sequelize
     await queryInterface.createTable('user-passports', {
       provider: STRING,
       uid: STRING,
       user_id: INTEGER,
       created_at: DATE,
       updated_at: DATE,
-      profile: JSON,
+      profile: TEXT,
     })
   },
 
