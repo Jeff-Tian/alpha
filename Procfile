@@ -1,1 +1,1 @@
-web: npm run migrate && egg-scripts start
+web: npx sequelize db:migrate --url $CLEARDB_DATABASE_URL && egg-scripts start
