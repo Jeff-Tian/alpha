@@ -13,23 +13,20 @@ export default (app: Application) => {
     debug('============================================', ctx)
     debug('user = ', user)
 
-    return user
+    const auth = await ctx.model.Authorization.findOne({
+      uid: id,
+      provider,
+    })
 
-    // tslint:disable-next-line:no-commented-code
-    // const auth = await ctx.model.Authorization.findOne({
-    //   uid: id,
-    //   provider,
-    // })
-    //
-    // if (auth) {
-    //   const {user_id} = auth
-    //   const existedUser = await ctx.model.User.findOne({id: user_id})
-    //   if (existedUser) {
-    //     return existedUser
-    //   }
-    // }
-    //
-    // return ctx.service.user.register(user)
+    if (auth) {
+      const {user_id} = auth
+      const existedUser = await ctx.model.User.findOne({id: user_id})
+      if (existedUser) {
+        return existedUser
+      }
+    }
+
+    return ctx.service.user.register(user)
   })
 
   // tslint:disable-next-line:no-commented-code
