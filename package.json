@@ -31,7 +31,8 @@
     "egg-passport-wechat-ts": "latest",
     "egg-scripts": "^2.6.0",
     "egg-sequelize": "^5.1.0",
-    "mysql2": "^1.6.5"
+    "mysql2": "^1.6.5",
+    "debug": "latest"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
