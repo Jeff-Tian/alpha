@@ -37,11 +37,12 @@ export default (app: Application) => {
     return ctx.service.user.register(user)
   })
 
-  app.passport.serializeUser(async (ctx, user) => {
-    ctx.logger.info('serialzing User: ', user)
-  })
-
-  app.passport.deserializeUser(async (ctx, user) => {
-    ctx.logger.info('deserializing User: ', user)
-  })
+  // tslint:disable-next-line:no-commented-code
+  // app.passport.serializeUser(async (ctx, user) => {
+  //   ctx.logger.info('serialzing User: ', user)
+  // })
+  //
+  // app.passport.deserializeUser(async (ctx, user) => {
+  //   ctx.logger.info('deserializing User: ', user)
+  // })
 }
