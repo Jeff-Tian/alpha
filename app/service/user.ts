@@ -20,7 +20,7 @@ export default class User extends Service {
         user_id: systemUser.id,
         created_at: new Date(),
         updated_at: new Date(),
-        profile: user.profile,
+        profile: user.profile.toString(),
       })
 
       await transaction.commit()
