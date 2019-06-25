@@ -7,4 +7,10 @@ export default class UserController extends Controller {
     ctx.logout()
     ctx.redirect(ctx.get('referer') || '/')
   }
+
+  public async code() {
+    const {ctx} = this
+
+    ctx.body = ctx.query
+  }
 }
