@@ -1,8 +1,11 @@
 import {Service} from 'egg'
 
 export default class User extends Service {
-  public async find() {
-    return {}
+  public async find(username, password) {
+    const {ctx} = this
+
+    ctx.logger.info('finding user: ', {username, password})
+    return ctx.model.User.findOne({})
   }
 
   public async register(user) {

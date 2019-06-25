@@ -16,4 +16,12 @@ export default (app: Application) => {
   app.router.get('/logout', 'user.logout')
 
   app.router.resources('users', '/users', controller.users)
+
+  app.all('/user/token', app.oAuth2Server.token())
+  app.get('/user/authorize', app.oAuth2Server.authorize(), 'user.code')
+  app.get(
+    '/user/authenticate',
+    app.oAuth2Server.authenticate(),
+    'user.authenticate'
+  )
 }

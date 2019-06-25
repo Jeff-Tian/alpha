@@ -36,6 +36,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-alinode',
   },
+
+  oAuth2Server: {
+    enable: true,
+    package: 'egg-oauth2-server',
+  },
 }
 
 export default plugin

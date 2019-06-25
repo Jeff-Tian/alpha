@@ -33,6 +33,10 @@ declare module 'egg' {
     factory: any
 
     model: any
+
+    all: any
+
+    oAuth2Server: any
   }
 
   // tslint:disable-next-line:interface-name

@@ -53,6 +53,11 @@ export default (appInfo: EggAppInfo) => {
     secret: process.env['alinode-secret']!,
   }
 
+  config.oAuth2Server = {
+    debug: true,
+    grants: ['password'],
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
