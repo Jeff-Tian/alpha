@@ -13,4 +13,9 @@ export default class UserController extends Controller {
 
     ctx.body = ctx.query
   }
+
+  public async authenticate() {
+    const {ctx} = this
+    ctx.body = ctx.query
+  }
 }
