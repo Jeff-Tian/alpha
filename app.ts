@@ -18,11 +18,17 @@ export default (app: Application) => {
         uid: id,
         provider,
       },
+      attributes: {
+        exclude: ['id'],
+      },
     })
 
     if (auth) {
       const {user_id} = auth
-      const existedUser = await ctx.model.User.findOne({where: {id: user_id}})
+      const existedUser = await ctx.model.User.findOne({
+        where: {id: user_id},
+        attributes: {},
+      })
       if (existedUser) {
         return existedUser
       }
