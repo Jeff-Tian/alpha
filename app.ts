@@ -25,12 +25,26 @@ export default (app: Application) => {
 
     if (auth) {
       const {user_id} = auth
+
+      await ctx.model.Authorization.update(
+        {
+          provider,
+          uid: id,
+          user_id,
+          updated_at: new Date(),
+          profile: user.profile.toString(),
+        },
+        {
+          where: {provider, id},
+        }
+      )
+
       const existedUser = await ctx.model.User.findOne({
         where: {id: user_id},
         attributes: {},
       })
       if (existedUser) {
-        return existedUser
+        return user
       }
     }
 
