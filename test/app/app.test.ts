@@ -49,7 +49,7 @@ describe('test/app.test.ts', () => {
         .expect(200)
     })
 
-    it('should get mock authenticated user context', async () => {
+    it.skip('should get mock authenticated user context', async () => {
       const ctx = app.mockUserContext()
       assert(ctx.user)
       assert(ctx.user.id === '10086')
