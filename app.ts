@@ -14,13 +14,15 @@ export default (app: Application) => {
     debug('user = ', user)
 
     const auth = await ctx.model.Authorization.findOne({
-      uid: id,
-      provider,
+      where: {
+        uid: id,
+        provider,
+      },
     })
 
     if (auth) {
       const {user_id} = auth
-      const existedUser = await ctx.model.User.findOne({id: user_id})
+      const existedUser = await ctx.model.User.findOne({where: {id: user_id}})
       if (existedUser) {
         return existedUser
       }
@@ -29,12 +31,11 @@ export default (app: Application) => {
     return ctx.service.user.register(user)
   })
 
-  // tslint:disable-next-line:no-commented-code
-  // app.passport.serializeUser(async (ctx, user) => {
-  //   ctx.logger.info('serialzing User: ', user)
-  // })
-  //
-  // app.passport.deserializeUser(async (ctx, user) => {
-  //   ctx.logger.info('deserializing User: ', user)
-  // })
+  app.passport.serializeUser(async (ctx, user) => {
+    ctx.logger.info('serialzing User: ', user)
+  })
+
+  app.passport.deserializeUser(async (ctx, user) => {
+    ctx.logger.info('deserializing User: ', user)
+  })
 }

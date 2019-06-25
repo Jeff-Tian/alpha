@@ -16,5 +16,4 @@ export default (app: Application) => {
   app.router.get('/logout', 'user.logout')
 
   app.router.resources('users', '/users', controller.users)
-  // app.router.get('/users', controller.users.index)
 }
