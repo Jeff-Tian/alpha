@@ -7,6 +7,7 @@ before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
 install:
   - npm i npminstall && npminstall
+  - npm i nodeinstall -g && nodeinstall --install-alinode ^3
 script:
   - npm run ci
 after_script:
