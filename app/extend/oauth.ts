@@ -12,13 +12,32 @@ export default (app: Application) => {
 
     async getClient(clientId, clientSecret) {
       this.ctx.logger.info('getting client...', {clientId, clientSecret})
-      return this.ctx.model.OauthApp.findOne({
-        where: {
-          client_id: clientId,
-          client_secret: clientSecret,
-        },
-      })
+
+      if (clientId === 'alpha' && clientSecret === 'alpha') {
+        this.ctx.body = {clientId, clientSecret}
+      } else {
+        this.ctx.throw(422, 'clientId or clientSecret not correct')
+      }
+
+      // tslint:disable-next-line:no-commented-code
+      // return this.ctx.model.OauthApp.findOne({
+      //   where: {
+      //     client_id: clientId,
+      //     client_secret: clientSecret,
+      //   },
+      // })
     }
+
+    async grantTypeAllowed(clientId, grantType) {
+      this.ctx.logger.info('grantTypeAllowed...', {clientId, grantType})
+
+      if (grantType === 'passsword' && clientId === 'alpha') {
+        this.ctx.body = true
+      } else {
+        this.ctx.body = false
+      }
+    }
+
     async getUser(username, password) {
       this.ctx.logger.info('getUser invoked.......', {username, password})
       return this.ctx.service.user.find(username, password)
