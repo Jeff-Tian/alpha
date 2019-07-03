@@ -31,11 +31,7 @@ export default (app: Application) => {
     async grantTypeAllowed(clientId, grantType) {
       this.ctx.logger.info('grantTypeAllowed...', {clientId, grantType})
 
-      if (grantType === 'passsword' && clientId === 'alpha') {
-        this.ctx.body = true
-      } else {
-        this.ctx.body = false
-      }
+      this.ctx.body = !!(grantType === 'passsword' && clientId === 'alpha')
     }
 
     async getUser(username, password) {

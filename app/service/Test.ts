@@ -13,6 +13,6 @@ export default class Test extends Service {
       process.env.NODE_ENV
     }, current SERVER_ENV=${process.env.EGG_SERVER_ENV}, github callback = ${
       this.config.passportGithub!.callbackURL
-    }, config.env = '${this.config.env}`
+    }, config.env = '${this.config.env}, process.versions = ${process.versions}`
   }
 }
