@@ -11,7 +11,7 @@ describe('test/app/service/Test.test.js', () => {
   })
 
   it('sayHi', async () => {
-    const result = await ctx.service.test.sayHi('egg')
-    assert(result.startsWith('hi, egg'))
+    const result = await ctx.service.test.healthCheck()
+    assert(result.NODE_ENV === 'test')
   })
 })

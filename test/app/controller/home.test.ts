@@ -17,6 +17,6 @@ describe('test/app/controller/home.test.ts', () => {
       .get('/health-check')
       .expect(200)
 
-    assert(result.text.startsWith('hi, egg'))
+    assert(JSON.parse(result.text).NODE_ENV === 'test')
   })
 })
