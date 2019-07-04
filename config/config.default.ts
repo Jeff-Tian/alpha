@@ -48,14 +48,14 @@ export default (appInfo: EggAppInfo) => {
   }
 
   config.alinode = {
-    enable: true,
+    enable: false,
     appid: process.env['alinode-appid']!,
     secret: process.env['alinode-secret']!,
   }
 
   config.oAuth2Server = {
     debug: true,
-    grants: ['password'],
+    grants: ['password', 'client_credentials'],
   }
 
   // the return config will combines to EggAppConfig

@@ -21,7 +21,7 @@ export default () => {
   }
 
   config.alinode = {
-    enable: true,
+    enable: false,
     appid: 'xxx',
     secret: 'yyy',
   }

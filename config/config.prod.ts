@@ -27,5 +27,11 @@ export default () => {
     connectionUri: process.env.CLEARDB_DATABASE_URL,
   }
 
+  config.alinode = {
+    enable: true,
+    appid: process.env['alinode-appid']!,
+    secret: process.env['alinode-secret']!,
+  }
+
   return config
 }

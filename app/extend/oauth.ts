@@ -11,12 +11,21 @@ export default (app: Application) => {
     }
 
     async getClient(clientId, clientSecret) {
-      this.ctx.logger.info('getting client...', {clientId, clientSecret})
+      this.ctx.logger.info('getting client...', {
+        clientId,
+        clientSecret,
+        args: arguments,
+      })
 
-      if (clientId === 'alpha' && clientSecret === 'alpha') {
-        this.ctx.body = {clientId, clientSecret}
+      if (clientId === 'alpha') {
+        return {
+          client_id: clientId,
+          clientSecret: 'alpha',
+          grants: [this.ctx.query.grant_type],
+          redirectUris: ['http://localhost:7001'],
+        }
       } else {
-        this.ctx.throw(422, 'clientId or clientSecret not correct')
+        throw new Error('clientId or clientSecret not correct')
       }
 
       // tslint:disable-next-line:no-commented-code
@@ -29,9 +38,8 @@ export default (app: Application) => {
     }
 
     async grantTypeAllowed(clientId, grantType) {
-      this.ctx.logger.info('grantTypeAllowed...', {clientId, grantType})
-
-      this.ctx.body = !!(grantType === 'passsword' && clientId === 'alpha')
+      console.log('clientId = ', clientId, 'grantType = ', grantType)
+      return false
     }
 
     async getUser(username, password) {
