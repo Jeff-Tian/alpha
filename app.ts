@@ -28,14 +28,12 @@ export default (app: Application) => {
 
       await ctx.model.Authorization.update(
         {
-          provider,
-          uid: id,
           user_id,
           updated_at: new Date(),
           profile: user.profile.toString(),
         },
         {
-          where: {provider, id},
+          where: {provider, uid: id},
         }
       )
 

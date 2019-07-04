@@ -20,7 +20,8 @@
     "autod": "autod",
     "lint": "tslint --project . -c tslint.json",
     "clean": "ets clean",
-    "migrate": "npx sequelize db:migrate"
+    "migrate": "npx sequelize db:migrate",
+    "log": "heroku logs --tail -a uniheart"
   },
   "dependencies": {
     "debug": "latest",
