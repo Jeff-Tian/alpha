@@ -1,12 +1,12 @@
 import {Application} from 'egg'
 
 export default (app: Application) => {
-  const {STRING, INTEGER, DATE, TEXT, ARRAY, BOOLEAN} = app.Sequelize
+  const {STRING, INTEGER, DATE, TEXT, BOOLEAN} = app.Sequelize
 
   return app.model.define('oauthApp', {
     id: {type: INTEGER, primaryKey: true, autoIncrement: true},
-    redirectUris: ARRAY(TEXT),
-    grants: ARRAY(TEXT),
+    redirectUris: TEXT,
+    grants: TEXT,
     name: STRING,
     description: TEXT,
     created_at: DATE,

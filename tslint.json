@@ -27,6 +27,7 @@
     "align": [true, "statements"],
     "no-implicit-dependencies": [true, "dev"],
     "semicolon": false,
-    "trailing-comma": false
+    "trailing-comma": false,
+    "arrow-parens": false
   }
 }

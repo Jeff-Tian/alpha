@@ -1,4 +1,5 @@
 import {Application} from 'egg'
+import validate from './middleware/validate'
 
 export default (app: Application) => {
   const {controller, router} = app
@@ -23,5 +24,12 @@ export default (app: Application) => {
     '/user/authenticate',
     app.oAuth2Server.authenticate(),
     'user.authenticate'
+  )
+
+  app.router.get(
+    'wechatDev.getAccessToken',
+    '/wechat-dev/access_token',
+    validate,
+    controller.wechatDev.getAccessToken
   )
 }

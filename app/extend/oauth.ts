@@ -38,7 +38,7 @@ export default (app: Application) => {
     }
 
     async grantTypeAllowed(clientId, grantType) {
-      console.log('clientId = ', clientId, 'grantType = ', grantType)
+      this.ctx.logger.info('clientId = ', clientId, 'grantType = ', grantType)
       return false
     }
 

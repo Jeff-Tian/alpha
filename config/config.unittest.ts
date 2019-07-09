@@ -15,6 +15,11 @@ export default () => {
     secret: process.env['passport-wechat-secret']!,
   }
 
+  config.passportHardway = {
+    key: process.env['passport-wechat-key-hardway']!,
+    secret: process.env['passport-wechat-secret-hardway']!,
+  }
+
   config.sequelize = {
     dialect: 'mysql',
     connectionUri: 'mysql://root:@127.0.0.1:3306/alpha',
