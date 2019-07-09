@@ -32,4 +32,10 @@ export default (app: Application) => {
     validate,
     controller.wechatDev.getAccessToken
   )
+  app.router.get(
+    'wechatDev.getQRCode',
+    '/wechat-dev/qr-code',
+    validate,
+    controller.wechatDev.getQRCode
+  )
 }
