@@ -19,7 +19,9 @@ export default class WechatDevController extends Controller {
       const wechatOAuth = this.getWechatOAuthClient()
 
       ctx.body = await wechatOAuth.getQRCode(
-        JSON.parse(decodeURIComponent(ctx.query.data)),
+        ctx.query.data
+          ? JSON.parse(decodeURIComponent(ctx.query.data))
+          : undefined,
         ctx.query.token
       )
     }
