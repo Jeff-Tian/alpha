@@ -3,8 +3,12 @@ import {plainToClass} from 'class-transformer'
 import {validate} from 'class-validator'
 import {Context} from 'egg'
 import GetAccessTokenRequest from '../validate/GetAccessTokenRequest'
+import GetQRCodeRequest from '../validate/GetQRCodeRequest'
 
-const typeMap = new Map([['wechatDev.getAccessToken', GetAccessTokenRequest]])
+const typeMap = new Map([
+  ['wechatDev.getAccessToken', GetAccessTokenRequest],
+  ['wechatDev.getQRCode', GetQRCodeRequest],
+])
 
 export default async (ctx: Context, next: () => {}) => {
   const type = typeMap.get(ctx.routerName)
