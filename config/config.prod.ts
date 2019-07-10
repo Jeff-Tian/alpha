@@ -38,5 +38,9 @@ export default () => {
     secret: process.env['alinode-secret']!,
   }
 
+  config.logger = {
+    disableConsoleAfterReady: !!process.env.EGG_LOGGER,
+  }
+
   return config
 }
