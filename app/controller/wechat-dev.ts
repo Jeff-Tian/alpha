@@ -18,13 +18,17 @@ export default class WechatDevController extends Controller {
     } else {
       const wechatOAuth = this.getWechatOAuthClient()
 
-      ctx.type = 'image/png'
-      ctx.body = await wechatOAuth.getQRCode(
+      const res = await wechatOAuth.getQRCode(
         ctx.query.data
           ? JSON.parse(decodeURIComponent(ctx.query.data))
           : undefined,
         ctx.query.token
       )
+
+      ctx.logger.info('图片 res = ', {res})
+
+      ctx.type = 'image/png'
+      ctx.body = res
     }
   }
 
