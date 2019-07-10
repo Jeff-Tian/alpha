@@ -18,7 +18,8 @@ export default class WechatDevController extends Controller {
       const res = await WechatOAuth.getQRCodeByTicket(
         decodeURIComponent(ticket)
       )
-      res.pipe(ctx.body.data)
+
+      res.pipe(ctx.body)
     } else {
       const wechatOAuth = this.getWechatOAuthClient()
 
@@ -29,7 +30,7 @@ export default class WechatDevController extends Controller {
         ctx.query.token
       )
 
-      res.pipe(ctx.body.data)
+      res.pipe(ctx.body)
     }
   }
 
