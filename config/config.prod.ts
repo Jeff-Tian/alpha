@@ -39,7 +39,7 @@ export default () => {
   }
 
   config.logger = {
-    disableConsoleAfterReady: !!process.env.EGG_LOGGER,
+    disableConsoleAfterReady: !process.env.EGG_LOGGER,
   }
 
   return config
