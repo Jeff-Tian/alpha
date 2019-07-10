@@ -13,8 +13,12 @@ export default class WechatDevController extends Controller {
     const {ctx} = this
     const {ticket} = ctx.query
 
+    ctx.type = 'image/*'
     if (ticket) {
-      ctx.body = await WechatOAuth.getQRCodeByTicket(decodeURIComponent(ticket))
+      const res = await WechatOAuth.getQRCodeByTicket(
+        decodeURIComponent(ticket)
+      )
+      res.pipe(ctx.body.data)
     } else {
       const wechatOAuth = this.getWechatOAuthClient()
 
@@ -25,10 +29,7 @@ export default class WechatDevController extends Controller {
         ctx.query.token
       )
 
-      ctx.logger.info('图片 res = ', {res})
-
-      ctx.type = 'image/png'
-      ctx.body = res
+      res.pipe(ctx.body.data)
     }
   }
 
