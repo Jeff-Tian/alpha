@@ -30,6 +30,11 @@ export default class WechatDevController extends Controller {
         ctx.query.token
       )
 
+      ctx.logger.info('type of res = ', {
+        type: typeof res,
+        keys: Object.keys(res),
+      })
+
       res.pipe(ctx.body)
     }
   }
