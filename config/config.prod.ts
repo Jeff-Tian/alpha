@@ -42,5 +42,12 @@ export default () => {
     disableConsoleAfterReady: !process.env.EGG_LOGGER,
   }
 
+  config.security = {
+    csrf: {
+      queryName: process.env.EGG_SECURITY_CSRF_NAME,
+      bodyName: process.env.EGG_SECURITY_CSRF_CONTENT,
+    },
+  }
+
   return config
 }
