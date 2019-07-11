@@ -28,10 +28,10 @@ export default class WechatDevController extends Controller {
       )
     }
 
-    this.logger.info('res = ', res)
+    this.logger.info('res = ', res.res)
 
     ctx.type = res.headers['content-type']
-    ctx.body = res.data
+    ctx.body = res.res
   }
 
   private getWechatOAuthClient() {
