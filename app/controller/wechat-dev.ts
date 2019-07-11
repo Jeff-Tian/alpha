@@ -15,6 +15,7 @@ export default class WechatDevController extends Controller {
 
     let res
     ctx.type = 'image/*'
+
     if (ticket) {
       res = await WechatOAuth.getQRCodeByTicket(decodeURIComponent(ticket))
     } else {
@@ -28,8 +29,7 @@ export default class WechatDevController extends Controller {
       )
     }
 
-    ctx.res.write(res)
-    ctx.res.end()
+    ctx.body = res
   }
 
   private getWechatOAuthClient() {
