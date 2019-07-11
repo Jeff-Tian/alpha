@@ -13,25 +13,18 @@ export default class WechatDevController extends Controller {
     const {ctx} = this
     const {ticket} = ctx.query
 
-    let res
+    const wechatOAuth = this.getWechatOAuthClient()
 
-    if (ticket) {
-      res = await WechatOAuth.getQRCodeByTicket(decodeURIComponent(ticket))
-    } else {
-      const wechatOAuth = this.getWechatOAuthClient()
+    const res = ticket
+      ? await wechatOAuth.getQRCodeLinkByTicket(ticket)
+      : await wechatOAuth.getQRCodeLink(
+          ctx.query.data
+            ? JSON.parse(decodeURIComponent(ctx.query.data))
+            : undefined,
+          ctx.query.token
+        )
 
-      res = await wechatOAuth.getQRCode(
-        ctx.query.data
-          ? JSON.parse(decodeURIComponent(ctx.query.data))
-          : undefined,
-        ctx.query.token
-      )
-    }
-
-    this.logger.info('res = ', res.res)
-
-    ctx.type = res.headers['content-type']
-    ctx.body = res.res
+    ctx.redirect(res)
   }
 
   private getWechatOAuthClient() {
