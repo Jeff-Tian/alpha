@@ -37,7 +37,7 @@ export default class WechatDevController extends Controller {
       process.env.WECHAT_REDIRECT_CLIENTS || JSON.stringify([])
     )
 
-    const results = await Promise.all(
+    const results = (await Promise.all(
       clients.map(c =>
         ctx.curl(c, {
           method: 'POST',
@@ -45,7 +45,7 @@ export default class WechatDevController extends Controller {
           data: message,
         })
       )
-    )
+    )).map((r: any) => r.status)
 
     ctx.logger.info('redirect results: ', results)
 
