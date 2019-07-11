@@ -33,7 +33,23 @@ export default class WechatDevController extends Controller {
 
     ctx.logger.info('get message from wechat: ', {message})
 
-    ctx.body = {message}
+    const clients = JSON.parse(
+      process.env.WECHAT_REDIRECT_CLIENTS || JSON.stringify([])
+    )
+
+    const results = await Promise.all(
+      clients.map(c =>
+        ctx.curl(c, {
+          method: 'POST',
+          dataType: 'application/xml',
+          data: message,
+        })
+      )
+    )
+
+    ctx.logger.info('redirect results: ', results)
+
+    ctx.body = {message, redirects: results}
   }
 
   private getWechatOAuthClient() {
