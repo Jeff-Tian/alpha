@@ -46,6 +46,7 @@ export default () => {
     csrf: {
       queryName: process.env.EGG_SECURITY_CSRF_NAME,
       bodyName: process.env.EGG_SECURITY_CSRF_CONTENT,
+      ignore: '/endpoints/wechat/message',
     },
   }
 
