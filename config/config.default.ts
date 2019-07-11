@@ -58,6 +58,14 @@ export default (appInfo: EggAppInfo) => {
     grants: ['password', 'client_credentials'],
   }
 
+  config.bodyParser = {
+    enable: true,
+    enableTypes: ['json', 'form', 'text'],
+    extendTypes: {
+      text: ['text/xml', 'application/xml'],
+    },
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

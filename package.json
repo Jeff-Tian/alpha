@@ -10,7 +10,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-alpha",
     "stop": "egg-scripts stop --title=egg-server-alpha",
-    "dev": "sh test/mysql-up.sh&&egg-bin dev",
+    "dev": "NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
     "debug": "egg-bin debug",
     "test-local": "npm run migrate&&egg-bin test",
     "test": "npm run lint -- --fix && npm run test-local",

@@ -26,5 +26,12 @@ export default () => {
     secret: 'yyy',
   }
 
+  config.security = {
+    csrf: {
+      queryName: '_csrf',
+      bodyName: 'uniheart',
+    },
+  }
+
   return config
 }
