@@ -38,4 +38,10 @@ export default (app: Application) => {
     validate,
     controller.wechatDev.getQRCode
   )
+
+  app.router.post(
+    'wechatDev.message',
+    '/endpoints/wechat/message',
+    controller.wechatDev.message
+  )
 }

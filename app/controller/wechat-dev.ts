@@ -27,6 +27,15 @@ export default class WechatDevController extends Controller {
     ctx.redirect(res)
   }
 
+  public async message() {
+    const {ctx} = this
+    const message = ctx.request.body
+
+    ctx.logger.info('get message from wechat: ', {message})
+
+    ctx.body = {message}
+  }
+
   private getWechatOAuthClient() {
     const {ctx} = this
     const {select} = ctx.query
