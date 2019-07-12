@@ -46,6 +46,9 @@ export default class WechatDevController extends Controller {
           dataType: 'json',
           data: message,
           content: message,
+          headers: {
+            'content-type': 'application/xml',
+          },
         })
       )
     )).map((r: any) => r.status)
