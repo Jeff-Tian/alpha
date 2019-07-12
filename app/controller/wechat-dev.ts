@@ -40,8 +40,10 @@ export default class WechatDevController extends Controller {
     const results = (await Promise.all(
       clients.map(c =>
         ctx.curl(c, {
+          type: 'POST',
           method: 'POST',
-          dataType: 'application/xml',
+          contentType: 'application/xml',
+          dataType: 'json',
           data: message,
         })
       )
