@@ -1,0 +1,19 @@
+extends layout/main
+
+block content
+    div
+        h2 #{ctx.path}
+        hr
+        p Loggin with:
+        ul
+            li
+                a(href="/passport/github") Github
+            li
+                a(href="/passport/wechat") Wechat
+            li
+                a(href="/passport/citi") Citi Bank Account
+        hr
+        p
+            a(href="/") Home
+            | |
+            a(href="/user") User

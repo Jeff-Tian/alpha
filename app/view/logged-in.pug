@@ -1,0 +1,16 @@
+extends layout/main
+
+block content
+    div
+        h2 #{ctx.path}
+        hr
+        p Logged in user:
+            img(src=ctx.user.photo)
+        p #{ctx.user.displayName} / #{ctx.user.id} |
+            a(href="/logout") Logout
+        pre
+            code #{JSON.stringify(ctx.user, null, 2)}
+        hr
+        a(href="/") Home
+        | |
+        a(href="/user") User

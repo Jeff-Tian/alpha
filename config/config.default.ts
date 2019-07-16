@@ -66,6 +66,12 @@ export default (appInfo: EggAppInfo) => {
     },
   }
 
+  config.view = {
+    mapping: {
+      '.pug': 'pug',
+    },
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

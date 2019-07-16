@@ -41,6 +41,16 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-oauth2-server',
   },
+
+  view: {
+    enable: true,
+    package: 'egg-view',
+  },
+
+  pug: {
+    enable: true,
+    package: 'egg-view-pug',
+  },
 }
 
 export default plugin
