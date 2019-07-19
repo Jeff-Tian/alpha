@@ -51,6 +51,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-view-pug',
   },
+
+  useragent: {
+    enable: true,
+    package: 'egg-useragent-ts',
+  },
 }
 
 export default plugin

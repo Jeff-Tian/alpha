@@ -5,7 +5,7 @@ import runscript = require('runscript')
 
 const baseDir = path.resolve(__dirname, '../..')
 
-describe('test/app.test.ts', () => {
+describe.skip('test/app.test.ts', () => {
   before(async () => {
     await runscript('ets', {cwd: baseDir})
     await runscript(`tsc -p ${baseDir}/tsconfig.json`, {cwd: baseDir})

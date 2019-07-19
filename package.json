@@ -37,6 +37,7 @@
     "egg-passport-wechat-ts": "latest",
     "egg-scripts": "^2.6.0",
     "egg-sequelize": "^5.1.0",
+    "egg-useragent-ts": "0.0.1",
     "egg-view": "^2.1.2",
     "egg-view-pug": "^1.0.0",
     "mysql2": "^1.6.5",
