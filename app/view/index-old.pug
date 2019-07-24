@@ -1,0 +1,30 @@
+extends layout/main
+
+block content
+    div
+        h2 #{ctx.path} from wechat: #{ctx.userAgent.isWechat}
+        hr
+        p Login with:
+        ul
+            li
+                a(href="/passport/github") Github
+            li
+                case ctx.userAgent.isWechat
+                    when true
+                        a(href="/passport/wechat") Wechat
+                    when false
+                        a(href="/wechat-dev/qr-code?select=passportWechat", target="_blank", rel="noopener noreferrer") Wechat
+                    default
+                        a()
+            li
+                a(href="/passport/citi") Citi Bank Account
+        hr
+        p
+            a(href="/") Home
+            | |
+            a(href="/user") User
+
+    div
+        div#root
+
+block scripts
