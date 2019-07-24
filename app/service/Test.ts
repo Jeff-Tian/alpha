@@ -9,7 +9,7 @@ export default class Test extends Service {
       NODE_ENV: process.env.NODE_ENV,
       EGG_SERVER_ENV: process.env.EGG_SERVER_ENV,
       configEnv: this.config.env,
-      processVersions: process.versions
+      processVersions: process.versions,
     }
   }
 }

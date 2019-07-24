@@ -1,4 +1,4 @@
-import assert from 'assert'
+import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
 import {app} from 'egg-mock/bootstrap'
 
@@ -17,6 +17,8 @@ describe('test/app/controller/home.test.ts', () => {
       .get('/health-check')
       .expect(200)
 
-    assert(JSON.parse(result.text).NODE_ENV === 'test')
+    const parsed = JSON.parse(result.text)
+    assert(parsed.NODE_ENV === 'test')
+    assert(parsed.configEnv === 'unittest')
   })
 })

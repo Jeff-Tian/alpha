@@ -23,3 +23,8 @@ config/**/*.map
 
 typings/app/*
 typings/config/*
+
+.umi
+app/web/.temp
+config/manifest.json
+app/public

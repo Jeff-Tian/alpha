@@ -36,4 +36,13 @@ html
         meta(name='msapplication-TileImage', content='https://gitmoji.js.org/static/ms-icon-144x144.png')
         meta(name='theme-color', content='#FFDD67')
     body
-        block content
+        div#main
+            block content
+        case ctx.env
+            when prod
+                script(src="https://unpkg.com/react@16/umd/react.development.js" crossorigin)
+                script(src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin)
+            default
+                script(src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin)
+                    script(src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin)
+        block scripts

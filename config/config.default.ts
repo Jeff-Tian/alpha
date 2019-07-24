@@ -1,4 +1,5 @@
 import {EggAppConfig, EggAppInfo, PowerPartial} from 'egg'
+import * as path from 'path'
 
 export default (appInfo: EggAppInfo) => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -69,6 +70,20 @@ export default (appInfo: EggAppInfo) => {
   config.view = {
     mapping: {
       '.pug': 'pug',
+    },
+  }
+
+  config.assets = {
+    publicPath: '/public',
+    devServer: {
+      autoPort: true,
+      command: 'umi dev --port={port}',
+      env: {
+        APP_ROOT: path.join(__dirname, '../app/web'),
+        BROWSER: 'none',
+        SOCKET_SERVER: 'http://127.0.0.1:{port}',
+      },
+      debug: true,
     },
   }
 

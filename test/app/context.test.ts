@@ -45,5 +45,10 @@ describe.skip('test/app.test.ts', () => {
       assert(res.status === 200)
       assert(res.data.message === '<xml></xml>')
     })
+
+    it('knows env', async () => {
+      const ctx = app.mockContext()
+      assert(ctx.env === 'unittest')
+    })
   })
 })
