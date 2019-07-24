@@ -7,6 +7,10 @@ html
         meta(name="description", content="uniheart | I am Alpha, I am Omega")
         meta(charset="utf-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        meta(name="apple-mobile-web-app-capable", content="yes")
+        meta(name="apple-mobile-web-app-status-bar-style", content="black")
+        meta(name="format-detection", content="telephone=no")
+        meta(name="format-detection", content="email=no")
         meta(name="twitter:card", content="uniheart")
         meta(name="twitter:title", content="uniheart")
         meta(name="twitter:description", content="uniheart | I am Alpha, I am Omega")
@@ -35,14 +39,17 @@ html
         meta(name='msapplication-TileColor', content='#FFDD67')
         meta(name='msapplication-TileImage', content='https://gitmoji.js.org/static/ms-icon-144x144.png')
         meta(name='theme-color', content='#FFDD67')
+        | !{helper.assets.getStyle('umi.css')}
     body
-        div#main
+        div
             block content
-        case ctx.env
-            when prod
-                script(src="https://unpkg.com/react@16/umd/react.development.js" crossorigin)
-                script(src="https://unpkg.com/react-dom@16/umd/react-dom.development.js" crossorigin)
+        script.
+            window.routerBase = '/';
+            window.resourceBaseUrl = '#{ helper.assets.resourceBase }';
+        script(src="https://gw.alipayobjects.com/os/antv/pkg/_antv.data-set-0.9.6/dist/data-set.min.js")
+        case ctx.app.config.env
+            when 'local'
+                | !{helper.assets.getScript('umi.dll.js')}
             default
-                script(src="https://unpkg.com/react@16/umd/react.production.min.js" crossorigin)
-                    script(src="https://unpkg.com/react-dom@16/umd/react-dom.production.min.js" crossorigin)
+                | !{helper.assets.getScript('umi.js')}
         block scripts
