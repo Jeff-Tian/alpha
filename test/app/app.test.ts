@@ -34,7 +34,7 @@ describe('test/app.test.ts', () => {
       return app
         .httpRequest()
         .get('/')
-        .expect(/Login with/)
+        .expect(/uniheart | I am Alpha, I am Omega/)
         .expect(200)
     })
 

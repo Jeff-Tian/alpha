@@ -8,7 +8,7 @@ describe('test/app/controller/home.test.ts', () => {
       .httpRequest()
       .get('/')
       .expect(200)
-    assert(result.text.match(/Home/))
+    assert(result.text.match(/uniheart | I am Alpha, I am Omega/))
   })
 
   it('should be health', async () => {
