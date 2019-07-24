@@ -16,4 +16,20 @@ export default class HomeController extends Controller {
       await ctx.render('index.pug', {ctx})
     }
   }
+
+  public async proxy() {
+    const {ctx, app} = this
+
+    const {method, curl, path, querystring} = ctx
+
+    const url = app.config.assets.url + path + '?' + querystring
+
+    // @ts-ignore
+    const res = await curl.bind(ctx)(url, {
+      method,
+    })
+
+    ctx.body = res.data
+    ctx.status = res.status
+  }
 }

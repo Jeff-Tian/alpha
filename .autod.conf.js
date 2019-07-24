@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 
 module.exports = {
   write: true,
@@ -8,21 +8,24 @@ module.exports = {
   exclude: [
     'test/fixtures',
     'coverage',
+    './dist',
+    '**/*.test.js',
+    '**/*.e2e.js',
   ],
-  dep: [
-    'egg',
-    'egg-scripts',
-  ],
+  dep: ['egg', 'egg-scripts'],
   devdep: [
+    'egg-ci',
+    'egg-mock',
     'autod',
     'autod-egg',
     'egg-bin',
     'tslib',
     'typescript',
+    'eslint',
+    'eslint-config-egg',
+    'webstorm-disable-index',
   ],
-  keep: [
-  ],
-  semver: [
-  ],
-  test: 'scripts',
-};
+  keep: [],
+  semver: [],
+  test: ['test', 'benchmark', 'script', '.roadhogrc.mock.js'],
+}

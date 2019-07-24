@@ -50,6 +50,7 @@ html
         case ctx.app.config.env
             when 'local'
                 | !{helper.assets.getScript('umi.dll.js')}
+                | !{helper.assets.getScript('umi.js')}
             default
                 | !{helper.assets.getScript('umi.js')}
         block scripts

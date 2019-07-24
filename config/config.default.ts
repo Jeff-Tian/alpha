@@ -68,6 +68,7 @@ export default (appInfo: EggAppInfo) => {
   }
 
   config.view = {
+    root: path.join(appInfo.baseDir, 'app/view'),
     mapping: {
       '.pug': 'pug',
     },
@@ -85,6 +86,10 @@ export default (appInfo: EggAppInfo) => {
       },
       debug: true,
     },
+  }
+
+  config.security = {
+    csrf: false,
   }
 
   // the return config will combines to EggAppConfig

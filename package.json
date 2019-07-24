@@ -23,7 +23,8 @@
     "clean": "ets clean",
     "migrate": "npx sequelize db:migrate",
     "log": "heroku logs --tail -a uniheart",
-    "build": "APP_ROOT=$PWD/app/web umi build"
+    "build": "APP_ROOT=$PWD/app/web umi build",
+    "sync": "./script/sync.js"
   },
   "dependencies": {
     "class-transformer": "latest",
