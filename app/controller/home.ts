@@ -27,6 +27,8 @@ export default class HomeController extends Controller {
     // @ts-ignore
     const res = await curl.bind(ctx)(url, {
       method,
+      data: ctx.request.body,
+      dataType: 'application/json',
     })
 
     ctx.body = res.data
