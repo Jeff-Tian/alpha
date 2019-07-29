@@ -16,6 +16,11 @@ export default (appInfo: EggAppInfo) => {
     sourceUrl: `https://github.com/eggjs/examples/tree/master/${appInfo.name}`,
   }
 
+  config.passportLocal = {
+    usernameField: 'username',
+    passwordField: 'password',
+  }
+
   config.passportGithub = {
     key: 'your_clientID',
     secret: 'your_clientSecret',
@@ -88,8 +93,7 @@ export default (appInfo: EggAppInfo) => {
     },
   }
 
-  config.security = {
-  }
+  config.security = {}
 
   // the return config will combines to EggAppConfig
   return {

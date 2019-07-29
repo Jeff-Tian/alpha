@@ -12,6 +12,11 @@ const plugin: EggPlugin = {
     package: 'egg-passport',
   },
 
+  passportLocal: {
+    enable: true,
+    package: 'egg-passport-local',
+  },
+
   passportGithub: {
     enable: true,
     package: 'egg-passport-github',

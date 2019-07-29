@@ -54,7 +54,7 @@ declare module 'egg' {
   interface EggAppConfig {
     passportLocal?: {
       usernameField: string
-      passportField: string
+      passwordField: string
     }
 
     passportGithub?: {

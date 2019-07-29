@@ -12,6 +12,9 @@ export default (app: Application) => {
   app.passport.mount('wechat', app.config.passportWechat)
   app.passport.mount('citi', app.config.passportCiti)
 
+  const localStrategy = app.passport.authenticate('local')
+  app.router.post('/passport/local', localStrategy)
+
   router.get('/logout', 'user.logout')
 
   router.resources('users', '/users', controller.users)
@@ -43,6 +46,11 @@ export default (app: Application) => {
     controller.wechatDev.message
   )
 
-  router.all('/api/*', controller.home.proxy)
+  if (app.config.env === 'prod') {
+    router.get('/api/currentUser', controller.user.current)
+  } else {
+    router.all('/api/*', controller.home.proxy)
+  }
+
   router.get('*', controller.home.render)
 }
