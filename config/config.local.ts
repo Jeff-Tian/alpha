@@ -17,7 +17,8 @@ export default () => {
 
   config.sequelize = {
     dialect: 'mysql',
-    connectionUri: 'mysql://root:@127.0.0.1:3306/alpha',
+    connectionUri:
+      process.env.CLEARDB_DATABASE_URL || 'mysql://root:@127.0.0.1:3306/alpha',
   }
 
   config.alinode = {
