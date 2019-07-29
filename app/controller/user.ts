@@ -4,7 +4,7 @@ export default class UserController extends Controller {
   public async logout() {
     const {ctx} = this
 
-    await ctx.logout()
+    ctx.logout()
     ctx.redirect(ctx.get('referer') || '/')
   }
 
