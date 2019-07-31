@@ -6,18 +6,28 @@ const debug = debug0('uniheart')
 
 export default (app: Application) => {
   app.passport.verify(async (ctx, user) => {
-    const {provider, id} = user
-    assert(provider, 'user.provider should exists')
-    assert(id, 'user.id should exists')
-
-    debug('============================================', ctx)
     debug('user = ', user)
+    const {provider, id, username, password} = user
+    assert(provider, 'user.provider should exists')
+    if (provider === 'local') {
+      assert(username, 'user.userusername should exists')
+      assert(password, 'user.password should exists')
+    } else {
+      assert(id, 'user.id should exists')
+    }
 
     const auth = await ctx.model.Authorization.findOne({
-      where: {
-        uid: id,
-        provider,
-      },
+      where:
+        provider === 'local'
+          ? {
+              username,
+              password,
+              provider,
+            }
+          : {
+              uid: id,
+              provider,
+            },
       attributes: {
         exclude: ['id'],
       },
@@ -46,7 +56,11 @@ export default (app: Application) => {
       }
     }
 
-    return ctx.service.user.register(user)
+    if (provider === 'local') {
+      return ctx.throw(422, '用户名或者密码错误！', user)
+    } else {
+      return ctx.service.user.register(user)
+    }
   })
 
   // tslint:disable-next-line:no-commented-code
@@ -56,5 +70,10 @@ export default (app: Application) => {
   //
   // app.passport.deserializeUser(async (ctx, user) => {
   //   ctx.logger.info('deserializing User: ', user)
+  // })
+  //
+  // app.on('error', (err, ctx) => {
+  //   console.error('exxxx = ', err, JSON.stringify(err))
+  //   ctx.logger.error(err)
   // })
 }

@@ -1,4 +1,4 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg'
+import {EggAppConfig, EggAppInfo, PowerPartial} from 'egg'
 import * as path from 'path'
 
 export default (appInfo: EggAppInfo) => {
@@ -17,7 +17,7 @@ export default (appInfo: EggAppInfo) => {
   }
 
   config.passportLocal = {
-    usernameField: 'username',
+    usernameField: process.env.passportLocalUserName!,
     passwordField: process.env.passportLocalPassword!,
   }
 
@@ -40,16 +40,13 @@ export default (appInfo: EggAppInfo) => {
 
   config.onerror = {
     all(err, ctx) {
-      ctx.body = { err }
-      ctx.status = 500
+      ctx.body = {err}
     },
     json(err, ctx) {
       ctx.body = err
-      ctx.status = 500
     },
     html(err, ctx) {
       ctx.body = '<h3>error</h3><p>' + JSON.stringify(err) + '</p>'
-      ctx.status = 500
     },
   }
 
