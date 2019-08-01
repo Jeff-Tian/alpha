@@ -11,6 +11,10 @@ describe('test/app.test.ts', () => {
     await runscript(`tsc -p ${baseDir}/tsconfig.json`, {cwd: baseDir})
   })
 
+  after(async () => {
+    await runscript('ets clean', {cwd: baseDir})
+  })
+
   describe('compiling code', () => {
     afterEach(mm.restore)
 
@@ -24,11 +28,11 @@ describe('test/app.test.ts', () => {
       return app.ready()
     })
 
-    after(async () => {
-      app.close()
-
-      assert.deepStrictEqual(app._app._backgroundTasks, [])
-    })
+    // after(async () => {
+    //   app.close()
+    //
+    //   assert.deepStrictEqual(app._app._backgroundTasks, [])
+    // })
 
     it('should show login tips when user unauthenticated', () => {
       return app

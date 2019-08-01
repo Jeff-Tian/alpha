@@ -57,7 +57,7 @@ export default (app: Application) => {
     }
 
     if (provider === 'local') {
-      return ctx.throw(422, '用户名或者密码错误！', user)
+      ctx.throw(422, '用户名或者密码错误！', user)
     } else {
       return ctx.service.user.register(user)
     }
@@ -73,7 +73,15 @@ export default (app: Application) => {
   // })
   //
   // app.on('error', (err, ctx) => {
-  //   console.error('exxxx = ', err, JSON.stringify(err))
   //   ctx.logger.error(err)
   // })
+
+  // @ts-ignore
+  process.on('unhandledRejection', error => {
+    // Will print "unhandledRejection err is not defined"
+    // console.error('unhandledRejection --> ', error)
+
+    throw error
+    // process.exit(1)
+  })
 }

@@ -12,7 +12,7 @@
     "stop": "egg-scripts stop --title=egg-server-alpha",
     "dev": "NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
     "debug": "egg-bin debug",
-    "test-with-full-trace": "egg-bin test --changed --full-trace",
+    "test-with-full-trace": "egg-bin test TESTS test/app/controller/passport-local.test.ts --full-trace",
     "test-local": "npm run migrate&&egg-bin test",
     "test-local-changed": "npm run migrate&&egg-bin test --changed",
     "test": "sh test/mysql-up.sh&&npm run lint -- --fix && npm run test-local-changed",

@@ -1,35 +1,9 @@
 import assert = require('assert')
-import mm from 'egg-mock'
-import * as path from 'path'
-import runscript = require('runscript')
+// tslint:disable-next-line: no-submodule-imports
+import {app} from 'egg-mock/bootstrap'
 
-const baseDir = path.resolve(__dirname, '../..')
-
-describe.skip('test/app.test.ts', () => {
-  before(async () => {
-    await runscript('ets', {cwd: baseDir})
-    await runscript(`tsc -p ${baseDir}/tsconfig.json`, {cwd: baseDir})
-  })
-
-  describe('compiling code', () => {
-    afterEach(mm.restore)
-
-    let app
-
-    before(async () => {
-      app = mm.app({
-        baseDir: '../..',
-      })
-
-      return app.ready()
-    })
-
-    after(async () => {
-      app.close()
-
-      assert.deepStrictEqual(app._app._backgroundTasks, [])
-    })
-
+describe('test/app.test.ts', () => {
+  describe('basic', () => {
     it.skip('post xml', async () => {
       const ctx = app.mockContext()
       const res = await ctx.curl(
@@ -48,7 +22,7 @@ describe.skip('test/app.test.ts', () => {
 
     it('knows env', async () => {
       const ctx = app.mockContext()
-      assert(ctx.env === 'unittest')
+      assert(ctx.app.env === 'unittest')
     })
   })
 })

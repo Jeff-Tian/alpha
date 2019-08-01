@@ -2,8 +2,16 @@ import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
 import {app} from 'egg-mock/bootstrap'
 
+import * as path from 'path'
+import runscript = require('runscript')
+
+const baseDir = path.resolve(__dirname, '../../..')
 describe('test/app/controller/passport-local.test.ts', () => {
-  it('should login', async () => {
+  before(async () => {
+    await runscript('ets clean', {cwd: baseDir})
+  })
+
+  it('logs in fail by username not exist', async () => {
     assert(app.config.passportLocal!.usernameField === 'username')
 
     app.mockCsrf()
