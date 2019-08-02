@@ -2,9 +2,9 @@ import assert from 'assert'
 import {plainToClass} from 'class-transformer'
 import {validate} from 'class-validator'
 import {Context} from 'egg'
+import Code2SessionRequest from '../validate/Code2SessionRequest'
 import GetAccessTokenRequest from '../validate/GetAccessTokenRequest'
 import GetQRCodeRequest from '../validate/GetQRCodeRequest'
-import Code2SessionRequest from '../validate/Code2SessionRequest'
 
 const typeMap = new Map([
   ['wechatDev.getAccessToken', GetAccessTokenRequest],

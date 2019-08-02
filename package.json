@@ -73,7 +73,7 @@
     "react-dom": "^16.5.1",
     "react-fittext": "^1.0.0",
     "react-router-dom": "^4.3.1",
-    "wechat-oauth-ts": "^1.0.9"
+    "wechat-oauth-ts": "^1.2.2"
   },
   "devDependencies": {
     "antd-pro-merge-less": "^0.1.0",

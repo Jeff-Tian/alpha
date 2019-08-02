@@ -1,6 +1,6 @@
 import {IsEnum, IsOptional} from 'class-validator'
 
-enum KeySecretSelection {
+export enum KeySecretSelection {
   PASSPORT_HARDWAY = 'passportHardway',
   PASSPORT_WECHAT = 'passportWechat',
   CUSTOMIZED = 'customized',
