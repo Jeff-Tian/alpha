@@ -39,6 +39,12 @@ export default (app: Application) => {
     validate,
     controller.wechatDev.getQRCode
   )
+  router.get(
+    'wechatDev.code2Session',
+    '/wechat-dev/code_2_session',
+    validate,
+    controller.wechatDev.code2Session
+  )
 
   router.post(
     'wechatDev.message',

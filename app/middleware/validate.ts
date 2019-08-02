@@ -4,10 +4,12 @@ import {validate} from 'class-validator'
 import {Context} from 'egg'
 import GetAccessTokenRequest from '../validate/GetAccessTokenRequest'
 import GetQRCodeRequest from '../validate/GetQRCodeRequest'
+import Code2SessionRequest from '../validate/Code2SessionRequest'
 
 const typeMap = new Map([
   ['wechatDev.getAccessToken', GetAccessTokenRequest],
   ['wechatDev.getQRCode', GetQRCodeRequest],
+  ['wechatDev.code2Session', Code2SessionRequest],
 ])
 
 export default async (ctx: Context, next: () => {}) => {

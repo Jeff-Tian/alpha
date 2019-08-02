@@ -56,6 +56,12 @@ export default class WechatDevController extends Controller {
     ctx.body = {message, redirects: results}
   }
 
+  public async code2Session() {
+    const {ctx} = this
+    const wechatOAuth = this.getWechatOAuthClient()
+    ctx.body = await wechatOAuth.code2Session(ctx.query.code)
+  }
+
   private getWechatOAuthClient() {
     const {ctx} = this
     const {select} = ctx.query
