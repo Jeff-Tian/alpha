@@ -1,9 +1,5 @@
 import {IsEnum, IsOptional} from 'class-validator'
-
-enum KeySecretSelection {
-  PASSPORT_WECHAT_MINI_PROGRAM_HARDWAY = 'passportWechatMiniProgramHardway',
-  CUSTOMIZED = 'customized',
-}
+import {KeySecretSelection} from './GetAccessTokenRequest'
 
 export default class GetAccessTokenRequest {
   @IsOptional()
