@@ -2,6 +2,30 @@ import {Controller} from 'egg'
 import WechatOAuth from 'wechat-oauth-ts'
 import {KeySecretSelection} from '../validate/GetAccessTokenRequest'
 
+export interface ICacheStorage {
+  get: (traceId: string) => Promise<string>
+  save: (traceId: string, referer: string, forHowLong: number) => Promise<void>
+  delete: (traceId: string) => Promise<void>
+}
+
+export class MemoryStorage implements ICacheStorage {
+  private static store = new Map<string, string>()
+
+  public async get(traceId: string) {
+    return MemoryStorage.store.get(String(traceId)) || ''
+  }
+
+  public async save(traceId: string, referer: string, clearAfter: number) {
+    MemoryStorage.store.set(String(traceId), referer)
+
+    setTimeout(() => MemoryStorage.store.delete(traceId), clearAfter)
+  }
+
+  public async delete(traceId: string) {
+    await MemoryStorage.store.delete(traceId)
+  }
+}
+
 export default class WechatDevController extends Controller {
   public async getAccessToken() {
     const {ctx} = this
@@ -70,7 +94,14 @@ export default class WechatDevController extends Controller {
   public async passportCallback() {
     const {ctx} = this
 
-    ctx.body = ctx.query
+    const referer = await ctx.app.refererCache.get(ctx.query.state)
+
+    await ctx.app.refererCache.delete(ctx.query.state)
+
+    ctx.body = {
+      ...ctx.query,
+      referer,
+    }
   }
 
   private getWechatOAuthClient() {

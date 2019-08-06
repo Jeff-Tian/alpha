@@ -1,10 +1,17 @@
 import assert = require('assert')
 import debug0 from 'debug'
 import {Application} from 'egg'
+import {MemoryStorage} from './app/controller/wechat-dev'
+import {RefererCache} from './app/router'
 
 const debug = debug0('uniheart')
 
 export default (app: Application) => {
+  app.refererCache = new RefererCache(
+    new MemoryStorage(),
+    app.config.refererCache
+  )
+
   app.passport.verify(async (ctx, user) => {
     debug('user = ', user)
     const {provider, id, username, password} = user

@@ -97,6 +97,10 @@ export default (appInfo: EggAppInfo) => {
     allowMethods: 'GET',
   }
 
+  config.refererCache = {
+    timeout: 1000 * 60 * 60,
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

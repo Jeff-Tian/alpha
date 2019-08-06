@@ -2,6 +2,10 @@ import 'egg'
 
 declare module 'egg' {
   // tslint:disable-next-line:interface-name
+  import {IMountOptions} from 'egg-passport'
+  import {RefererCache} from '../app/router'
+
+  // tslint:disable-next-line:interface-name
   interface Application {
     passport: {
       serializeUser<TUser = any>(
@@ -37,6 +41,8 @@ declare module 'egg' {
     all: any
 
     oAuth2Server: any
+
+    refererCache: RefererCache
   }
 
   // tslint:disable-next-line:interface-name
