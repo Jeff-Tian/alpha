@@ -19,6 +19,9 @@ export default () => {
   config.passportHardway = {
     key: process.env['passport-wechat-key-hardway']!,
     secret: process.env['passport-wechat-secret-hardway']!,
+    loginURL: 'https://uniheart.herokuapp.com/passport/wechat-hardway/',
+    callbackURL:
+      'https://uniheart.herokuapp.com/passport/wechat-hardway/callback',
   }
 
   config.passportWechatMiniProgramHardway = {
