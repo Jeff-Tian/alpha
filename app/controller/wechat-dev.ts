@@ -62,8 +62,14 @@ export default class WechatDevController extends Controller {
     ctx.body = await wechatOAuth.code2Session(ctx.query.code)
   }
 
+  public async passportStart() {
+    const {ctx} = this
+    ctx.body = 'ok'
+  }
+
   public async passportCallback() {
     const {ctx} = this
+
     ctx.body = ctx.query
   }
 

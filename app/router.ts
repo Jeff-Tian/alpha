@@ -15,6 +15,17 @@ export default (app: Application) => {
     '/passport/wechat-hardway/callback',
     controller.wechatDev.passportCallback
   )
+  app.router.get(
+    'wechatDev.passportStart',
+    '/passport/wechat-hardway',
+    async (ctx, next) => {
+      ctx.logger.info('passport started: ', {
+        query: ctx.query,
+        traceId: ctx.traceId,
+      })
+      await next()
+    }
+  )
   app.passport.mount('wechat', app.config.passportHardway)
   app.passport.mount('citi', app.config.passportCiti)
 
