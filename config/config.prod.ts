@@ -22,6 +22,7 @@ export default () => {
     loginURL: 'https://uniheart.herokuapp.com/passport/wechat-hardway/',
     callbackURL:
       'https://uniheart.herokuapp.com/passport/wechat-hardway/callback',
+    scope: 'snsapi_base',
   }
 
   config.passportWechatMiniProgramHardway = {
