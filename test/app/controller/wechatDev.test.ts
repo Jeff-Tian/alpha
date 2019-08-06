@@ -20,10 +20,17 @@ describe('test/app/controller/wechatDev.test.ts', () => {
     })
   })
 
-  it.skip('should GET /wechat-dev/access_token', async () => {
+  // it.skip('should GET /wechat-dev/access_token', async () => {
+  //   await app
+  //     .httpRequest()
+  //     .get('/wechat-dev/access_token?select=passportWechat')
+  //     .expect(200)
+  // })
+
+  it('saves referer', async () => {
     await app
       .httpRequest()
-      .get('/wechat-dev/access_token?select=passportWechat')
+      .get('/passport/wechat-hardway')
       .expect(200)
   })
 })

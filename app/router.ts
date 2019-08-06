@@ -1,6 +1,6 @@
 import {Application} from 'egg'
-import validate from './middleware/validate'
 import {ICacheStorage} from './controller/wechat-dev'
+import validate from './middleware/validate'
 
 export class RefererCache {
   private static globalRefererCache: RefererCache
