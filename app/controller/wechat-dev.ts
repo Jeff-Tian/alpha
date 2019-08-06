@@ -59,9 +59,12 @@ export default class WechatDevController extends Controller {
   public async code2Session() {
     const {ctx} = this
     const wechatOAuth = this.getWechatOAuthClient()
-    const data = await wechatOAuth.code2Session(ctx.query.code)
+    ctx.body = await wechatOAuth.code2Session(ctx.query.code)
+  }
 
-    ctx.body = data
+  public async passportCallback() {
+    const {ctx} = this
+    ctx.body = ctx.query
   }
 
   private getWechatOAuthClient() {
