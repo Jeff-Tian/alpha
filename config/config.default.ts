@@ -92,6 +92,11 @@ export default (appInfo: EggAppInfo) => {
 
   config.security = {}
 
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET',
+  }
+
   // the return config will combines to EggAppConfig
   return {
     ...config,
