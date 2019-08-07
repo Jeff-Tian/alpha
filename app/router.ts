@@ -1,51 +1,6 @@
-import assert from 'assert'
 import {Application} from 'egg'
-import {ICacheStorage} from './controller/wechat-dev'
+import rememberReferer from './middleware/rememberReferer'
 import validate from './middleware/validate'
-
-export class RefererCache {
-  private static globalRefererCache: RefererCache
-  public readonly cacheTimeout: number
-  private storage: ICacheStorage
-
-  public constructor(
-    store: ICacheStorage,
-    config: {cacheTimeout: number} = {cacheTimeout: 1000 * 60 * 60}
-  ) {
-    if (RefererCache.globalRefererCache) {
-      throw new Error('RefererCache 已经被实例化过了！')
-    }
-
-    this.storage = store
-    this.cacheTimeout = config.cacheTimeout
-
-    RefererCache.globalRefererCache = this
-  }
-
-  public static getInstance(): RefererCache {
-    if (!RefererCache.globalRefererCache) {
-      throw new Error('RefererCache 还没有实例化过！')
-    }
-
-    return RefererCache.globalRefererCache
-  }
-
-  public async get(traceId: string) {
-    return this.storage.get(traceId)
-  }
-
-  public async save(traceId: string, referer: string) {
-    return this.storage.save(traceId, referer, this.cacheTimeout)
-  }
-
-  public async delete(traceId: string) {
-    return this.storage.delete(traceId)
-  }
-
-  public get size() {
-    return this.storage.size
-  }
-}
 
 export default (app: Application) => {
   const {controller, router} = app
@@ -64,19 +19,7 @@ export default (app: Application) => {
   app.router.get(
     'wechatDev.passportStart',
     '/passport/wechat-hardway',
-    async (ctx, next) => {
-      const referer = ctx.headers.referer
-
-      ctx.logger.info('passport started: ', {
-        query: ctx.query,
-        traceId: ctx.traceId,
-      })
-
-      await app.refererCache.save(ctx.traceId, referer)
-      assert(app.refererCache.size >= 1)
-
-      await next()
-    }
+    rememberReferer
   )
   app.passport.mount('wechat', app.config.passportHardway)
   app.passport.mount('citi', app.config.passportCiti)

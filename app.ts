@@ -1,8 +1,8 @@
 import assert = require('assert')
 import debug0 from 'debug'
 import {Application} from 'egg'
-import {MemoryStorage} from './app/controller/wechat-dev'
-import {RefererCache} from './app/router'
+import MemoryStorage from './app/common/MemoryStorage'
+import RefererCache from './app/common/RefererCache'
 
 const debug = debug0('uniheart')
 
