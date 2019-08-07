@@ -23,6 +23,7 @@ export default () => {
     callbackURL:
       'https://uniheart.herokuapp.com/passport/wechat-hardway/callback',
     scope: 'snsapi_base',
+    state: ctx => ctx.traceId,
   }
 
   config.passportWechatMiniProgramHardway = {

@@ -1,3 +1,4 @@
+import assert from 'assert'
 import {Controller} from 'egg'
 import WechatOAuth from 'wechat-oauth-ts'
 import {KeySecretSelection} from '../validate/GetAccessTokenRequest'
@@ -16,7 +17,11 @@ export class MemoryStorage implements ICacheStorage {
     return MemoryStorage.store.get(String(traceId)) || ''
   }
 
-  public async save(traceId: string, referer: string, clearAfter: number) {
+  public async save(
+    traceId: string,
+    referer: string,
+    clearAfter: number = 1000 * 60 * 60
+  ) {
     MemoryStorage.store.set(String(traceId), referer)
 
     setTimeout(() => MemoryStorage.store.delete(traceId), clearAfter)
@@ -98,6 +103,8 @@ export default class WechatDevController extends Controller {
 
   public async passportCallback() {
     const {ctx} = this
+
+    assert(ctx.app.refererCache.size >= 1)
 
     const referer = await ctx.app.refererCache.get(ctx.query.state)
 
