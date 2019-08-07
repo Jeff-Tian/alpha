@@ -2,6 +2,7 @@ import assert from 'assert'
 import {Controller} from 'egg'
 import WechatOAuth from 'wechat-oauth-ts'
 import {KeySecretSelection} from '../validate/GetAccessTokenRequest'
+import * as querystring from 'querystring'
 
 export default class WechatDevController extends Controller {
   public async getAccessToken() {
@@ -77,9 +78,25 @@ export default class WechatDevController extends Controller {
 
     await ctx.app.refererCache.delete(ctx.query.state)
 
-    ctx.body = {
-      ...ctx.query,
-      referer,
+    if (ctx.app.env === 'unittest') {
+      ctx.body = {...ctx.query, referer}
+    }
+
+    const oauthClient = new WechatOAuth(
+      ctx.app.config.passportHardway.key,
+      ctx.app.config.passportHardway.secret
+    )
+
+    const accessTokenResult = await oauthClient.getAccessToken(ctx.query.code)
+
+    if (referer) {
+      ctx.redirect(
+        referer +
+          (referer.indexOf('?') > 0 ? '&' : '?') +
+          querystring.stringify(accessTokenResult)
+      )
+    } else {
+      ctx.body = accessTokenResult
     }
   }
 

@@ -5,7 +5,7 @@ import runscript = require('runscript')
 
 const baseDir = path.resolve(__dirname, '../..')
 
-describe('test/app.test.ts', () => {
+describe('test/passport-wechat-hardway.test.ts', () => {
   before(async () => {
     await runscript('ets', {cwd: baseDir})
     await runscript(`tsc -p ${baseDir}/tsconfig.json`, {cwd: baseDir})
@@ -15,7 +15,7 @@ describe('test/app.test.ts', () => {
     await runscript('ets clean', {cwd: baseDir})
   })
 
-  describe('compiling code', () => {
+  describe('compiling code and run tests', () => {
     afterEach(mm.restore)
 
     let app
@@ -47,15 +47,9 @@ describe('test/app.test.ts', () => {
           res.headers.location
       )
 
-      const res2 = await runningApp.get(
-        `/passport/wechat-hardway/callback?code=5678&state=${1234}`
-      )
-
-      assert.deepStrictEqual(res2.body, {
-        code: '5678',
-        state: '1234',
-        referer: 'http://localhost',
-      })
+      await runningApp
+        .get(`/passport/wechat-hardway/callback?code=5678&state=${1234}`)
+        .expect(500)
     })
   })
 })

@@ -1,4 +1,4 @@
-import {ICacheStorage} from '../controller/wechat-dev'
+import ICacheStorage from './ICacheStorage'
 
 export default class RefererCache {
   private static globalRefererCache: RefererCache
