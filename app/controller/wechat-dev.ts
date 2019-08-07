@@ -1,8 +1,8 @@
 import assert from 'assert'
 import {Controller} from 'egg'
+import * as querystring from 'querystring'
 import WechatOAuth from 'wechat-oauth-ts'
 import {KeySecretSelection} from '../validate/GetAccessTokenRequest'
-import * as querystring from 'querystring'
 
 export default class WechatDevController extends Controller {
   public async getAccessToken() {
