@@ -22,8 +22,14 @@ export default () => {
   }
 
   config.passportHardway = {
-    key: process.env['passport-wechat-key-hardway']!,
-    secret: process.env['passport-wechat-secret-hardway']!,
+    key: 'xxx',
+    secret: 'yyy',
+    loginURL: '/passport/wechat-hardway/',
+    callbackURL: '/passport/wechat-hardway/callback',
+    scope: 'snsapi_base',
+    state: ctx => {
+      return ctx.traceId
+    },
   }
 
   config.sequelize = {

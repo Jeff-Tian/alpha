@@ -6,6 +6,7 @@ export interface ICacheStorage {
   get: (traceId: string) => Promise<string>
   save: (traceId: string, referer: string, forHowLong: number) => Promise<void>
   delete: (traceId: string) => Promise<void>
+  size: number
 }
 
 export class MemoryStorage implements ICacheStorage {
@@ -23,6 +24,10 @@ export class MemoryStorage implements ICacheStorage {
 
   public async delete(traceId: string) {
     await MemoryStorage.store.delete(traceId)
+  }
+
+  public get size() {
+    return MemoryStorage.store.size
   }
 }
 

@@ -1,3 +1,4 @@
+import assert from 'assert'
 import {Application} from 'egg'
 import {ICacheStorage} from './controller/wechat-dev'
 import validate from './middleware/validate'
@@ -40,6 +41,10 @@ export class RefererCache {
   public async delete(traceId: string) {
     return this.storage.delete(traceId)
   }
+
+  public get size() {
+    return this.storage.size
+  }
 }
 
 export default (app: Application) => {
@@ -67,9 +72,8 @@ export default (app: Application) => {
         traceId: ctx.traceId,
       })
 
-      ctx.query.state = ctx.query.state || ctx.traceId
-
-      await app.refererCache.save(ctx.query.state, referer)
+      await app.refererCache.save(ctx.traceId, referer)
+      assert(app.refererCache.size >= 1)
 
       await next()
     }

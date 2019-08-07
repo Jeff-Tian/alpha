@@ -26,11 +26,4 @@ describe('test/app/controller/wechatDev.test.ts', () => {
   //     .get('/wechat-dev/access_token?select=passportWechat')
   //     .expect(200)
   // })
-
-  it('saves referer', async () => {
-    await app
-      .httpRequest()
-      .get('/passport/wechat-hardway')
-      .expect(200)
-  })
 })
