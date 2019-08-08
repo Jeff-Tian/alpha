@@ -30,6 +30,8 @@
   "dependencies": {
     "@antv/data-set": "^0.9.6",
     "@babel/runtime": "^7.1.2",
+    "@ckeditor/ckeditor5-build-classic": "^12.3.1",
+    "@ckeditor/ckeditor5-react": "^1.1.3",
     "antd": "^3.10.0",
     "bizcharts": "^3.2.2",
     "bizcharts-plugin-slider": "^2.0.3",
@@ -46,7 +48,7 @@
     "egg-passport-citi": "0.2.3",
     "egg-passport-github": "^1.0.0",
     "egg-passport-local": "^1.2.1",
-    "egg-passport-wechat-ts": "1.0.0",
+    "egg-passport-wechat-ts": "1.1.0",
     "egg-scripts": "^2.6.0",
     "egg-sequelize": "^5.1.0",
     "egg-tracer": "^1.1.0",

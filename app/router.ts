@@ -10,7 +10,6 @@ export default (app: Application) => {
   router.get('/user', 'home.render')
 
   app.passport.mount('github', app.config.passportGithub)
-  app.passport.mount('wechat', app.config.passportWechat)
   app.router.get(
     'wechatDev.passportCallback',
     '/passport/wechat-hardway/callback',
@@ -21,7 +20,8 @@ export default (app: Application) => {
     '/passport/wechat-hardway',
     rememberReferer
   )
-  app.passport.mount('wechat', app.config.passportHardway)
+  app.passport.mount('wechat', app.config.passportWechat)
+  app.passport.mount('wechat-hardway', app.config.passportHardway)
   app.passport.mount('citi', app.config.passportCiti)
 
   const localStrategy = app.passport.authenticate('local')

@@ -11,19 +11,22 @@ export default () => {
   }
 
   config.passportWechat = {
-    key: process.env['passport-wechat-key']!,
-    secret: process.env['passport-wechat-secret']!,
-    callbackURL: 'https://uniheart.herokuapp.com/passport/wechat/callback',
-  }
-
-  config.passportHardway = {
-    key: process.env['passport-wechat-key-hardway']!,
-    secret: process.env['passport-wechat-secret-hardway']!,
-    loginURL: 'https://uniheart.herokuapp.com/passport/wechat-hardway/',
-    callbackURL:
-      'https://uniheart.herokuapp.com/passport/wechat-hardway/callback',
-    scope: 'snsapi_base',
-    state: ctx => ctx.traceId,
+    clients: {
+      wechat: {
+        key: process.env['passport-wechat-key']!,
+        secret: process.env['passport-wechat-secret']!,
+        callbackURL: 'https://uniheart.herokuapp.com/passport/wechat/callback',
+      },
+      'wechat-hardway': {
+        key: process.env['passport-wechat-key-hardway']!,
+        secret: process.env['passport-wechat-secret-hardway']!,
+        loginURL: 'https://uniheart.herokuapp.com/passport/wechat-hardway/',
+        callbackURL:
+          'https://uniheart.herokuapp.com/passport/wechat-hardway/callback',
+        scope: 'snsapi_base',
+        state: ctx => ctx.traceId,
+      },
+    },
   }
 
   config.passportWechatMiniProgramHardway = {

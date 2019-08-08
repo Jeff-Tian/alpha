@@ -38,7 +38,7 @@ describe('test/passport-wechat-hardway.test.ts', () => {
       const res = await runningApp
         .get('/passport/wechat-hardway')
         .set('referer', 'http://localhost')
-        .expect(302)
+      // .expect(302)
 
       assert(res.text === 'Found')
       assert(
