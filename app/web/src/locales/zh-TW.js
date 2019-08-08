@@ -7,7 +7,8 @@ export default {
   'validation.email.wrong-format': '郵箱地址格式錯誤！',
   'validation.password.required': '請輸入密碼！',
   'validation.password.twice': '兩次輸入的密碼不匹配!',
-  'validation.password.strength.msg': '請至少輸入 6 個字符。請不要使用容易被猜到的密碼。',
+  'validation.password.strength.msg':
+    '請至少輸入 6 個字符。請不要使用容易被猜到的密碼。',
   'validation.password.strength.strong': '強度：強',
   'validation.password.strength.medium': '強度：中',
   'validation.password.strength.short': '強度：太短',
@@ -73,6 +74,7 @@ export default {
   'menu.dashboard.workplace': '工作臺',
   'menu.form': '表單頁',
   'menu.form.basicform': '基礎表單',
+  'menu.form.editor': '富文本编辑',
   'menu.form.stepform': '分步表單',
   'menu.form.stepform.info': '分步表單（填寫轉賬信息）',
   'menu.form.stepform.confirm': '分步表單（確認轉賬信息）',
@@ -201,11 +203,13 @@ export default {
   'app.settings.security.phone': '密保手機',
   'app.settings.security.phone-description': '已綁定手機：',
   'app.settings.security.question': '密保問題',
-  'app.settings.security.question-description': '未設置密保問題，密保問題可有效保護賬戶安全',
+  'app.settings.security.question-description':
+    '未設置密保問題，密保問題可有效保護賬戶安全',
   'app.settings.security.email': '備用郵箱',
   'app.settings.security.email-description': '已綁定郵箱：',
   'app.settings.security.mfa': 'MFA 設備',
-  'app.settings.security.mfa-description': '未綁定 MFA 設備，綁定後，可以進行二次確認',
+  'app.settings.security.mfa-description':
+    '未綁定 MFA 設備，綁定後，可以進行二次確認',
   'app.settings.security.modify': '修改',
   'app.settings.security.set': '設置',
   'app.settings.security.bind': '綁定',
@@ -217,9 +221,11 @@ export default {
   'app.settings.binding.dingding-description': '當前未綁定釘釘賬號',
   'app.settings.binding.bind': '綁定',
   'app.settings.notification.password': '賬戶密碼',
-  'app.settings.notification.password-description': '其他用戶的消息將以站內信的形式通知',
+  'app.settings.notification.password-description':
+    '其他用戶的消息將以站內信的形式通知',
   'app.settings.notification.messages': '系統消息',
-  'app.settings.notification.messages-description': '系統消息將以站內信的形式通知',
+  'app.settings.notification.messages-description':
+    '系統消息將以站內信的形式通知',
   'app.settings.notification.todo': '賬戶密碼',
   'app.settings.notification.todo-description': '賬戶密碼',
   'app.settings.open': '開',
@@ -279,7 +285,8 @@ export default {
   'app.setting.othersettings': '其他設置',
   'app.setting.weakmode': '色弱模式',
   'app.setting.copy': '拷貝設置',
-  'app.setting.copyinfo': '拷貝成功，請到 src/defaultSettings.js 中替換默認配置',
+  'app.setting.copyinfo':
+    '拷貝成功，請到 src/defaultSettings.js 中替換默認配置',
   'app.setting.production.hint':
     '配置欄只在開發環境用於預覽，生產環境不會展現，請拷貝後手動修改配置文件',
-};
+}

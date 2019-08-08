@@ -7,7 +7,8 @@ export default {
   'validation.email.wrong-format': '邮箱地址格式错误！',
   'validation.password.required': '请输入密码！',
   'validation.password.twice': '两次输入的密码不匹配!',
-  'validation.password.strength.msg': '请至少输入 6 个字符。请不要使用容易被猜到的密码。',
+  'validation.password.strength.msg':
+    '请至少输入 6 个字符。请不要使用容易被猜到的密码。',
   'validation.password.strength.strong': '强度：强',
   'validation.password.strength.medium': '强度：中',
   'validation.password.strength.short': '强度：太短',
@@ -72,6 +73,7 @@ export default {
   'menu.dashboard.monitor': '监控页',
   'menu.dashboard.workplace': '工作台',
   'menu.form': '表单页',
+  'menu.form.editor': '富文本编辑',
   'menu.form.basicform': '基础表单',
   'menu.form.stepform': '分步表单',
   'menu.form.stepform.info': '分步表单（填写转账信息）',
@@ -201,11 +203,13 @@ export default {
   'app.settings.security.phone': '密保手机',
   'app.settings.security.phone-description': '已绑定手机：',
   'app.settings.security.question': '密保问题',
-  'app.settings.security.question-description': '未设置密保问题，密保问题可有效保护账户安全',
+  'app.settings.security.question-description':
+    '未设置密保问题，密保问题可有效保护账户安全',
   'app.settings.security.email': '备用邮箱',
   'app.settings.security.email-description': '已绑定邮箱：',
   'app.settings.security.mfa': 'MFA 设备',
-  'app.settings.security.mfa-description': '未绑定 MFA 设备，绑定后，可以进行二次确认',
+  'app.settings.security.mfa-description':
+    '未绑定 MFA 设备，绑定后，可以进行二次确认',
   'app.settings.security.modify': '修改',
   'app.settings.security.set': '设置',
   'app.settings.security.bind': '绑定',
@@ -217,9 +221,11 @@ export default {
   'app.settings.binding.dingding-description': '当前未绑定钉钉账号',
   'app.settings.binding.bind': '绑定',
   'app.settings.notification.password': '账户密码',
-  'app.settings.notification.password-description': '其他用户的消息将以站内信的形式通知',
+  'app.settings.notification.password-description':
+    '其他用户的消息将以站内信的形式通知',
   'app.settings.notification.messages': '系统消息',
-  'app.settings.notification.messages-description': '系统消息将以站内信的形式通知',
+  'app.settings.notification.messages-description':
+    '系统消息将以站内信的形式通知',
   'app.settings.notification.todo': '账户密码',
   'app.settings.notification.todo-description': '账户密码',
   'app.settings.open': '开',
@@ -279,7 +285,8 @@ export default {
   'app.setting.othersettings': '其他设置',
   'app.setting.weakmode': '色弱模式',
   'app.setting.copy': '拷贝设置',
-  'app.setting.copyinfo': '拷贝成功，请到 src/defaultSettings.js 中替换默认配置',
+  'app.setting.copyinfo':
+    '拷贝成功，请到 src/defaultSettings.js 中替换默认配置',
   'app.setting.production.hint':
     '配置栏只在开发环境用于预览，生产环境不会展现，请拷贝后手动修改配置文件',
-};
+}

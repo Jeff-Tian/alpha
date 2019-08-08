@@ -1,4 +1,3 @@
-import assert from 'assert'
 import {Controller} from 'egg'
 import * as querystring from 'querystring'
 import WechatOAuth from 'wechat-oauth-ts'
@@ -71,8 +70,6 @@ export default class WechatDevController extends Controller {
 
   public async passportCallback() {
     const {ctx} = this
-
-    assert(ctx.app.refererCache.size >= 1)
 
     const referer = await ctx.app.refererCache.get(ctx.query.state)
 

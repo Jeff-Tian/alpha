@@ -85,6 +85,7 @@
     "antd-theme-webpack-plugin": "^1.1.8",
     "autod": "^3.0.1",
     "autod-egg": "^1.1.0",
+    "awesome-typescript-loader": "^5.2.1",
     "babel-eslint": "^8.1.2",
     "babel-plugin-dva-hmr": "^0.4.1",
     "babel-plugin-import": "^1.6.3",

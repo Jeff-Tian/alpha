@@ -15,7 +15,8 @@ export default {
   'validation.confirm-password.required': 'Please confirm your password!',
   'validation.phone-number.required': 'Please enter your phone number!',
   'validation.phone-number.wrong-format': 'Malformed phone number!',
-  'validation.verification-code.required': 'Please enter the verification code!',
+  'validation.verification-code.required':
+    'Please enter the verification code!',
   'validation.title.required': 'Please enter a title',
   'validation.date.required': 'Please select the start and end date',
   'validation.goal.required': 'Please enter a description of the goal',
@@ -42,7 +43,8 @@ export default {
   'form.client.placeholder':
     'Please describe your customer service, internal customers directly @ Name / job number',
   'form.invites.label': 'Inviting critics',
-  'form.invites.placeholder': 'Please direct @ Name / job number, you can invite up to 5 people',
+  'form.invites.placeholder':
+    'Please direct @ Name / job number, you can invite up to 5 people',
   'form.weight.label': 'Weight',
   'form.weight.placeholder': 'Please enter weight',
   'form.public.label': 'Target disclosure',
@@ -60,7 +62,8 @@ export default {
   'component.globalHeader.search.example3': 'Search example 3',
   'component.globalHeader.help': 'Help',
   'component.globalHeader.notification': 'Notification',
-  'component.globalHeader.notification.empty': 'You have viewed all notifications.',
+  'component.globalHeader.notification.empty':
+    'You have viewed all notifications.',
   'component.globalHeader.message': 'Message',
   'component.globalHeader.message.empty': 'You have viewed all messsages.',
   'component.globalHeader.event': 'Event',
@@ -74,6 +77,7 @@ export default {
   'menu.dashboard.monitor': 'Monitor',
   'menu.dashboard.workplace': 'Workplace',
   'menu.form': 'Form',
+  'menu.form.editor': 'Rich Text Editor',
   'menu.form.basicform': 'Basic Form',
   'menu.form.stepform': 'Step Form',
   'menu.form.stepform.info': 'Step Form(write transfer information)',
@@ -104,7 +108,8 @@ export default {
   'menu.account.settings': 'Account Settings',
   'menu.account.trigger': 'Trigger Error',
   'menu.account.logout': 'Logout',
-  'app.login.message-invalid-credentials': 'Invalid username or password（admin/888888）',
+  'app.login.message-invalid-credentials':
+    'Invalid username or password（admin/888888）',
   'app.login.message-invalid-verification-code': 'Invalid verification code',
   'app.login.tab-login-credentials': 'Credentials',
   'app.login.tab-login-mobile': 'Mobile number',
@@ -218,7 +223,8 @@ export default {
   'app.settings.binding.alipay': 'Binding Alipay',
   'app.settings.binding.alipay-description': 'Currently unbound Alipay account',
   'app.settings.binding.dingding': 'Binding DingTalk',
-  'app.settings.binding.dingding-description': 'Currently unbound DingTalk account',
+  'app.settings.binding.dingding-description':
+    'Currently unbound DingTalk account',
   'app.settings.binding.bind': 'Bind',
   'app.settings.notification.password': 'Account Password',
   'app.settings.notification.password-description':
@@ -238,7 +244,8 @@ export default {
   'app.result.error.title': 'Submission Failed',
   'app.result.error.description':
     'Please check and modify the following information before resubmitting.',
-  'app.result.error.hint-title': 'The content you submitted has the following error:',
+  'app.result.error.hint-title':
+    'The content you submitted has the following error:',
   'app.result.error.hint-text1': 'Your account has been frozen',
   'app.result.error.hint-btn1': 'Thaw immediately',
   'app.result.error.hint-text2': 'Your account is not yet eligible to apply',
@@ -287,7 +294,8 @@ export default {
   'app.setting.othersettings': 'Other Settings',
   'app.setting.weakmode': 'Weak Mode',
   'app.setting.copy': 'Copy Setting',
-  'app.setting.copyinfo': 'copy success，please replace defaultSettings in src/models/setting.js',
+  'app.setting.copyinfo':
+    'copy success，please replace defaultSettings in src/models/setting.js',
   'app.setting.production.hint':
     'Setting panel shows in development environment only, please manually modify',
-};
+}
