@@ -26,7 +26,7 @@ export default () => {
         key: 'xxx',
         secret: 'yyy',
         loginURL: '/passport/wechat-hardway/',
-        callbackURL: '/passport/wechat-hardway/callback',
+        callbackURL: 'https://localhost:7001/passport/wechat-hardway/callback',
         scope: 'snsapi_base',
         state: ctx => {
           return ctx.traceId

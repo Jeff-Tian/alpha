@@ -1,6 +1,64 @@
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import CKEditor from '@ckeditor/ckeditor5-react'
+// tslint:disable-next-line:no-submodule-imports
+// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/base64uploadadapter'
 import React, {PureComponent} from 'react'
+
+class Base64ImageUploadAdapter {
+  loader: any
+  reader: any
+  /**
+   * Creates a new adapter instance.
+   *
+   * @param {module:upload/filerepository~FileLoader} loader
+   */
+  constructor(loader) {
+    /**
+     * `FileLoader` instance to use during the upload.
+     *
+     * @member {module:upload/filerepository~FileLoader} #loader
+     */
+    this.loader = loader
+  }
+
+  /**
+   * Starts the upload process.
+   *
+   * @see module:upload/filerepository~UploadAdapter#upload
+   * @returns {Promise}
+   */
+  upload() {
+    return new Promise((resolve, reject) => {
+      const reader = (this.reader = new FileReader())
+
+      reader.addEventListener('load', () => {
+        resolve({default: reader.result})
+      })
+
+      reader.addEventListener('error', err => {
+        reject(err)
+      })
+
+      reader.addEventListener('abort', () => {
+        reject()
+      })
+
+      this.loader.file.then(file => {
+        reader.readAsDataURL(file)
+      })
+    })
+  }
+
+  /**
+   * Aborts the upload process.
+   *
+   * @see module:upload/filerepository~UploadAdapter#abort
+   * @returns {Promise}
+   */
+  abort() {
+    this.reader.abort()
+  }
+}
 
 export default class Editor extends PureComponent {
   render() {
@@ -11,6 +69,8 @@ export default class Editor extends PureComponent {
           data="<p>Hello from CKEditor 5!</p>"
           onInit={editor => {
             // You can store the "editor" and use when it is needed.
+            editor.plugins.get('FileRepository').createUploadAdapter = loader =>
+              new Base64ImageUploadAdapter(loader)
             // tslint:disable-next-line:no-console
             console.log('Editor is ready to use!', editor)
           }}
