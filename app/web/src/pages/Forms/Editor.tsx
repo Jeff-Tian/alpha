@@ -2,6 +2,7 @@ import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import CKEditor from '@ckeditor/ckeditor5-react'
 // tslint:disable-next-line:no-submodule-imports
 // import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/base64uploadadapter'
+
 import React, {PureComponent} from 'react'
 
 class Base64ImageUploadAdapter {
@@ -68,11 +69,25 @@ export default class Editor extends PureComponent {
           editor={ClassicEditor}
           data="<p>Hello from CKEditor 5!</p>"
           onInit={editor => {
+            ClassicEditor.builtinPlugins.map(plugin => {
+              // tslint:disable-next-line:no-console
+              console.log(plugin.pluginName)
+              if (plugin.pluginName === 'MediaEmbed') {
+                // tslint:disable-next-line:no-console
+                plugin.extraProviders = [
+                  {
+                    name: 'test',
+                    url: /.+/,
+                    html: match => `...${match}...`,
+                  },
+                ]
+              }
+            })
+
             // You can store the "editor" and use when it is needed.
+            // tslint:disable-next-line:no-console
             editor.plugins.get('FileRepository').createUploadAdapter = loader =>
               new Base64ImageUploadAdapter(loader)
-            // tslint:disable-next-line:no-console
-            console.log('Editor is ready to use!', editor)
           }}
           onChange={(event, editor) => {
             const data = editor.getData()
@@ -86,6 +101,23 @@ export default class Editor extends PureComponent {
           onFocus={editor => {
             // tslint:disable-next-line:no-console
             console.log('Focus.', editor)
+          }}
+          config={{
+            plugins: ClassicEditor.builtinPlugins.map(
+              plugin => plugin.pluginName
+            ),
+            mediaEmbed: {
+              extraProviders: [
+                {
+                  name: 'all',
+                  // A URL regexp or an array of URL regexps:
+                  url: /.+/,
+
+                  // To be defined only if the media are previewable:
+                  html: match => `...${match}`,
+                },
+              ],
+            },
           }}
         />
       </div>
