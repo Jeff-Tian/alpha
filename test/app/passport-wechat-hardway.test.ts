@@ -43,7 +43,7 @@ describe('test/passport-wechat-hardway.test.ts', () => {
       assert(res.text === 'Found')
       assert(
         // tslint:disable-next-line:max-line-length
-        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=xxx&redirect_uri=%2Fpassport%2Fwechat-hardway%2Fcallback&response_type=code&scope=snsapi_base&state=${1234}#wechat_redirect` ===
+        `https://open.weixin.qq.com/connect/oauth2/authorize?appid=xxx&redirect_uri=https%3A%2F%2Flocalhost%3A7001%2Fpassport%2Fwechat-hardway%2Fcallback&response_type=code&scope=snsapi_base&state=1234#wechat_redirect` ===
           res.headers.location
       )
 

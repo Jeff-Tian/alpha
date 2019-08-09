@@ -35,17 +35,6 @@ export default () => {
     },
   }
 
-  config.passportHardway = {
-    key: 'xxx',
-    secret: 'yyy',
-    loginURL: '/passport/wechat-hardway/',
-    callbackURL: '/passport/wechat-hardway/callback',
-    scope: 'snsapi_base',
-    state: ctx => {
-      return ctx.traceId
-    },
-  }
-
   config.sequelize = {
     dialect: 'mysql',
     connectionUri: 'mysql://root:@127.0.0.1:3306/alpha',

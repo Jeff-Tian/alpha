@@ -20,8 +20,11 @@ export default (app: Application) => {
     '/passport/wechat-hardway',
     rememberReferer
   )
-  app.passport.mount('wechat', app.config.passportWechat)
-  app.passport.mount('wechat-hardway', app.config.passportHardway)
+  app.passport.mount('wechat', app.config.passportWechat.clients.wechat)
+  app.passport.mount(
+    'wechat-hardway',
+    app.config.passportWechat.clients['wechat-hardway']
+  )
   app.passport.mount('citi', app.config.passportCiti)
 
   const localStrategy = app.passport.authenticate('local')

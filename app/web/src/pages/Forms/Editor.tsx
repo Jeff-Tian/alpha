@@ -1,8 +1,5 @@
 import ClassicEditor from '@ckeditor/ckeditor5-build-classic'
 import CKEditor from '@ckeditor/ckeditor5-react'
-// tslint:disable-next-line:no-submodule-imports
-// import Base64UploadAdapter from '@ckeditor/ckeditor5-upload/src/base64uploadadapter'
-
 import React, {PureComponent} from 'react'
 
 class Base64ImageUploadAdapter {
