@@ -22,7 +22,7 @@ const data = [
   {
     name: 'Python 基础',
     version: '1.1',
-    createdAt: '2014-12-24 23:12:00',
+    createdAt: '2014-12-25 23:12:00',
     upgradeNum: '56',
     creator: 'Jeff Tian',
   },
