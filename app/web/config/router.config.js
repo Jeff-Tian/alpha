@@ -4,10 +4,10 @@ export default [
     path: '/user',
     component: '../layouts/UserLayout',
     routes: [
-      {path: '/user', redirect: '/user/login'},
-      {path: '/user/login', component: './User/Login'},
-      {path: '/user/register', component: './User/Register'},
-      {path: '/user/register-result', component: './User/RegisterResult'},
+      { path: '/user', redirect: '/user/login' },
+      { path: '/user/login', component: './User/Login' },
+      { path: '/user/register', component: './User/Register' },
+      { path: '/user/register-result', component: './User/RegisterResult' },
     ],
   },
   // app
@@ -18,7 +18,7 @@ export default [
     authority: ['admin', 'user'],
     routes: [
       // dashboard
-      {path: '/', redirect: '/dashboard/analysis'},
+      { path: '/', redirect: '/dashboard/analysis' },
       {
         path: '/dashboard',
         name: 'dashboard',
@@ -51,6 +51,11 @@ export default [
             path: '/form/editor',
             name: 'editor',
             component: './Forms/Editor',
+          },
+          {
+            path: '/form/nested-table',
+            name: 'nestedTable',
+            component: './Forms/NestedTable',
           },
           {
             path: '/form/basic-form',
@@ -172,7 +177,7 @@ export default [
             name: 'success',
             component: './Result/Success',
           },
-          {path: '/result/fail', name: 'fail', component: './Result/Error'},
+          { path: '/result/fail', name: 'fail', component: './Result/Error' },
         ],
       },
       {

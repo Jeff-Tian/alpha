@@ -10,7 +10,7 @@
   "scripts": {
     "start": "egg-scripts start --daemon --title=egg-server-alpha",
     "stop": "egg-scripts stop --title=egg-server-alpha",
-    "dev": "cross-env NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
+    "dev": "sh test/mysql-up.sh&&cross-env NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
     "debug": "egg-bin debug",
     "test-with-full-trace": "egg-bin test TESTS test/app/passport-wechat-hardway.test.ts --full-trace",
     "test-local": "npm run migrate&&egg-bin test",

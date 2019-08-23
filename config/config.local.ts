@@ -1,4 +1,4 @@
-import {EggAppConfig, PowerPartial} from 'egg'
+import { EggAppConfig, PowerPartial } from 'egg'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -11,8 +11,21 @@ export default () => {
   }
 
   config.passportWechat = {
-    key: process.env['passport-wechat-key']!,
-    secret: process.env['passport-wechat-secret']!,
+    clients: {
+      wechat: {
+        key: process.env['passport-wechat-key'] || 'xxx',
+        secret: process.env['passport-wechat-secret'] || 'yyy',
+      },
+      'wechat-hardway': {
+        key: process.env['passport-wechat-key-hardway'] || 'xxxx',
+        secret: process.env['passport-wechat-secret-hardway'] || 'yyyy',
+        loginURL: 'https://uniheart.herokuapp.com/passport/wechat-hardway/',
+        callbackURL:
+          'https://uniheart.herokuapp.com/passport/wechat-hardway/callback',
+        scope: 'snsapi_base',
+        state: ctx => ctx.traceId,
+      },
+    },
   }
 
   config.sequelize = {
