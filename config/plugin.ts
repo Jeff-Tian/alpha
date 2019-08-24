@@ -32,6 +32,11 @@ const plugin: EggPlugin = {
     package: 'egg-passport-citi',
   },
 
+  passportWeapp: {
+    enable: true,
+    package: 'egg-passport-weapp',
+  },
+
   sequelize: {
     enable: true,
     package: 'egg-sequelize',

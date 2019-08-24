@@ -29,7 +29,7 @@ export default () => {
     },
   }
 
-  config.passportWechatMiniProgramHardway = {
+  config.passportWeapp = {
     key: process.env['passport-wechat-mini-program-hardway-key']!,
     secret: process.env['passport-wechat-mini-program-hardway-secret']!,
   }

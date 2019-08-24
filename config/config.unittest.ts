@@ -35,21 +35,14 @@ export default () => {
     },
   }
 
+  config.passportWeapp = {
+    key: 'xxx',
+    secret: 'yyy',
+  }
+
   config.sequelize = {
     dialect: 'mysql',
     connectionUri: 'mysql://root:@127.0.0.1:3306/alpha',
-  }
-
-  config.onerror = {
-    all(err, ctx) {
-      ctx.body = {err}
-    },
-    json(err, ctx) {
-      ctx.body = err
-    },
-    html(err, ctx) {
-      ctx.body = '<h3>error</h3><p>' + JSON.stringify(err) + '</p>'
-    },
   }
 
   config.alinode = {

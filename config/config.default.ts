@@ -38,18 +38,6 @@ export default (appInfo: EggAppInfo) => {
     secret: 'secret',
   }
 
-  config.onerror = {
-    all(err, ctx) {
-      ctx.body = {err}
-    },
-    json(err, ctx) {
-      ctx.body = err
-    },
-    html(err, ctx) {
-      ctx.body = '<h3>error</h3><p>' + JSON.stringify(err) + '</p>'
-    },
-  }
-
   config.alinode = {
     enable: false,
     appid: process.env['alinode-appid']!,
