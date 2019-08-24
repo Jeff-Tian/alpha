@@ -3,7 +3,7 @@ import {IsEnum, IsOptional} from 'class-validator'
 export enum KeySecretSelection {
   PASSPORT_HARDWAY = 'passportHardway',
   PASSPORT_WECHAT = 'passportWechat',
-  PASSPORT_WECHAT_MINI_PROGRAM_HARDWAY = 'passportWechatMiniProgramHardway',
+  PASSPORT_WECHAT_MINI_PROGRAM_HARDWAY = 'passportWeapp',
   CUSTOMIZED = 'customized',
 }
 

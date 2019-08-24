@@ -23,6 +23,10 @@ export default (app: Application) => {
       assert(id, 'user.id should exists')
     }
 
+    if (provider === 'weapp') {
+      ctx.session.returnTo = ctx.path
+    }
+
     const auth = await ctx.model.Authorization.findOne({
       where:
         provider === 'local'
