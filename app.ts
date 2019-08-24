@@ -9,7 +9,7 @@ const debug = debug0('uniheart')
 export default (app: Application) => {
   app.refererCache = new RefererCache(
     new MemoryStorage(),
-    app.config.refererCache
+    app.config.refererCache,
   )
 
   app.passport.verify(async (ctx, user) => {
@@ -23,22 +23,18 @@ export default (app: Application) => {
       assert(id, 'user.id should exists')
     }
 
-    if (provider === 'weapp') {
-      ctx.session.returnTo = ctx.path
-    }
-
     const auth = await ctx.model.Authorization.findOne({
       where:
         provider === 'local'
           ? {
-              username,
-              password,
-              provider,
-            }
+            username,
+            password,
+            provider,
+          }
           : {
-              uid: id,
-              provider,
-            },
+            uid: id,
+            provider,
+          },
       attributes: {
         exclude: ['id'],
       },
@@ -55,7 +51,7 @@ export default (app: Application) => {
         },
         {
           where: {provider, uid: id},
-        }
+        },
       )
 
       const existedUser = await ctx.model.User.findOne({
