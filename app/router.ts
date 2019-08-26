@@ -26,6 +26,11 @@ export default (app: Application) => {
     app.config.passportWechat.clients['wechat-hardway']
   )
   app.passport.mount('citi', app.config.passportCiti)
+  app.router.get(
+    'wechatDev.passportCallback',
+    '/passport/weapp/callback',
+    controller.wechatDev.passportCallback
+  )
   app.passport.mount('weapp', app.config.passportWeapp)
 
   const localStrategy = app.passport.authenticate('local')

@@ -71,6 +71,10 @@ export default class WechatDevController extends Controller {
   public async passportCallback() {
     const {ctx} = this
 
+    if (ctx.path === '/passport/weapp/callback') {
+      return (ctx.body = ctx.user)
+    }
+
     const referer = await ctx.app.refererCache.get(ctx.query.state)
 
     await ctx.app.refererCache.delete(ctx.query.state)
