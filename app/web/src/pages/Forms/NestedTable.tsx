@@ -1,5 +1,6 @@
 import {Badge, Table} from 'antd'
 import React, {PureComponent} from 'react'
+import UniHeart from '../../components/UniHeart'
 
 const columns = [
   {title: '精品课名称', dataIndex: 'name', key: 'name'},
@@ -156,12 +157,15 @@ const blockRenderer = () => {
 export default class NestedTable extends PureComponent {
   render() {
     return (
-      <Table
-        className="components-table-demo-nested"
-        columns={columns}
-        expandedRowRender={blockRenderer}
-        dataSource={data}
-      />
+      <>
+        <Table
+          className="components-table-demo-nested"
+          columns={columns}
+          expandedRowRender={blockRenderer}
+          dataSource={data}
+        />
+        <UniHeart />
+      </>
     )
   }
 }

@@ -1,4 +1,4 @@
-import { EggAppConfig, PowerPartial } from 'egg'
+import {EggAppConfig, PowerPartial} from 'egg'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -26,6 +26,11 @@ export default () => {
         state: ctx => ctx.traceId,
       },
     },
+  }
+
+  config.passportWeapp = {
+    key: 'xxx',
+    secret: 'yyy',
   }
 
   config.sequelize = {
