@@ -13,25 +13,31 @@ export default (app: Application) => {
   app.router.get(
     'wechatDev.passportCallback',
     '/passport/wechat-hardway/callback',
-    controller.wechatDev.passportCallback,
+    controller.wechatDev.passportCallback
   )
   app.router.get(
     'wechatDev.passportStart',
     '/passport/wechat-hardway',
-    rememberReferer,
+    rememberReferer
   )
   app.passport.mount('wechat', app.config.passportWechat.clients.wechat)
   app.passport.mount(
     'wechat-hardway',
-    app.config.passportWechat.clients['wechat-hardway'],
+    app.config.passportWechat.clients['wechat-hardway']
   )
   app.passport.mount('citi', app.config.passportCiti)
+  app.router.get(
+    'passport-relay.relay',
+    '/passport/citi/callback',
+    controller.PassportRelay.relay
+  )
+
   app.passport.mount('weapp', app.config.passportWeapp)
 
   app.router.get(
     'wechatDev.passportCallback',
     '/passport/weapp/callback',
-    controller.wechatDev.passportCallback,
+    controller.wechatDev.passportCallback
   )
 
   const localStrategy = app.passport.authenticate('local')
@@ -46,32 +52,32 @@ export default (app: Application) => {
   app.get(
     '/user/authenticate',
     app.oAuth2Server.authenticate(),
-    'user.authenticate',
+    'user.authenticate'
   )
 
   router.get(
     'wechatDev.getAccessToken',
     '/wechat-dev/access_token',
     validate,
-    controller.wechatDev.getAccessToken,
+    controller.wechatDev.getAccessToken
   )
   router.get(
     'wechatDev.getQRCode',
     '/wechat-dev/qr-code',
     validate,
-    controller.wechatDev.getQRCode,
+    controller.wechatDev.getQRCode
   )
   router.get(
     'wechatDev.code2Session',
     '/wechat-dev/code_2_session',
     validate,
-    controller.wechatDev.code2Session,
+    controller.wechatDev.code2Session
   )
 
   router.post(
     'wechatDev.message',
     '/endpoints/wechat/message',
-    controller.wechatDev.message,
+    controller.wechatDev.message
   )
 
   if (app.config.env === 'prod') {
