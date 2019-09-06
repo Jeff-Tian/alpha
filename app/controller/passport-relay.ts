@@ -6,8 +6,6 @@ export default class PassportRelayController extends Controller {
     const {ctx} = this
 
     const referer = await ctx.app.refererCache.get(ctx.query.state)
-    // tslint:disable-next-line:no-console
-    console.log('referer =========== ', referer)
     await ctx.app.refererCache.delete(ctx.query.state)
 
     if (referer) {

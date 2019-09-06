@@ -18,15 +18,19 @@ describe('test/app/controller/passport-relay.test.ts', () => {
       .get('/gcb/api/v1/customers/profiles')
       .reply(200, {
         emails: [{emailAddress: 'jie.tian@hotmail.com'}],
+        customerParticulars: {
+          names: [{fullName: 'jie.tian'}],
+        },
       })
 
     const result = await app
       .httpRequest()
       .get('/passport/citi/callback?code=1234')
-      .expect(200)
+      .expect(302)
 
-    assert.deepStrictEqual(result.body, {
-      token: '1234',
-    })
+    assert.deepStrictEqual(
+      result.headers.location,
+      '/passport/citi/passport-relay'
+    )
   })
 })

@@ -58,8 +58,6 @@ export default (app: Application) => {
         where: {id: user_id},
         attributes: {},
       })
-      // tslint:disable-next-line:no-console
-      console.log('existedUser = ', existedUser, user_id)
       if (existedUser) {
         return user
       }

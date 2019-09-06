@@ -16,8 +16,6 @@ export default class User extends Service {
       const systemUser = await ctx.model.User.create({
         display_name: user.displayName,
       })
-      // tslint:disable-next-line:no-console
-      console.log('created systemUser = ', systemUser)
 
       await ctx.model.Authorization.create({
         provider: user.provider,
@@ -30,8 +28,6 @@ export default class User extends Service {
 
       await transaction.commit()
 
-      // tslint:disable-next-line:no-console
-      console.log('transaction committed, user = ', user)
       return user
     } catch (err) {
       await transaction.rollback()

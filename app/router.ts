@@ -25,10 +25,11 @@ export default (app: Application) => {
     'wechat-hardway',
     app.config.passportWechat.clients['wechat-hardway']
   )
+
   app.passport.mount('citi', app.config.passportCiti)
   app.router.get(
     'passport-relay.relay',
-    '/passport/citi/callback',
+    '/passport/citi/callback-relay',
     controller.passportRelay.relay
   )
 
