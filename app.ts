@@ -9,7 +9,7 @@ const debug = debug0('uniheart')
 export default (app: Application) => {
   app.refererCache = new RefererCache(
     new MemoryStorage(),
-    app.config.refererCache,
+    app.config.refererCache
   )
 
   app.passport.verify(async (ctx, user) => {
@@ -17,7 +17,7 @@ export default (app: Application) => {
     const {provider, id, username, password} = user
     assert(provider, 'user.provider should exists')
     if (provider === 'local') {
-      assert(username, 'user.userusername should exists')
+      assert(username, 'user.username should exists')
       assert(password, 'user.password should exists')
     } else {
       assert(id, 'user.id should exists')
@@ -27,14 +27,14 @@ export default (app: Application) => {
       where:
         provider === 'local'
           ? {
-            username,
-            password,
-            provider,
-          }
+              username,
+              password,
+              provider,
+            }
           : {
-            uid: id,
-            provider,
-          },
+              uid: id,
+              provider,
+            },
       attributes: {
         exclude: ['id'],
       },
@@ -51,13 +51,15 @@ export default (app: Application) => {
         },
         {
           where: {provider, uid: id},
-        },
+        }
       )
 
       const existedUser = await ctx.model.User.findOne({
         where: {id: user_id},
         attributes: {},
       })
+      // tslint:disable-next-line:no-console
+      console.log('existedUser = ', existedUser, user_id)
       if (existedUser) {
         return user
       }

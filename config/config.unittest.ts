@@ -40,6 +40,11 @@ export default () => {
     secret: 'yyy',
   }
 
+  config.passportCiti = {
+    key: 'xxx',
+    secret: 'yyy',
+  }
+
   config.sequelize = {
     dialect: 'mysql',
     connectionUri: 'mysql://root:@127.0.0.1:3306/alpha',
