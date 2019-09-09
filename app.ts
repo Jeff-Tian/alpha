@@ -13,6 +13,8 @@ export default (app: Application) => {
   )
 
   app.passport.verify(async (ctx, user) => {
+    // tslint:disable-next-line:no-console
+    console.log('verifying...', user)
     debug('user = ', user)
     const {provider, id, username, password} = user
     assert(provider, 'user.provider should exists')
@@ -41,6 +43,8 @@ export default (app: Application) => {
     })
 
     if (auth) {
+      // tslint:disable-next-line:no-console
+      console.log('auth ===== ', auth)
       const {user_id} = auth
 
       await ctx.model.Authorization.update(

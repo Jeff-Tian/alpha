@@ -27,11 +27,7 @@ export default (app: Application) => {
   )
 
   app.passport.mount('citi', app.config.passportCiti)
-  app.router.get(
-    'passport-relay.relay',
-    '/passport/citi/callback-relay',
-    controller.passportRelay.relay
-  )
+  app.router.get('/passport/citi/callback', controller.passportRelay.relay)
 
   app.passport.mount('weapp', app.config.passportWeapp)
 

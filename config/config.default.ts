@@ -36,6 +36,7 @@ export default (appInfo: EggAppInfo) => {
   config.passportCiti = {
     key: 'key',
     secret: 'secret',
+    successReturnToOrRedirect: '/passport/citi/passport-relay',
   }
 
   config.alinode = {

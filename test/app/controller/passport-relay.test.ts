@@ -4,7 +4,10 @@ import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
 
 describe('test/app/controller/passport-relay.test.ts', () => {
-  it('should show token', async () => {
+  it('should redirect after successfully login by citi account', async () => {
+    // tslint:disable-next-line: no-commented-code
+    // const ctx = app.mockContext({})
+
     nock('https://sandbox.apihub.citi.com')
       .post('/gcb/api/authCode/oauth2/token/sg/gcb')
       .reply(200, {
@@ -23,14 +26,24 @@ describe('test/app/controller/passport-relay.test.ts', () => {
         },
       })
 
-    const result = await app
+    await app
       .httpRequest()
       .get('/passport/citi/callback?code=1234')
       .expect(302)
 
-    assert.deepStrictEqual(
-      result.headers.location,
-      '/passport/citi/passport-relay'
+    // assert(ctx.isAuthenticated())
+  })
+  it('should return token', async () => {
+    const response = await app
+      .httpRequest()
+      .get('/passport/citi')
+      .expect(302)
+
+    assert(
+      response.headers.location.startsWith(
+        // tslint:disable-next-line:max-line-length
+        'https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=xxx&scope=customers_profiles&countryCode=SG&businessCode=GCB&locale=en_US&'
+      )
     )
   })
 })
