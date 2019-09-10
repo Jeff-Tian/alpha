@@ -6,8 +6,6 @@ export default class PassportRelayController extends Controller {
   public async relay() {
     const {ctx} = this
 
-    // tslint:disable-next-line:no-console
-    console.log('relaying...', ctx.query)
     return (ctx.body = ctx.user.id)
 
     // tslint:disable-next-line:no-commented-code
