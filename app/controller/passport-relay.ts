@@ -13,10 +13,10 @@ export default class PassportRelayController extends Controller {
       ctx.redirect(
         referer +
           (referer.indexOf('?') > 0 ? '&' : '?') +
-          querystring.stringify({token: ctx.user.id})
+          querystring.stringify({token: ctx.user.id, traceId: ctx.traceId})
       )
     } else {
-      ctx.body = {token: ctx.user.id}
+      ctx.body = {token: ctx.user.id, traceId: ctx.traceId}
     }
   }
 }
