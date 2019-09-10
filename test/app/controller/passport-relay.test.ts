@@ -46,4 +46,14 @@ describe('test/app/controller/passport-relay.test.ts', () => {
       )
     )
   })
+
+  it('hello', async () => {
+    const response = await app
+      .httpRequest()
+      .get('/test')
+      .expect(200)
+
+    assert(response.text === 'hello')
+    assert.deepStrictEqual(response.body, {})
+  })
 })

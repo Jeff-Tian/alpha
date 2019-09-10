@@ -1,6 +1,6 @@
 import {Application} from 'egg'
-import rememberReferer from './middleware/rememberReferer'
-import validate from './middleware/validate'
+import rememberReferer from '../middleware/rememberReferer'
+import validate from '../middleware/validate'
 
 export default (app: Application) => {
   const {controller, router} = app
@@ -25,9 +25,6 @@ export default (app: Application) => {
     'wechat-hardway',
     app.config.passportWechat.clients['wechat-hardway']
   )
-
-  app.passport.mount('citi', app.config.passportCiti)
-  app.router.get('/passport/citi/callback', controller.passportRelay.relay)
 
   app.passport.mount('weapp', app.config.passportWeapp)
 
@@ -83,5 +80,7 @@ export default (app: Application) => {
     router.all('/api/*', controller.home.proxy)
   }
 
-  router.get('*', controller.home.render)
+  router.get('/', controller.home.render)
+
+  // router.get('*', controller.home.render)
 }
