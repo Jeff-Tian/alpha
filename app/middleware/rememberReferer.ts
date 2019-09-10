@@ -6,7 +6,7 @@ export default async (ctx, next) => {
     traceId: ctx.traceId,
   })
 
-  await ctx.app.refererCache.save(ctx.traceId, referer)
+  await ctx.app.refererCache.save(ctx.query.state, referer)
 
   await next()
 }
