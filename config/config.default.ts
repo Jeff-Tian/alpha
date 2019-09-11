@@ -1,6 +1,6 @@
 import {EggAppConfig, EggAppInfo, PowerPartial} from 'egg'
 import * as path from 'path'
-const uuid = require('uuid/v4')
+import {v4 as uuid} from 'uuid'
 
 export default (appInfo: EggAppInfo) => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -42,8 +42,6 @@ export default (appInfo: EggAppInfo) => {
       const state = uuid()
       app.logger.info('state = ', {
         state,
-        context: app.context,
-        headers: app.context.headers,
       })
       return state
     },

@@ -89,6 +89,7 @@
     "@types/mocha": "^2.2.40",
     "@types/node": "^7.0.12",
     "@types/supertest": "^2.0.0",
+    "@types/uuid": "^3.4.5",
     "antd-pro-merge-less": "^0.1.0",
     "antd-theme-webpack-plugin": "^1.1.8",
     "autod": "^3.0.1",
