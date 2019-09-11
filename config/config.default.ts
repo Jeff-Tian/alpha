@@ -1,5 +1,6 @@
 import {EggAppConfig, EggAppInfo, PowerPartial} from 'egg'
 import * as path from 'path'
+const uuid = require('uuid/v4')
 
 export default (appInfo: EggAppInfo) => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -37,6 +38,15 @@ export default (appInfo: EggAppInfo) => {
     key: 'key',
     secret: 'secret',
     successReturnToOrRedirect: '/passport/citi/passport-relay',
+    state: app => {
+      const state = uuid()
+      app.logger.info('state = ', {
+        state,
+        context: app.context,
+        headers: app.context.headers,
+      })
+      return state
+    },
   }
 
   config.alinode = {
