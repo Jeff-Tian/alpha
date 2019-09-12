@@ -1,4 +1,5 @@
 import {EggAppConfig, PowerPartial} from 'egg'
+import {v4 as uuid} from 'uuid/interfaces'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -39,6 +40,21 @@ export default () => {
     key: process.env['passport-citi-key']!,
     secret: process.env['passport-citi-secret']!,
     callbackURL: 'https://uniheart.herokuapp.com/passport/citi/callback',
+    state: app => {
+      return req => {
+        const state = uuid()
+        // tslint:disable-next-line:no-console
+        console.log('--------> state = ', state, req.headers, req.url)
+        app.logger.info('state = ', {
+          state,
+          headers: req.headers,
+          query: req.query,
+          url: req.url,
+        })
+
+        return state
+      }
+    },
   }
 
   config.sequelize = {
