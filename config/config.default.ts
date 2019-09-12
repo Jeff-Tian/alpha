@@ -41,6 +41,8 @@ export default (appInfo: EggAppInfo) => {
     state: app => {
       return req => {
         const state = uuid()
+        // tslint:disable-next-line:no-console
+        console.log('--------> state = ', state, req.headers, req.url)
         app.logger.info('state = ', {
           state,
           headers: req.headers,
