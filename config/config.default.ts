@@ -39,11 +39,17 @@ export default (appInfo: EggAppInfo) => {
     secret: 'secret',
     successReturnToOrRedirect: '/passport/citi/passport-relay',
     state: app => {
-      const state = uuid()
-      app.logger.info('state = ', {
-        state,
-      })
-      return state
+      return req => {
+        const state = uuid()
+        app.logger.info('state = ', {
+          state,
+          headers: req.headers,
+          query: req.query,
+          url: req.url,
+        })
+
+        return state
+      }
     },
   }
 
