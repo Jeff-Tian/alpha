@@ -44,6 +44,11 @@ export default () => {
     key: 'xxx',
     secret: 'yyy',
     successReturnToOrRedirect: '/passport/citi/passport-relay',
+    state: () => {
+      return () => {
+        return '4321'
+      }
+    },
   }
 
   config.sequelize = {

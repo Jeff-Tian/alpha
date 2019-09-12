@@ -1,5 +1,5 @@
 import {EggAppConfig, PowerPartial} from 'egg'
-import {v4 as uuid} from 'uuid/interfaces'
+import {v4 as uuid} from 'uuid'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}

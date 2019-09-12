@@ -42,7 +42,7 @@ describe('test/app/controller/passport-relay.test.ts', () => {
     assert(
       response.headers.location.startsWith(
         // tslint:disable-next-line:max-line-length
-        'https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=xxx&scope=customers_profiles&countryCode=SG&businessCode=GCB&locale=en_US&'
+        'https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=xxx&scope=customers_profiles&countryCode=SG&businessCode=GCB&locale=en_US&state=4321'
       )
     )
   })
