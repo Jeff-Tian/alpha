@@ -6,6 +6,7 @@ export default class PassportRelayController extends Controller {
   public async relay() {
     const {ctx} = this
 
+    ctx.logger.info(`query = `, {query: ctx.query})
     const referer = await ctx.app.refererCache.get(ctx.query.state)
     await ctx.app.refererCache.delete(ctx.query.state)
 

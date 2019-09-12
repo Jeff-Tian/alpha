@@ -13,9 +13,8 @@ export default (app: Application) => {
   )
 
   app.passport.verify(async (ctx, user) => {
-    // tslint:disable-next-line:no-console
-    console.log('verifying...', user)
-    debug('user = ', user)
+    ctx.logger.info('verifying...', user, ctx.query)
+    debug('user = ', user, ctx.query)
     const {provider, id, username, password} = user
     assert(provider, 'user.provider should exists')
     if (provider === 'local') {
@@ -65,6 +64,11 @@ export default (app: Application) => {
       if (existedUser) {
         return user
       }
+    }
+
+    if (provider === 'citi') {
+      ctx.session.returnTo =
+        '/passport/citi/passport-relay?state=' + ctx.query.state
     }
 
     if (provider === 'local') {
