@@ -3,7 +3,7 @@ import 'egg'
 declare module 'egg' {
   // tslint:disable-next-line:interface-name
   import {IMountOptions} from 'egg-passport'
-  import {RefererCache} from '../app/router/router'
+  import RefererCache from '../app/common/RefererCache'
 
   // tslint:disable-next-line:interface-name
   interface Application {

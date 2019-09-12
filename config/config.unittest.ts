@@ -44,8 +44,10 @@ export default () => {
     key: 'xxx',
     secret: 'yyy',
     successReturnToOrRedirect: '/passport/citi/passport-relay',
-    state: () => {
+    state: app => {
       return () => {
+        app.refererCache.save('4321', '1234').then()
+
         return '4321'
       }
     },

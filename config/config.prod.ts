@@ -43,8 +43,7 @@ export default () => {
     state: app => {
       return req => {
         const state = uuid()
-        // tslint:disable-next-line:no-console
-        console.log('--------> state = ', state, req.headers, req.url)
+        app.refererCache.save(state, req.headers.referer).then()
         app.logger.info('state = ', {
           state,
           headers: req.headers,

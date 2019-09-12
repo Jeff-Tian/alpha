@@ -45,15 +45,7 @@ describe('test/app/controller/passport-relay.test.ts', () => {
         'https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=xxx&scope=customers_profiles&countryCode=SG&businessCode=GCB&locale=en_US&state=4321'
       )
     )
-  })
 
-  it('hello', async () => {
-    const response = await app
-      .httpRequest()
-      .get('/test')
-      .expect(200)
-
-    assert(response.text === 'hello')
-    assert.deepStrictEqual(response.body, {})
+    assert((await app.refererCache.get('4321')) === '1234')
   })
 })
