@@ -73,6 +73,6 @@ describe('test/app/controller/jwt.test.ts', () => {
         await app
             .httpRequest()
             .get('/jwt/unauthorerror')
-            .expect('UnauthorizedError');
+            .expect(/UnauthorizedError/);
     });
 })
