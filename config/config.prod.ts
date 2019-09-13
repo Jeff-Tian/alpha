@@ -43,7 +43,13 @@ export default () => {
     state: app => {
       return req => {
         const state = uuid()
-        app.refererCache.save(state, req.headers.referer).then()
+        const referer = req.headers.referrer || req.headers.referer
+          || req.query.redirect_uri;
+
+        app.logger.info('referer = ', referer)
+
+        app.refererCache.save(state, referer).then()
+
         app.logger.info('state = ', {
           state,
           referer: req.headers.referer,
