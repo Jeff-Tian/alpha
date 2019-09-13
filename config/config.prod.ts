@@ -1,6 +1,6 @@
 import { EggAppConfig, PowerPartial } from 'egg'
-import { v4 as uuid } from 'uuid'
 import redisUrlParse from 'redis-url-parse'
+import { v4 as uuid } from 'uuid'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
