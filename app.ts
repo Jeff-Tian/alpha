@@ -41,6 +41,13 @@ export default (app: Application) => {
       },
     })
 
+    if (provider === 'citi') {
+      debug('return to referer: ', { query: ctx.query })
+      ctx.logger.info('return to referer: ', { query: ctx.query })
+      ctx.session.returnTo =
+        '/passport/citi/passport-relay?state=' + ctx.query.state
+    }
+
     if (auth) {
       // tslint:disable-next-line:no-console
       console.log('auth ===== ', auth)
@@ -64,13 +71,6 @@ export default (app: Application) => {
       if (existedUser) {
         return user
       }
-    }
-
-    if (provider === 'citi') {
-      debug('return to referer: ', { query: ctx.query })
-      ctx.logger.info('return to referer: ', { query: ctx.query })
-      ctx.session.returnTo =
-        '/passport/citi/passport-relay?state=' + ctx.query.state
     }
 
     if (provider === 'local') {
