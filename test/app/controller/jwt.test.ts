@@ -37,6 +37,7 @@ describe('test/app/controller/jwt.test.ts', () => {
 
         const res = await app
             .httpRequest()
+            // tslint:disable-next-line: no-duplicate-string
             .get('/jwt/success')
             .set('Authorization', 'Bearer ' + token);
 
