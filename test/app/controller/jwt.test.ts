@@ -11,15 +11,15 @@ describe('test/app/controller/jwt.test.ts', () => {
     });
 
     it('should success resolve token', async () => {
-        const token = app.jwt.sign({ foo: 'bar' }, '1234');
-        const payload: any = app.jwt.verify(token, '1234');
+        const token = app.jwt.sign({ foo: 'bar' }, app.config.jwt.secret);
+        const payload: any = app.jwt.verify(token, app.config.jwt.secret);
 
         assert.equal(payload.foo, 'bar');
     });
 
     it('should success sign use options.expiresIn', async () => {
-        const token = app.jwt.sign({ foo: 'bar' }, '123456', { expiresIn: 10 });
-        const payload: any = app.jwt.verify(token, '123456');
+        const token = app.jwt.sign({ foo: 'bar' }, app.config.jwt.secret, { expiresIn: 10 });
+        const payload: any = app.jwt.verify(token, app.config.jwt.secret);
 
         assert.equal(payload.foo, 'bar');
     });
@@ -33,7 +33,7 @@ describe('test/app/controller/jwt.test.ts', () => {
     });
 
     it('should work if authorization header is valid jwt', async () => {
-        const token = app.jwt.sign({ foo: 'bar' }, '1234');
+        const token = app.jwt.sign({ foo: 'bar' }, app.config.jwt.secret);
 
         const res = await app
             .httpRequest()
