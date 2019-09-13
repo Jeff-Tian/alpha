@@ -1,8 +1,9 @@
 import 'egg'
+import { Redis, RedisOptions } from "ioredis";
 
 declare module 'egg' {
   // tslint:disable-next-line:interface-name
-  import {IMountOptions} from 'egg-passport'
+  import { IMountOptions } from 'egg-passport'
   import RefererCache from '../app/common/RefererCache'
 
   // tslint:disable-next-line:interface-name
@@ -43,6 +44,8 @@ declare module 'egg' {
     oAuth2Server: any
 
     refererCache: RefererCache
+
+    redis: Redis & Singleton<Redis>;
   }
 
   // tslint:disable-next-line:interface-name

@@ -5,6 +5,7 @@ node_js:
   - '10'
 services:
   - mysql
+  - redis
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
 install:

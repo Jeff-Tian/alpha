@@ -19,7 +19,7 @@ export default class MemoryStorage implements ICacheStorage {
     debug('saving ' + traceId + ': ' + referer + ', ' + clearAfter)
     MemoryStorage.store.set(String(traceId), referer)
 
-    debug('saved ', MemoryStorage.store.size)
+    debug('saved ', MemoryStorage.store.size, MemoryStorage.store.get(String(traceId)))
 
     setTimeout(() => MemoryStorage.store.delete(traceId), clearAfter)
   }

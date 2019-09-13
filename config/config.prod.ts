@@ -1,5 +1,6 @@
 import { EggAppConfig, PowerPartial } from 'egg'
 import { v4 as uuid } from 'uuid'
+import redisUrlParse from 'redis-url-parse'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -88,6 +89,18 @@ export default () => {
 
   config.jwt = {
     secret: process.env.EGG_JWT_SECRET || 'uniheart'
+  }
+
+  const redisUri = process.env.REDISTOGO_URL
+  const parsed = redisUrlParse(redisUri)
+
+  config.redis = {
+    client: {
+      port: parsed.port,
+      host: parsed.host,
+      password: parsed.password,
+      db: parsed.database,
+    },
   }
 
   return config

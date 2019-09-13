@@ -2,13 +2,14 @@ import assert = require('assert')
 import debug0 from 'debug'
 import { Application } from 'egg'
 import MemoryStorage from './app/common/MemoryStorage'
+import RedisStorage from './app/common/RedisStorage'
 import RefererCache from './app/common/RefererCache'
 
 const debug = debug0('uniheart')
 
 export default (app: Application) => {
   app.refererCache = new RefererCache(
-    new MemoryStorage(),
+    app.config.env === 'prod' ? new RedisStorage(app) : new MemoryStorage(),
     app.config.refererCache
   )
 
