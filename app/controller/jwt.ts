@@ -13,7 +13,7 @@ export default class JwtController extends Controller {
 
     public async success() {
         const { ctx } = this;
-        ctx.body = 'jwt success'
+        ctx.body = ctx.state.user;
     }
 
     public async unauthorerror() {
