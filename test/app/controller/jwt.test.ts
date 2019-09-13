@@ -44,6 +44,7 @@ describe('test/app/controller/jwt.test.ts', () => {
         assert(res.body.foo === 'bar');
     });
 
+    // tslint:disable-next-line: no-identical-functions
     it('jwt.sign should support custom secret', async () => {
         const token = app.jwt.sign({ foo: 'bar' }, app.config.jwt.secret);
 

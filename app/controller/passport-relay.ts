@@ -15,10 +15,10 @@ export default class PassportRelayController extends Controller {
       ctx.redirect(
         referer +
         (referer.indexOf('?') > 0 ? '&' : '?') +
-        querystring.stringify({ token: ctx.user.id, traceId: ctx.traceId })
+        ctx.app.jwt.sign({ token: ctx.user.id, traceId: ctx.traceId }, ctx.app.config.jwt.secret)
       )
     } else {
-      ctx.body = { token: ctx.user.id, traceId: ctx.traceId }
+      ctx.body = ctx.app.jwt.sign({ token: ctx.user.id, traceId: ctx.traceId }, ctx.app.config.jwt.secret)
     }
   }
 }
