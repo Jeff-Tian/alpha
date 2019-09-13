@@ -1,5 +1,5 @@
-import {EggAppConfig, PowerPartial} from 'egg'
-import {v4 as uuid} from 'uuid'
+import { EggAppConfig, PowerPartial } from 'egg'
+import { v4 as uuid } from 'uuid'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -46,6 +46,7 @@ export default () => {
         app.refererCache.save(state, req.headers.referer).then()
         app.logger.info('state = ', {
           state,
+          referer: req.headers.referer,
           headers: req.headers,
           query: req.query,
           url: req.url,
@@ -77,6 +78,10 @@ export default () => {
       bodyName: process.env.EGG_SECURITY_CSRF_CONTENT,
       ignore: '/endpoints/wechat/message',
     },
+  }
+
+  config.jwt = {
+    secret: process.env.EGG_JWT_SECRET || 'uniheart'
   }
 
   return config

@@ -1,4 +1,4 @@
-import {EggPlugin} from 'egg'
+import { EggPlugin } from 'egg'
 
 const plugin: EggPlugin = {
   // static: true,
@@ -86,6 +86,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-router-plus',
   },
+
+  jwt: {
+    enable: true,
+    package: 'egg-jwt'
+  }
 }
 
 export default plugin

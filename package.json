@@ -16,6 +16,7 @@
     "test-local": "npm run migrate&&egg-bin test",
     "test-local-changed": "npm run migrate&&egg-bin test --changed",
     "test": "sh test/mysql-up.sh&&npm run lint -- --fix && npm run test-local-changed",
+    "test:windows": "egg-bin test --changed",
     "test:frontend": "cd app/web && umi test && cd ../.. || cd ../..",
     "cov": "egg-bin cov",
     "tsc": "ets && tsc -p tsconfig.json",

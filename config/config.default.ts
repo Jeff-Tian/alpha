@@ -1,6 +1,6 @@
-import {EggAppConfig, EggAppInfo, PowerPartial} from 'egg'
+import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg'
 import * as path from 'path'
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 export default (appInfo: EggAppInfo) => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -104,6 +104,10 @@ export default (appInfo: EggAppInfo) => {
 
   config.refererCache = {
     timeout: 1000 * 60 * 60,
+  }
+
+  config.jwt = {
+    secret: '123456'
   }
 
   // the return config will combines to EggAppConfig
