@@ -1,5 +1,7 @@
+import Debug from 'debug'
 import ICacheStorage from './ICacheStorage'
-import { debug } from 'util'
+
+const debug = Debug('uniheart')
 
 export default class MemoryStorage implements ICacheStorage {
   private static store = new Map<string, string>()

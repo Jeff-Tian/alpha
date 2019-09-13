@@ -6,6 +6,6 @@ export default (app: Application) => {
     const subRouter = router.namespace('/admin')
 
     subRouter.get('/refererCache', async (ctx) => {
-        ctx.body = await app.refererCache.get(ctx.query.traceId)
+        ctx.body = { size: app.refererCache.size, [ctx.query.traceId]: await app.refererCache.get(ctx.query.traceId) }
     });
 }
