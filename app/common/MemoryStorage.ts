@@ -1,9 +1,11 @@
 import ICacheStorage from './ICacheStorage'
+import { debug } from 'util'
 
 export default class MemoryStorage implements ICacheStorage {
   private static store = new Map<string, string>()
 
   public async get(traceId: string) {
+    debug('getting by ' + traceId)
     return MemoryStorage.store.get(String(traceId)) || ''
   }
 
@@ -12,9 +14,10 @@ export default class MemoryStorage implements ICacheStorage {
     referer: string,
     clearAfter: number = 1000 * 60 * 60
   ) {
+    debug('saving ' + traceId + ': ' + referer + ', ' + clearAfter)
     MemoryStorage.store.set(String(traceId), referer)
 
-    setTimeout(() => MemoryStorage.store.delete(traceId), clearAfter)
+    // setTimeout(() => MemoryStorage.store.delete(traceId), clearAfter)
   }
 
   public async delete(traceId: string) {
