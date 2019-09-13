@@ -1,11 +1,12 @@
 sudo: false
 language: node_js
+cache: npm
 node_js:
   - '8'
   - '10'
 services:
   - mysql
-  - redis
+  - redis-server
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
 install:
