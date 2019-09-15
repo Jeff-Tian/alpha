@@ -24,7 +24,6 @@ export default (app: Application) => {
     'user.authenticate'
   )
 
-
   if (app.config.env === 'prod') {
     router.get('/api/currentUser', controller.user.current)
   } else {
