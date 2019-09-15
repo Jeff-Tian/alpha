@@ -10,6 +10,10 @@ const plugin: EggPlugin = {
   alinode: {
     enable: false,
   },
+
+  redis: {
+    enable: false,
+  },
 }
 
 export default plugin

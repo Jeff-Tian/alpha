@@ -1,6 +1,6 @@
-import { EggAppConfig, PowerPartial } from 'egg'
+import {EggAppConfig, PowerPartial} from 'egg'
 import redisUrlParse from 'redis-url-parse'
-import { v4 as uuid } from 'uuid'
+import {v4 as uuid} from 'uuid'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -32,9 +32,18 @@ export default () => {
   }
 
   config.passportWeapp = {
-    key: process.env['passport-wechat-mini-program-hardway-key']!,
-    secret: process.env['passport-wechat-mini-program-hardway-secret']!,
-    successReturnToOrRedirect: '',
+    clients: {
+      weapp: {
+        key: process.env['passport-wechat-mini-program-hardway-key']!,
+        secret: process.env['passport-wechat-mini-program-hardway-secret']!,
+        successReturnToOrRedirect: '',
+      },
+
+      'weapp-yiqifen': {
+        key: process.env['passport-wechat-mini-program-yiqifen-key']!,
+        secret: process.env['passport-wechat-mini-program-yiqifen-secret']!,
+      },
+    },
   }
 
   config.passportCiti = {
@@ -44,8 +53,8 @@ export default () => {
     state: app => {
       return req => {
         const state = uuid()
-        const referer = req.headers.referrer || req.headers.referer
-          || req.query.redirect_uri;
+        const referer =
+          req.headers.referrer || req.headers.referer || req.query.redirect_uri
 
         app.logger.info('referer = ', referer)
 
@@ -88,7 +97,7 @@ export default () => {
   }
 
   config.jwt = {
-    secret: process.env.EGG_JWT_SECRET || 'uniheart'
+    secret: process.env.EGG_JWT_SECRET || 'uniheart',
   }
 
   const redisUri = process.env.REDISTOGO_URL
