@@ -4,7 +4,7 @@ export default (app: Application) => {
     const { controller, router } = app
 
     app.passport.mount('weapp', app.config.passportWeapp.clients.weapp)
-    app.router.get(
+    router.get(
         'wechatDev.passportCallback',
         '/passport/weapp/callback',
         controller.wechatDev.passportCallback
@@ -15,7 +15,7 @@ export default (app: Application) => {
         app.config.passportWeapp.clients['weapp-yiqifen']
     )
 
-    app.router.get(
+    router.get(
         'wechatDev.passportCallback',
         '/passport/weapp-yiqifen/callback',
         controller.wechatDev.passportCallback
