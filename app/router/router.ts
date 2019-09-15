@@ -26,18 +26,6 @@ export default (app: Application) => {
     app.config.passportWechat.clients['wechat-hardway']
   )
 
-  app.passport.mount('weapp', app.config.passportWeapp.clients.weapp)
-  app.passport.mount(
-    'weapp-yiqifen',
-    app.config.passportWeapp.clients['weapp-yiqifen']
-  )
-
-  app.router.get(
-    'wechatDev.passportCallback',
-    '/passport/weapp/callback',
-    controller.wechatDev.passportCallback
-  )
-
   const localStrategy = app.passport.authenticate('local')
   app.router.post('/passport/local', localStrategy)
 
