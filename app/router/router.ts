@@ -26,7 +26,11 @@ export default (app: Application) => {
     app.config.passportWechat.clients['wechat-hardway']
   )
 
-  app.passport.mount('weapp', app.config.passportWeapp)
+  app.passport.mount('weapp', app.config.passportWeapp.clients.weapp)
+  app.passport.mount(
+    'weapp-yiqifen',
+    app.config.passportWeapp.clients['weapp-yiqifen']
+  )
 
   app.router.get(
     'wechatDev.passportCallback',

@@ -36,8 +36,16 @@ export default () => {
   }
 
   config.passportWeapp = {
-    key: 'xxx',
-    secret: 'yyy',
+    clients: {
+      weapp: {
+        key: 'xxx',
+        secret: 'yyy',
+      },
+      'weapp-yiqifen': {
+        key: 'xxx',
+        secret: 'yyy',
+      },
+    },
   }
 
   config.passportCiti = {

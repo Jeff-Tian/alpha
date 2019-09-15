@@ -6,7 +6,7 @@ import runscript = require('runscript')
 
 const baseDir = path.resolve(__dirname, '../..')
 
-describe('test/passport-weapp-hardway.test.ts', () => {
+describe('test/passport-weapp-yiqifen.test.ts', () => {
   before(async () => {
     await runscript('ets', {cwd: baseDir})
     await runscript(`tsc -p ${baseDir}/tsconfig.json`, {cwd: baseDir})
@@ -51,7 +51,7 @@ describe('test/passport-weapp-hardway.test.ts', () => {
       const runningApp = app.httpRequest()
 
       await runningApp
-        .get(`/passport/weapp/callback?code=5678&state=${1234}`)
+        .get(`/passport/weapp-yiqifen/callback?code=5678&state=${1234}`)
         .expect(200)
     })
   })
