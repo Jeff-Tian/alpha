@@ -58,7 +58,7 @@ export default (app: Application) => {
         {
           user_id,
           updated_at: new Date(),
-          profile: user.profile.toString(),
+          profile: JSON.stringify(user.profile),
         },
         {
           where: { provider, uid: id },
