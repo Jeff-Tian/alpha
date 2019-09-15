@@ -10,6 +10,7 @@ services:
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
 install:
+  - npm i -g npm@5.7.1
   - npm i npminstall && npminstall
 script:
   - npm run ci
