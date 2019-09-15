@@ -19,7 +19,7 @@ jobs:
   include:
     - stage: deploy
       node_js: '10'
-      script: skip
+      #      script: skip
       deploy:
         provider: heroku
         api_key:
