@@ -2,7 +2,6 @@ sudo: false
 language: node_js
 cache: npm
 node_js:
-  - '8'
   - '10'
 services:
   - mysql
@@ -10,7 +9,6 @@ services:
 before_install:
   - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
 install:
-  - npm i -g npm@5.7.1
   - npm i npminstall && npminstall
 script:
   - npm run ci
