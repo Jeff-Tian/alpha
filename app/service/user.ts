@@ -1,5 +1,4 @@
 import {Service} from 'egg'
-import {Transaction} from 'sequelize'
 
 export default class User extends Service {
   public async find(username, password) {
@@ -12,17 +11,12 @@ export default class User extends Service {
   public async register(user) {
     const {ctx} = this
 
-    const transaction = await ctx.model.transaction({
-      isolationLevel: Transaction.ISOLATION_LEVELS.SERIALIZABLE,
-      autocommit: true,
-    })
+    const transaction = await ctx.model.transaction({})
     try {
       const systemUser = await ctx.model.User.create(
         {
           display_name: user.displayName,
-          transaction,
         },
-        {transaction},
         {transaction}
       )
 
@@ -34,15 +28,11 @@ export default class User extends Service {
           created_at: new Date(),
           updated_at: new Date(),
           profile: JSON.stringify(user.profile),
-          transaction,
         },
-        {transaction},
         {transaction}
       )
 
       await transaction.commit()
-      // tslint:disable-next-line:no-console
-      console.log('x    xxx x x x x xx x x xx transaction committed')
 
       return user
     } catch (err) {

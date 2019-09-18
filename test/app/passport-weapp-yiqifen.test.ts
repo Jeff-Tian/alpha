@@ -39,7 +39,7 @@ describe('test/passport-weapp-yiqifen.test.ts', () => {
       nock('https://api.weixin.qq.com')
         .get(/\/sns\/jscode2session.+/)
         .reply(200, {
-          unionid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8',
+          unionid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8' + Date.now(),
           openid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf9',
           session_key: 'DUsPOa8AOYZqqaCvyB//wg==',
         })

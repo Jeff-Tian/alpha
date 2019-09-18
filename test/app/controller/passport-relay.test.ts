@@ -20,7 +20,7 @@ describe('test/app/controller/passport-relay.test.ts', () => {
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/customers/profiles')
       .reply(200, {
-        emails: [{emailAddress: 'jie.tian@hotmail.com'}],
+        emails: [{emailAddress: 'jie.tian@hotmail.com' + Date.now()}],
         customerParticulars: {
           names: [{fullName: 'jie.tian'}],
         },
