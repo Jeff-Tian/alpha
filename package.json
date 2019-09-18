@@ -68,7 +68,7 @@
     "lodash-decorators": "6.0.0",
     "memoize-one": "4.0.0",
     "moment": "2.22.2",
-    "mysql2": "^1.6.5",
+    "mysql2": "^1.7.0",
     "numeral": "2.0.6",
     "nzh": "1.0.3",
     "omit.js": "1.0.0",
@@ -85,6 +85,7 @@
     "react-konva": "^16.9.0-0",
     "react-router-dom": "^4.3.1",
     "redis-url-parse": "^2.0.0",
+    "sequelize": "^5.18.4",
     "uuid": "^3.3.3",
     "wechat-oauth-ts": "^1.2.2"
   },

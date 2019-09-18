@@ -42,6 +42,7 @@ export default () => {
       'weapp-yiqifen': {
         key: process.env['passport-wechat-mini-program-yiqifen-key']!,
         secret: process.env['passport-wechat-mini-program-yiqifen-secret']!,
+        successReturnToOrRedirect: '',
       },
     },
   }

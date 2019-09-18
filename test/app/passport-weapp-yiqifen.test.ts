@@ -31,7 +31,7 @@ describe('test/passport-weapp-yiqifen.test.ts', () => {
       return app.ready()
     })
 
-    it.skip('callback', async () => {
+    it('callback', async () => {
       app.mockContext({
         traceId: '1234',
       })
@@ -39,12 +39,8 @@ describe('test/passport-weapp-yiqifen.test.ts', () => {
       nock('https://api.weixin.qq.com')
         .get(/\/sns\/jscode2session.+/)
         .reply(200, {
-          provider: 'weapp',
-          id: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8',
-          name: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8',
-          displayName: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8',
-          photo: '',
-          gender: 'unknown',
+          unionid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8',
+          openid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf9',
           session_key: 'DUsPOa8AOYZqqaCvyB//wg==',
         })
 

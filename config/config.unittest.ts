@@ -40,10 +40,12 @@ export default () => {
       weapp: {
         key: 'xxx',
         secret: 'yyy',
+        successReturnToOrRedirect: '',
       },
       'weapp-yiqifen': {
         key: 'xxx',
         secret: 'yyy',
+        successReturnToOrRedirect: '',
       },
     },
   }

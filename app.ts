@@ -1,6 +1,6 @@
 import assert = require('assert')
 import debug0 from 'debug'
-import { Application } from 'egg'
+import {Application} from 'egg'
 import MemoryStorage from './app/common/MemoryStorage'
 import RedisStorage from './app/common/RedisStorage'
 import RefererCache from './app/common/RefererCache'
@@ -16,7 +16,7 @@ export default (app: Application) => {
   app.passport.verify(async (ctx, user) => {
     ctx.logger.info('verifying...', user, ctx.query)
     debug('user = ', user, ctx.query)
-    const { provider, id, username, password } = user
+    const {provider, id, username, password} = user
     assert(provider, 'user.provider should exists')
     if (provider === 'local') {
       assert(username, 'user.username should exists')
@@ -29,30 +29,27 @@ export default (app: Application) => {
       where:
         provider === 'local'
           ? {
-            username,
-            password,
-            provider,
-          }
+              username,
+              password,
+              provider,
+            }
           : {
-            uid: id,
-            provider,
-          },
+              uid: id,
+              provider,
+            },
       attributes: {
         exclude: ['id'],
       },
     })
 
     if (provider === 'citi') {
-      debug('return to referer: ', { query: ctx.query })
-      ctx.logger.info('return to referer: ', { query: ctx.query })
       ctx.session.returnTo =
         '/passport/citi/passport-relay?state=' + ctx.query.state
     }
 
     if (auth) {
       // tslint:disable-next-line:no-console
-      console.log('auth ===== ', auth)
-      const { user_id } = auth
+      const {user_id} = auth
 
       await ctx.model.Authorization.update(
         {
@@ -61,12 +58,12 @@ export default (app: Application) => {
           profile: JSON.stringify(user.profile),
         },
         {
-          where: { provider, uid: id },
+          where: {provider, uid: id},
         }
       )
 
       const existedUser = await ctx.model.User.findOne({
-        where: { id: user_id },
+        where: {id: user_id},
         attributes: {},
       })
       if (existedUser) {
