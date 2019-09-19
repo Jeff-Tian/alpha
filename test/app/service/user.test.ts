@@ -11,14 +11,16 @@ describe('test/app/service/user.test.js', () => {
   })
 
   it('registers user', async () => {
-    const user = await ctx.model.User.create({
+    const user = await ctx.service.user.register({
       display_name: 'hello',
+      provider: 'test',
+      id: 'hahaha',
     })
 
-    assert(ctx.model.User.tableName === 'users')
-    // assert(user.profile.hello === 'world')
     assert(user.display_name === 'hello')
     const number = await ctx.model.User.count()
     assert(number >= 1)
+    const numberOfAuth = await ctx.model.Authorization.count()
+    assert(numberOfAuth >= 1)
   })
 })
