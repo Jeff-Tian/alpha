@@ -1,12 +1,11 @@
 import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
-import {app} from 'egg-mock/bootstrap'
+import { app } from 'egg-mock/bootstrap'
 import nock from 'nock'
 
 describe('test/app/controller/passport-relay.test.ts', () => {
   it('should redirect after successfully login by citi account', async () => {
-    // tslint:disable-next-line: no-commented-code
-    // const ctx = app.mockContext({})
+    const ctx = app.mockContext({})
 
     nock('https://sandbox.apihub.citi.com')
       .post('/gcb/api/authCode/oauth2/token/sg/gcb')
@@ -20,9 +19,9 @@ describe('test/app/controller/passport-relay.test.ts', () => {
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/customers/profiles')
       .reply(200, {
-        emails: [{emailAddress: 'jie.tian@hotmail.com' + Date.now()}],
+        emails: [{ emailAddress: 'jie.tian@hotmail.com' + Date.now() }],
         customerParticulars: {
-          names: [{fullName: 'jie.tian'}],
+          names: [{ fullName: 'jie.tian' }],
         },
       })
 
@@ -32,6 +31,12 @@ describe('test/app/controller/passport-relay.test.ts', () => {
       .expect(302)
 
     // assert(ctx.isAuthenticated())
+
+    const user = await ctx.service.user.get('jie.tian@hotmail.com');
+
+    assert.ok(user);
+    assert(user.id > 0)
+    assert(user.display_name === 'jie.tian')
   })
   it('should return token', async () => {
     const response = await app
