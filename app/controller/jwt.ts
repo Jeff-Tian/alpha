@@ -20,4 +20,9 @@ export default class JwtController extends Controller {
         const { ctx } = this;
         ctx.body = 'jwt unauthorerror'
     }
+
+    public async user() {
+        const { ctx } = this;
+        ctx.body = ctx.service.user.get(ctx.state.user)
+    }
 }

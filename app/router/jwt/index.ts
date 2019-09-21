@@ -10,5 +10,6 @@ export default (app: Application) => {
     subRouter.get('/', jwt, controller.jwt.index);
     subRouter.get('/login', controller.jwt.login);
     subRouter.get('/success', jwt, controller.jwt.success);
+    subRouter.get('/user', jwt, controller.jwt.user);
     subRouter.get('/unauthorerror', jwt, controller.jwt.unauthorerror);
 }
