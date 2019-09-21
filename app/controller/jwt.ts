@@ -23,6 +23,6 @@ export default class JwtController extends Controller {
 
     public async user() {
         const { ctx } = this;
-        ctx.body = ctx.service.user.get(ctx.state.user)
+        ctx.body = await ctx.service.user.get(ctx.state.user)
     }
 }
