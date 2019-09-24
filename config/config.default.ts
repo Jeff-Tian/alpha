@@ -1,6 +1,6 @@
-import { EggAppConfig, EggAppInfo, PowerPartial } from 'egg'
+import {EggAppConfig, EggAppInfo, PowerPartial} from 'egg'
 import * as path from 'path'
-import { v4 as uuid } from 'uuid'
+import {v4 as uuid} from 'uuid'
 
 export default (appInfo: EggAppInfo) => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -107,16 +107,20 @@ export default (appInfo: EggAppInfo) => {
   }
 
   config.jwt = {
-    secret: '123456'
+    secret: '123456',
   }
 
   config.redis = {
     client: {
-      port: 6379,          // Redis port
-      host: '127.0.0.1',   // Redis host
+      port: 6379, // Redis port
+      host: '127.0.0.1', // Redis host
       password: '',
       db: 0,
     },
+  }
+
+  config.errorDisplay = {
+    isProd: () => false,
   }
 
   // the return config will combines to EggAppConfig

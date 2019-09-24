@@ -1,4 +1,4 @@
-import { EggPlugin } from 'egg'
+import {EggPlugin} from 'egg'
 
 const plugin: EggPlugin = {
   // static: true,
@@ -89,13 +89,18 @@ const plugin: EggPlugin = {
 
   jwt: {
     enable: true,
-    package: 'egg-jwt'
+    package: 'egg-jwt',
   },
 
   redis: {
     enable: true,
-    package: 'egg-redis'
-  }
+    package: 'egg-redis',
+  },
+
+  errorDisplay: {
+    enable: true,
+    package: 'egg-error-display',
+  },
 }
 
 export default plugin
