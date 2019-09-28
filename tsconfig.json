@@ -22,7 +22,8 @@
     "importHelpers": true,
     "esModuleInterop": true,
     "jsx": "react",
-    "inlineSourceMap": true
+    "inlineSourceMap": true,
+    "sourceMap": false
   },
   "exclude": ["app/public", "app/views", "node_modules*", "app/web"]
 }

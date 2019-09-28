@@ -6,7 +6,8 @@
     "importHelpers": true,
     "jsx": "react",
     "esModuleInterop": true,
-    "sourceMap": true,
+    "sourceMap": false,
+    "inlineSourceMap": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"]
