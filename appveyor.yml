@@ -16,7 +16,8 @@ install:
 test_script:
   - node --version
   - npm --version
-  - npm run test-with-full-trace
+  - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
+  - npm run ci
 
 build: off
 services:

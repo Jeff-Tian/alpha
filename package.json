@@ -88,7 +88,7 @@
     "redis-url-parse": "^2.0.0",
     "sequelize": "^5.18.4",
     "uuid": "^3.3.3",
-    "wechat-oauth-ts": "^1.2.2"
+    "wechat-oauth-ts": "^1.4.0"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",
@@ -146,7 +146,7 @@
     "version": "8, 9, 10",
     "command": {
       "travis": "ci",
-      "appveyor": "test-with-full-trace",
+      "appveyor": "ci",
       "azure-pipelines": "ci"
     },
     "services": "redis-server, mysql",

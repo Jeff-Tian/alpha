@@ -12,7 +12,12 @@ export default class WechatDevController extends Controller {
 
   public async getQRCode() {
     const { ctx } = this
-    const { ticket, mode } = ctx.query
+    const { ticket } = ctx.query
+    let { mode } = ctx.query
+
+    if (!mode) {
+      mode = 'redirect'
+    }
 
     const wechatOAuth = this.getWechatOAuthClient()
 
@@ -28,7 +33,7 @@ export default class WechatDevController extends Controller {
       ))
 
     if (mode === 'raw') {
-      ctx.body = res
+      ctx.body = res.data
       return
     }
 
@@ -38,11 +43,21 @@ export default class WechatDevController extends Controller {
     }
 
     if (mode === 'proxy') {
-      ctx.body = await ctx.curl(res)
+      const result = await ctx.curl(res)
+      ctx.headers = result.headers
+      ctx.body = result.data
       return
     }
 
     ctx.throw(423, 'Unknown error')
+  }
+
+  public async jsSDKSign() {
+    const { ctx } = this
+
+    const wechatOAuth = this.getWechatOAuthClient()
+
+    ctx.body = wechatOAuth.jsSDKSign(ctx.query.url || ctx.get('referer'), ctx.query.ticket);
   }
 
   public async message() {

@@ -1,15 +1,17 @@
 import assert from 'assert'
-import {plainToClass} from 'class-transformer'
-import {validate} from 'class-validator'
-import {Context} from 'egg'
+import { plainToClass } from 'class-transformer'
+import { validate } from 'class-validator'
+import { Context } from 'egg'
 import Code2SessionRequest from '../validate/Code2SessionRequest'
 import GetAccessTokenRequest from '../validate/GetAccessTokenRequest'
 import GetQRCodeRequest from '../validate/GetQRCodeRequest'
+import JsSDKSignRequest from '../validate/JsSDKSIgnRequest'
 
 const typeMap = new Map([
   ['wechatDev.getAccessToken', GetAccessTokenRequest],
   ['wechatDev.getQRCode', GetQRCodeRequest],
   ['wechatDev.code2Session', Code2SessionRequest],
+  ['wechatDev.jsSDKSign', JsSDKSignRequest]
 ])
 
 export default async (ctx: Context, next: () => {}) => {
