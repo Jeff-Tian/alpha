@@ -15,11 +15,12 @@ install:
 
 before_test:
   - ps: >-
-    "C:\Program Files\MySQL\MySQL Server 5.7\bin\mysql" -e "CREATE DATABASE IF NOT EXISTS alpha;" --user=root
+    "C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysql" -e "CREATE DATABASE IF NOT EXISTS alpha;" --user=root
 
 test_script:
   - node --version
   - npm --version
+  - "C:\\Program Files\\MySQL\\MySQL Server 5.7\\bin\\mysql" -e "CREATE DATABASE IF NOT EXISTS alpha;" --user=root
   - npm run ci
 
 build: off
