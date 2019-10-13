@@ -14,7 +14,6 @@ script:
   - npm run ci
 after_script:
   - npm i codecov && codecov
-
 deploy:
   provider: heroku
   api_key:

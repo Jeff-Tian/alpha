@@ -65,7 +65,7 @@ export default () => {
 
   config.sequelize = {
     dialect: 'mysql',
-    connectionUri: 'mysql://root:@127.0.0.1:3306/alpha',
+    connectionUri: `mysql://root:${process.env.MYSQL_PWD || ''}@127.0.0.1:3306/alpha`,
   }
 
   config.alinode = {

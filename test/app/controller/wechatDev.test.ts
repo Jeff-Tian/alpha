@@ -27,4 +27,12 @@ describe('test/app/controller/wechatDev.test.ts', () => {
       .expect(500)
       .expect(/invalid appid hint/)
   })
+
+  it.skip('should proxy wechat qrcode', async () => {
+    const ctx = app.mockContext()
+
+    // tslint:disable-next-line:max-line-length
+    const res = await ctx.curl('https://mp.weixin.qq.com/cgi-bin/showqrcode?ticket=gQHW7zwAAAAAAAAAAS5odHRwOi8vd2VpeGluLnFxLmNvbS9xLzAyM1lhbHBqdEpmbmsxeXhOSXh0MXMAAgQh96JdAwSAOgkA')
+    assert(res.status === 200)
+  })
 })

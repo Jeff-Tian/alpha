@@ -1,4 +1,4 @@
-import {IsOptional} from 'class-validator'
+import { IsOptional } from 'class-validator'
 import GetAccessTokenRequest from './GetAccessTokenRequest'
 
 export default class GetQRCodeRequest extends GetAccessTokenRequest {
@@ -10,4 +10,7 @@ export default class GetQRCodeRequest extends GetAccessTokenRequest {
 
   @IsOptional()
   data: any
+
+  @IsOptional()
+  mode: 'redirect' | 'proxy' | 'raw'
 }

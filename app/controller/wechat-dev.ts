@@ -12,20 +12,37 @@ export default class WechatDevController extends Controller {
 
   public async getQRCode() {
     const { ctx } = this
-    const { ticket } = ctx.query
+    const { ticket, mode } = ctx.query
 
     const wechatOAuth = this.getWechatOAuthClient()
 
     const res = ticket
-      ? await wechatOAuth.getQRCodeLinkByTicket(ticket)
-      : await wechatOAuth.getQRCodeLink(
+      // tslint:disable-next-line:max-line-length
+      ? (mode === 'raw' ? await wechatOAuth.getQRCode(ticket) : await wechatOAuth.getQRCodeLinkByTicket(ticket))
+      // tslint:disable-next-line:max-line-length
+      : (mode === 'raw' ? await wechatOAuth.getQRCode(ctx.query.data ? JSON.parse(decodeURIComponent(ctx.query.data)) : undefined) : await wechatOAuth.getQRCodeLink(
         ctx.query.data
           ? JSON.parse(decodeURIComponent(ctx.query.data))
           : undefined,
         ctx.query.token
-      )
+      ))
 
-    ctx.redirect(res)
+    if (mode === 'raw') {
+      ctx.body = res
+      return
+    }
+
+    if (mode === 'redirect') {
+      ctx.redirect(res)
+      return
+    }
+
+    if (mode === 'proxy') {
+      ctx.body = await ctx.curl(res)
+      return
+    }
+
+    ctx.throw(423, 'Unknown error')
   }
 
   public async message() {

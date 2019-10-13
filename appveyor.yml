@@ -1,4 +1,5 @@
 environment:
+  MYSQL_PWD: 'Password12!'
   matrix:
     - nodejs_version: '8'
     - nodejs_version: '9'
