@@ -88,7 +88,7 @@
     "redis-url-parse": "^2.0.0",
     "sequelize": "^5.18.4",
     "uuid": "^3.3.3",
-    "wechat-oauth-ts": "^1.4.0"
+    "wechat-oauth-ts": "^1.4.1"
   },
   "devDependencies": {
     "@types/mocha": "^2.2.40",

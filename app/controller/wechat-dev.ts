@@ -57,7 +57,12 @@ export default class WechatDevController extends Controller {
 
     const wechatOAuth = this.getWechatOAuthClient()
 
-    ctx.body = wechatOAuth.jsSDKSign(ctx.query.url || ctx.get('referer'), ctx.query.ticket);
+    ctx.body = {
+      ...await wechatOAuth.jsSDKSign(
+        ctx.query.url || ctx.get('referer'), ctx.query.ticket
+      ),
+      appId: wechatOAuth.appId
+    };
   }
 
   public async message() {
