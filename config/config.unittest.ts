@@ -1,4 +1,4 @@
-import {EggAppConfig, PowerPartial} from 'egg'
+import { EggAppConfig, PowerPartial } from 'egg'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -26,7 +26,7 @@ export default () => {
         key: 'xxx',
         secret: 'yyy',
         loginURL: '/passport/wechat-hardway/',
-        callbackURL: 'https://localhost:7001/passport/wechat-hardway/callback',
+        callbackURL: '/passport/wechat-hardway/callback',
         scope: 'snsapi_base',
         state: ctx => {
           return ctx.traceId
