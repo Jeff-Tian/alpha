@@ -33,24 +33,16 @@ export default class WechatDevController extends Controller {
       ))
 
     if (mode === 'raw') {
-      ctx.body = res.data
-      return
+      return ctx.body = res.data
     }
 
     if (mode === 'redirect') {
-      ctx.redirect(res)
-      return
+      return ctx.redirect(res)
     }
 
     if (mode === 'proxy') {
-      const result = await ctx.curl(res)
-
-      for (const key of result.headers) {
-        ctx.set(key, result.headers[key]);
-      }
-
-      ctx.body = result.data
-      return
+      await this.proxy(ctx, res)
+      return;
     }
 
     ctx.throw(423, 'Unknown error')
@@ -144,6 +136,14 @@ export default class WechatDevController extends Controller {
     } else {
       ctx.body = accessTokenResult
     }
+  }
+
+  private async proxy(ctx, res: any) {
+    const result = await ctx.curl(res);
+    for (const key of result.headers) {
+      ctx.set(key, result.headers[key]);
+    }
+    ctx.body = result.data;
   }
 
   private getWechatOAuthClient() {
