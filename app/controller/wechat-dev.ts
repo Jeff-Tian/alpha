@@ -44,7 +44,11 @@ export default class WechatDevController extends Controller {
 
     if (mode === 'proxy') {
       const result = await ctx.curl(res)
-      ctx.headers = result.headers
+
+      for (const key of result.headers) {
+        ctx.set(key, result.headers[key]);
+      }
+
       ctx.body = result.data
       return
     }
