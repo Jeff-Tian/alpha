@@ -147,7 +147,7 @@
     "command": {
       "travis": "ci",
       "appveyor": "ci",
-      "azure-pipelines": "ci"
+      "azure-pipelines": "test:frontend"
     },
     "services": "redis-server, mysql",
     "license": true
