@@ -74,6 +74,8 @@ export default {
   'menu.dashboard.workplace': '工作台',
   'menu.form': '表单页',
   'menu.form.editor': '富文本编辑',
+  'menu.form.map-reduce': 'Map Reduce',
+  'menu.form.nestedTable': '嵌套表格',
   'menu.form.basicform': '基础表单',
   'menu.form.stepform': '分步表单',
   'menu.form.stepform.info': '分步表单（填写转账信息）',

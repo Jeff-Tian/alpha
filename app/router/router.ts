@@ -1,7 +1,7 @@
-import { Application } from 'egg'
+import {Application} from 'egg'
 
 export default (app: Application) => {
-  const { controller, router } = app
+  const {controller, router} = app
 
   router.get('/health-check', controller.home.index)
   router.get('/os', controller.os.info)
@@ -32,5 +32,5 @@ export default (app: Application) => {
 
   router.get('/', controller.home.render)
 
-  // router.get('*', controller.home.render)
+  router.get('*', controller.home.render)
 }

@@ -78,6 +78,8 @@ export default {
   'menu.dashboard.workplace': 'Workplace',
   'menu.form': 'Form',
   'menu.form.editor': 'Rich Text Editor',
+  'menu.form.map-reduce': 'Map Reduce',
+  'menu.form.nestedTable': 'Nested Table',
   'menu.form.basicform': 'Basic Form',
   'menu.form.stepform': 'Step Form',
   'menu.form.stepform.info': 'Step Form(write transfer information)',

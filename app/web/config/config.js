@@ -1,8 +1,8 @@
 // https://umijs.org/config/
-import os from 'os';
-import pageRoutes from './router.config';
-import webpackPlugin from './plugin.config';
-import defaultSettings from '../src/defaultSettings';
+import os from 'os'
+import pageRoutes from './router.config'
+import webpackPlugin from './plugin.config'
+import defaultSettings from '../src/defaultSettings'
 
 export default {
   // add for transfer to umi
@@ -60,13 +60,13 @@ export default {
   externals: {
     '@antv/data-set': 'DataSet',
   },
-  // proxy: {
-  //   '/server/api/': {
-  //     target: 'https://preview.pro.ant.design/',
-  //     changeOrigin: true,
-  //     pathRewrite: { '^/server': '' },
-  //   },
-  // },
+  proxy: {
+    '/server/api/': {
+      target: 'https://preview.pro.ant.design/',
+      changeOrigin: true,
+      pathRewrite: {'^/server': ''},
+    },
+  },
   ignoreMomentLocale: true,
   lessLoaderOptions: {
     javascriptEnabled: true,
@@ -80,18 +80,18 @@ export default {
         context.resourcePath.includes('ant.design.pro.less') ||
         context.resourcePath.includes('global.less')
       ) {
-        return localName;
+        return localName
       }
-      const match = context.resourcePath.match(/src(.*)/);
+      const match = context.resourcePath.match(/src(.*)/)
       if (match && match[1]) {
-        const antdProPath = match[1].replace('.less', '');
+        const antdProPath = match[1].replace('.less', '')
         const arr = antdProPath
           .split('/')
           .map(a => a.replace(/([A-Z])/g, '-$1'))
-          .map(a => a.toLowerCase());
-        return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-');
+          .map(a => a.toLowerCase())
+        return `antd-pro${arr.join('-')}-${localName}`.replace(/--/g, '-')
       }
-      return localName;
+      return localName
     },
   },
 
@@ -108,4 +108,4 @@ export default {
     fileName: '../../config/manifest.json',
     publicPath: '',
   },
-};
+}
