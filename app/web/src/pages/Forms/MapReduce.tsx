@@ -2,11 +2,21 @@ import {Col, Input, Row} from 'antd'
 import {connect} from 'dva'
 import React, {PureComponent} from 'react'
 
-@connect(({mapReduce}) => ({state: mapReduce}))
-export default class MapReduce extends PureComponent {
+interface IMapReduceProps {
+  map: []
+  reducer: string
+  output: []
+}
+
+@connect(({mapReduce: {map, reducer, output}}) => ({
+  map,
+  reducer,
+  output,
+}))
+export default class MapReduce extends PureComponent<IMapReduceProps> {
   render() {
-    // tslint:disable-next-line:no-console
-    console.log('props = ', this.props)
+    const {map, reducer, output} = this.props
+
     return (
       <div>
         <Row gutter={8}>
@@ -15,7 +25,7 @@ export default class MapReduce extends PureComponent {
             <Input.TextArea
               placeholder="Autosize height based on content lines"
               autosize
-              // value={this.props.map.join('\n')}
+              value={map.join('\n')}
             />
           </Col>
           <Col span={8}>
@@ -23,6 +33,7 @@ export default class MapReduce extends PureComponent {
             <Input.TextArea
               placeholder="Autosize height based on content lines"
               autosize
+              value={reducer}
             />
           </Col>
           <Col span={8}>
@@ -30,6 +41,7 @@ export default class MapReduce extends PureComponent {
             <Input.TextArea
               placeholder="Autosize height based on content lines"
               autosize
+              value={output}
             />
           </Col>
         </Row>

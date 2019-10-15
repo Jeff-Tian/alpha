@@ -32,5 +32,5 @@ export default (app: Application) => {
 
   router.get('/', controller.home.render)
 
-  router.get('*', controller.home.render)
+  // router.get('*', controller.home.render)
 }
