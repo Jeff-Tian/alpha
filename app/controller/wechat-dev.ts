@@ -63,7 +63,7 @@ export default class WechatDevController extends Controller {
 
     ctx.body = {
       ...(await wechatOAuth.jsSDKSign(
-        encodeURIComponent(ctx.query.url || ctx.get('referer')),
+        ctx.query.url || ctx.get('referer'),
         ctx.query.ticket
       )),
       appId: wechatOAuth.appId,
