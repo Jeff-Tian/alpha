@@ -38,21 +38,7 @@ export default (appInfo: EggAppInfo) => {
     key: 'key',
     secret: 'secret',
     successReturnToOrRedirect: '/passport/citi/passport-relay',
-    state: app => {
-      return req => {
-        const state = uuid()
-        // tslint:disable-next-line:no-console
-        console.log('--------> state = ', state, req.headers, req.url)
-        app.logger.info('state = ', {
-          state,
-          headers: req.headers,
-          query: req.query,
-          url: req.url,
-        })
-
-        return state
-      }
-    },
+    state: () => uuid,
   }
 
   config.alinode = {
