@@ -12,7 +12,7 @@ export default class User extends Service {
     const { ctx } = this;
 
     const auth = await ctx.model.Authorization.findOne({ uid: userId, provider });
-    return ctx.model.User.findByPk(auth ? auth.user_id : userId)
+    return { ... (await ctx.model.User.findByPk(auth ? auth.user_id : userId)).get(), ...auth.get() }
   }
 
   public async register(user) {
