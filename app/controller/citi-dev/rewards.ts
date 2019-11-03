@@ -1,6 +1,6 @@
-import { Controller } from 'egg'
 import CitiOAuth from 'citi-oauth'
 import crypto from 'crypto'
+import { Controller } from 'egg'
 
 export default class RewardsController extends Controller {
     public async getPointBalance() {
@@ -13,6 +13,13 @@ export default class RewardsController extends Controller {
             app.config.passportCiti.successReturnToOrRedirect
         )
 
-        ctx.body = await citiOAuth.Reward.getPointBalance(ctx.query.countryCode, crypto.createHash('sha512').update(ctx.query.creditCardNumber, 'utf8').digest('hex'))
+        ctx.body = await citiOAuth
+            .Reward
+            .getPointBalance(
+                ctx.query.countryCode,
+                crypto
+                    .createHash('sha512')
+                    .update(ctx.query.creditCardNumber, 'utf8').digest('hex')
+            )
     }
 }
