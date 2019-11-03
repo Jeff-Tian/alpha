@@ -1,19 +1,12 @@
-import {Application} from 'egg'
+import { Application } from 'egg'
 
 export default (app: Application) => {
-  const {controller, router} = app
+  const { controller, router } = app
 
   router.get('/health-check', controller.home.index)
   router.get('/os', controller.os.info)
   router.get('/user', 'home.render')
-
-  app.passport.mount('github', app.config.passportGithub)
-
-  const localStrategy = app.passport.authenticate('local')
-  app.router.post('/passport/local', localStrategy)
-
   router.get('/logout', 'user.logout')
-
   router.resources('users', '/users', controller.users)
 
   app.all('/user/token', app.oAuth2Server.token())
