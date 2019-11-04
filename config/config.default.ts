@@ -108,7 +108,8 @@ export default (appInfo: EggAppInfo) => {
   config.errorDisplay = {
     isProd: () => process.env.isPord === 'true',
     // tslint:disable-next-line:no-empty
-    serializer: () => {},
+    serializer: () => {
+    },
   }
 
   // the return config will combines to EggAppConfig
