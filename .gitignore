@@ -4,7 +4,6 @@ node_modules/
 coverage/
 .idea/
 run/
-logs/
 .DS_Store
 .vscode
 *.swp
@@ -30,3 +29,5 @@ typings/config/*
 app/web/.temp
 config/manifest.json
 app/public
+
+**/*.d.ts
