@@ -1,13 +1,49 @@
-import { Application } from 'egg'
+import {AccessToken} from 'citi-oauth'
+import {Application, Context} from 'egg'
+// tslint:disable-next-line:no-submodule-imports
+import fp from 'lodash/fp'
+
+const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
 export default (app: Application) => {
-  const { controller, router } = app
+  const {controller, router} = app
 
-  app.passport.mount('citi', app.config.passportCiti)
-  router.get('/passport/citi/passport-relay', controller.passportRelay.relay)
+  const options = {
+    ...app.config.passportCiti,
+    getToken: fp.compose(
+      (o: any) => o as AccessToken,
+      app.redis.get,
+      getTokenRedisKey
+    ),
+    saveToken: async (uid: string, accessTokenResult: AccessToken) => {
+      await app.redis.set(getTokenRedisKey(uid), accessTokenResult)
+      await app.redis.expire(
+        getTokenRedisKey(uid),
+        accessTokenResult.expires_in
+      )
+    },
+  }
+
+  app.passport.mount('citi', options)
+  router.get(
+    'citiDev.passportRelay',
+    '/passport/citi/passport-relay',
+    controller.passportRelay.relay
+  )
 
   router.get(
-    'wechatDev.rewards.pointBalance',
-    '/citi-dev/rewards/point-balance', controller.citiDev.rewards.getPointBalance
+    'citiDev.rewards.pointBalance',
+    '/citi-dev/rewards/point-balance',
+    controller.citiDev.rewards.getPointBalance
+  )
+
+  router.get(
+    'citiDev.cards.list',
+    '/citi-dev/cards',
+    async (ctx: Context, next: () => Promise<void>) => {
+      ctx.citiOAuthOptions = options
+      await next()
+    },
+    controller.citiDev.cards.getList
   )
 }

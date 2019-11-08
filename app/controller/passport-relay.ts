@@ -1,5 +1,4 @@
 import {Controller} from 'egg'
-// @ts-ignore
 import querystring from 'querystring'
 
 export default class PassportRelayController extends Controller {

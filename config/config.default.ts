@@ -10,7 +10,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1559644196238_5958'
 
   // add your egg config in here
-  config.middleware = ['notfoundHandler']
+  config.middleware = ['notfoundHandler', 'requestLogger']
 
   // add your special config in here
   const bizConfig = {
@@ -108,8 +108,7 @@ export default (appInfo: EggAppInfo) => {
   config.errorDisplay = {
     isProd: () => process.env.isPord === 'true',
     // tslint:disable-next-line:no-empty
-    serializer: () => {
-    },
+    serializer: () => {},
   }
 
   // the return config will combines to EggAppConfig

@@ -12,7 +12,7 @@ const plugin: EggPlugin = {
   },
 
   redis: {
-    enable: false,
+    enable: true,
   },
 }
 

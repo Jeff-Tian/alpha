@@ -1,6 +1,6 @@
 import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
-import { app } from 'egg-mock/bootstrap'
+import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
 
 describe('test/app/controller/passport-relay.test.ts', () => {
@@ -19,9 +19,9 @@ describe('test/app/controller/passport-relay.test.ts', () => {
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/customers/profiles')
       .reply(200, {
-        emails: [{ emailAddress: 'jie.tian@hotmail.com' + Date.now() }],
+        emails: [{emailAddress: 'jie.tian@hotmail.com' + Date.now()}],
         customerParticulars: {
-          names: [{ fullName: 'jie.tian' }],
+          names: [{fullName: 'jie.tian'}],
         },
       })
 
@@ -32,9 +32,9 @@ describe('test/app/controller/passport-relay.test.ts', () => {
 
     // assert(ctx.isAuthenticated())
 
-    const user = await ctx.service.user.get('jie.tian@hotmail.com');
+    const user = await ctx.service.user.get('jie.tian@hotmail.com')
 
-    assert.ok(user);
+    assert.ok(user)
     assert(user.id > 0)
     assert(user.display_name === 'jie.tian')
   })
@@ -47,7 +47,7 @@ describe('test/app/controller/passport-relay.test.ts', () => {
     assert(
       response.headers.location.startsWith(
         // tslint:disable-next-line:max-line-length
-        'https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=xxx&scope=customers_profiles&countryCode=SG&businessCode=GCB&locale=en_US&state=4321'
+        'https://sandbox.apihub.citi.com/gcb/api/authCode/oauth2/authorize?response_type=code&client_id=xxx&scope=pay_with_points%20accounts_details_transactions%20customers_profiles%20payees%20personal_domestic_transfers%20internal_domestic_transfers%20external_domestic_transfers%20bill_payments%20cards%20onboarding%20reference_data&countryCode=SG&businessCode=GCB&locale=en_US&state=4321'
       )
     )
 

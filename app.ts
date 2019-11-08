@@ -48,7 +48,6 @@ export default (app: Application) => {
     }
 
     if (auth) {
-      // tslint:disable-next-line:no-console
       const {user_id} = auth
 
       await ctx.model.Authorization.update(
