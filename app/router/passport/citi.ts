@@ -1,12 +1,12 @@
-import {AccessToken} from 'citi-oauth'
-import {Application, Context} from 'egg'
+import { AccessToken } from 'citi-oauth'
+import { Application, Context } from 'egg'
 // tslint:disable-next-line:no-submodule-imports
 import fp from 'lodash/fp'
 
 const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
 export default (app: Application) => {
-  const {controller, router} = app
+  const { controller, router } = app
 
   const options = {
     ...app.config.passportCiti,
@@ -37,9 +37,12 @@ export default (app: Application) => {
     controller.citiDev.rewards.getPointBalance
   )
 
+  const jwt = app.middleware.jwt(app.config.jwt);
+
   router.get(
     'citiDev.cards.list',
     '/citi-dev/cards',
+    jwt,
     async (ctx: Context, next: () => Promise<void>) => {
       ctx.citiOAuthOptions = options
       await next()
