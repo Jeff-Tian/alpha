@@ -1,4 +1,5 @@
 import { Service } from 'egg'
+import assert = require('assert');
 
 export default class User extends Service {
   public async find(username, password) {
@@ -10,9 +11,16 @@ export default class User extends Service {
 
   public async get(userId, provider = 'citi') {
     const { ctx } = this;
+    ctx.logger.info('getting user by: ', { userId, provider })
+
+    assert.ok(userId)
 
     const auth = await ctx.model.Authorization.findOne({ uid: userId, provider });
-    return { ... (await ctx.model.User.findByPk(auth ? auth.user_id : userId)).get(), ...auth.get() }
+
+    return {
+      ... (await ctx.model.User.findByPk(auth ? auth.user_id : userId)).get(),
+      ...auth.get()
+    }
   }
 
   public async register(user) {
