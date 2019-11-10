@@ -8,22 +8,15 @@ const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 export default (app: Application) => {
   const { controller, router } = app
 
-  const trace = fp.curry((tag, x) => {
-    app.logger.info('tracing: ', { tag, x })
+  // const trace = fp.curry((tag, x) => {
+  //   app.logger.info('tracing: ', { tag, x })
 
-    return x;
-  })
+  //   return x;
+  // })
 
   const options = {
     ...app.config.passportCiti,
-    getToken: fp.compose(
-      trace('after converting to AccessToken'),
-      (o: any) => o as AccessToken,
-      trace('after app redis get'),
-      app.redis.get,
-      trace('after get token redis key'),
-      getTokenRedisKey
-    ),
+    getToken: fp.compose((o: any) => o as AccessToken, async (s: string) => await app.redis.get(s), getTokenRedisKey),
     saveToken: async (uid: string, accessTokenResult: AccessToken) => {
       await app.redis.set(getTokenRedisKey(uid), accessTokenResult)
       await app.redis.expire(
@@ -58,4 +51,8 @@ export default (app: Application) => {
     },
     controller.citiDev.cards.getList
   )
+
+  router.get('citiDev.token.get', '/citi-dev/token', async (ctx: Context) => {
+    ctx.body = await options.getToken(ctx.query.uid)
+  })
 }

@@ -13,4 +13,18 @@ describe('test/app/controller/citiDev.test.ts', () => {
         assert.deepStrictEqual(result.body.code, 'credentials_required')
     })
 
+    it('gets user\'s token', async () => {
+        await app.redis.set(`access-token-citi-1234`, 'test')
+
+        const res = await app.redis.get('access-token-citi-1234')
+        assert(res === 'test')
+
+        const result = await app
+            .httpRequest()
+            .get('/citi-dev/token?uid=1234')
+            .set('accept', 'application/json')
+            .expect(200)
+
+        assert(result.body, 'test')
+    })
 })

@@ -73,8 +73,8 @@ export default () => {
   }
 
   config.logger = {
-    level: 'DEBUG',
-    consoleLevel: 'DEBUG'
+    level: 'INFO',
+    consoleLevel: 'INFO'
   }
 
   return config
