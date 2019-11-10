@@ -14,7 +14,6 @@ export default class CardsController extends Controller {
       ctx.logger
     )
 
-    ctx.logger.info('state user = ', { state: ctx.state })
     const user = await ctx.service.user.get(ctx.state.user, 'citi')
     ctx.logger.info('getting cards for ', { user })
     const accessToken = await citiOAuth.getToken(user.uid)
