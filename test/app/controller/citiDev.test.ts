@@ -8,7 +8,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
             .httpRequest()
             .get('/citi-dev/cards')
             .set('accept', 'application/json')
-            .expect(500)
+            .expect(401)
 
         assert.deepStrictEqual(result.body.code, 'ERR_ASSERTION')
     })
