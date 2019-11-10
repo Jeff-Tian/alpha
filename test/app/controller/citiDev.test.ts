@@ -3,14 +3,14 @@ import assert = require('assert')
 import { app } from 'egg-mock/bootstrap'
 
 describe('test/app/controller/citiDev.test.ts', () => {
-    it('should get cards', async () => {
+    it('should fail with 401 if not logged in', async () => {
         const result = await app
             .httpRequest()
             .get('/citi-dev/cards')
             .set('accept', 'application/json')
             .expect(401)
 
-        assert.deepStrictEqual(result.body.code, 'ERR_ASSERTION')
+        assert.deepStrictEqual(result.body.code, 'credentials_required')
     })
 
 })
