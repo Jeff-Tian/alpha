@@ -1,4 +1,6 @@
 export default () => async (ctx, next) => {
+  ctx.logger.info('Request Start: ', { query: ctx.query, param: ctx.param, body: ctx.request.body, path: ctx.path });
+
   await next()
 
   ctx.logger.info('Request Done: ', {
