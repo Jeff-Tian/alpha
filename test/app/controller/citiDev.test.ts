@@ -10,7 +10,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
             .set('accept', 'application/json')
             .expect(500)
 
-        assert.deepStrictEqual(result.body.code, "ERR_ASSERTION")
+        assert.deepStrictEqual(result.body.code, 'ERR_ASSERTION')
     })
 
 })

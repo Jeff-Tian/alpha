@@ -1,5 +1,5 @@
-import { Service } from 'egg'
 import assert = require('assert');
+import { Service } from 'egg'
 
 export default class User extends Service {
   public async find(username, password) {
