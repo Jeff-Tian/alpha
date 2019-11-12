@@ -1,96 +1,134 @@
 import assert = require('assert')
+import {AccessToken} from 'citi-oauth'
 import {Application} from 'egg'
+// tslint:disable-next-line:no-submodule-imports
+import fp from 'lodash/fp'
 import MemoryStorage from './app/common/MemoryStorage'
 import RedisStorage from './app/common/RedisStorage'
 import RefererCache from './app/common/RefererCache'
 
-export default (app: Application) => {
-  app.refererCache = new RefererCache(
-    app.config.env === 'prod' ? new RedisStorage(app) : new MemoryStorage(),
-    app.config.refererCache
-  )
+const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
-  app.passport.verify(async (ctx, user) => {
-    const {provider, id, username, password} = user
-    assert(provider, 'user.provider should exists')
-    if (provider === 'local') {
-      assert(username, 'user.username should exists')
-      assert(password, 'user.password should exists')
-    } else {
-      assert(id, 'user.id should exists')
-    }
+export default class AppBootHook {
+  private readonly app: Application
 
-    const auth = await ctx.model.Authorization.findOne({
-      where:
-        provider === 'local'
-          ? {
-              username,
-              password,
-              provider,
-            }
-          : {
-              uid: id,
-              provider,
-            },
-      attributes: {
-        exclude: ['id'],
+  constructor(app: Application) {
+    this.app = app
+  }
+
+  configWillLoad() {
+    const {app} = this
+
+    app.config.passportCiti = {
+      ...app.config.passportCiti,
+      getToken: fp.compose(
+        (o: any) => o as AccessToken,
+        async (s: string) => app.redis.get(s),
+        getTokenRedisKey
+      ),
+      saveToken: async (uid: string, accessTokenResult: AccessToken) => {
+        app.logger.error('saving token: ', {uid, accessTokenResult})
+        await app.redis.set(getTokenRedisKey(uid), accessTokenResult)
+        await app.redis.expire(
+          getTokenRedisKey(uid),
+          accessTokenResult.expires_in
+        )
       },
+      logger: app.logger,
+    }
+  }
+
+  // tslint:disable-next-line:cognitive-complexity
+  async didReady() {
+    const {app} = this
+
+    app.refererCache = new RefererCache(
+      app.config.env === 'prod' ? new RedisStorage(app) : new MemoryStorage(),
+      app.config.refererCache
+    )
+
+    app.passport.verify(async (ctx, user) => {
+      const {provider, id, username, password} = user
+      assert(provider, 'user.provider should exists')
+      if (provider === 'local') {
+        assert(username, 'user.username should exists')
+        assert(password, 'user.password should exists')
+      } else {
+        assert(id, 'user.id should exists')
+      }
+
+      const auth = await ctx.model.Authorization.findOne({
+        where:
+          provider === 'local'
+            ? {
+                username,
+                password,
+                provider,
+              }
+            : {
+                uid: id,
+                provider,
+              },
+        attributes: {
+          exclude: ['id'],
+        },
+      })
+
+      if (provider === 'citi') {
+        ctx.session.returnTo =
+          '/passport/citi/passport-relay?state=' + ctx.query.state
+      }
+
+      if (auth) {
+        const {user_id} = auth
+
+        await ctx.model.Authorization.update(
+          {
+            user_id,
+            updated_at: new Date(),
+            profile: JSON.stringify(user.profile),
+          },
+          {
+            where: {provider, uid: id},
+          }
+        )
+
+        const existedUser = await ctx.model.User.findOne({
+          where: {id: user_id},
+          attributes: {},
+        })
+        if (existedUser) {
+          return user
+        }
+      }
+
+      if (provider === 'local') {
+        ctx.throw(422, '用户名或者密码错误！', user)
+      } else {
+        return ctx.service.user.register(user)
+      }
     })
 
-    if (provider === 'citi') {
-      ctx.session.returnTo =
-        '/passport/citi/passport-relay?state=' + ctx.query.state
-    }
+    // tslint:disable-next-line:no-commented-code
+    // app.passport.serializeUser(async (ctx, user) => {
+    //   ctx.logger.info('serialzing User: ', user)
+    // })
+    //
+    // app.passport.deserializeUser(async (ctx, user) => {
+    //   ctx.logger.info('deserializing User: ', user)
+    // })
+    //
+    // app.on('error', (err, ctx) => {
+    //   ctx.logger.error(err)
+    // })
 
-    if (auth) {
-      const {user_id} = auth
+    // @ts-ignore
+    process.on('unhandledRejection', error => {
+      // Will print "unhandledRejection err is not defined"
+      // console.error('unhandledRejection --> ', error)
 
-      await ctx.model.Authorization.update(
-        {
-          user_id,
-          updated_at: new Date(),
-          profile: JSON.stringify(user.profile),
-        },
-        {
-          where: {provider, uid: id},
-        }
-      )
-
-      const existedUser = await ctx.model.User.findOne({
-        where: {id: user_id},
-        attributes: {},
-      })
-      if (existedUser) {
-        return user
-      }
-    }
-
-    if (provider === 'local') {
-      ctx.throw(422, '用户名或者密码错误！', user)
-    } else {
-      return ctx.service.user.register(user)
-    }
-  })
-
-  // tslint:disable-next-line:no-commented-code
-  // app.passport.serializeUser(async (ctx, user) => {
-  //   ctx.logger.info('serialzing User: ', user)
-  // })
-  //
-  // app.passport.deserializeUser(async (ctx, user) => {
-  //   ctx.logger.info('deserializing User: ', user)
-  // })
-  //
-  // app.on('error', (err, ctx) => {
-  //   ctx.logger.error(err)
-  // })
-
-  // @ts-ignore
-  process.on('unhandledRejection', error => {
-    // Will print "unhandledRejection err is not defined"
-    // console.error('unhandledRejection --> ', error)
-
-    throw error
-    // process.exit(1)
-  })
+      throw error
+      // process.exit(1)
+    })
+  }
 }

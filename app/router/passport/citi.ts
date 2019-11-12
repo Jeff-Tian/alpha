@@ -1,38 +1,10 @@
-import {AccessToken} from 'citi-oauth'
 import {Application, Context} from 'egg'
-// tslint:disable-next-line:no-submodule-imports
-import fp from 'lodash/fp'
-
-const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
 export default (app: Application) => {
   const {controller, router} = app
 
-  // const trace = fp.curry((tag, x) => {
-  //   app.logger.info('tracing: ', { tag, x })
+  app.passport.mount('citi', app.config.passportCiti)
 
-  //   return x;
-  // })
-
-  const options = {
-    ...app.config.passportCiti,
-    getToken: fp.compose(
-      (o: any) => o as AccessToken,
-      async (s: string) => app.redis.get(s),
-      getTokenRedisKey
-    ),
-    saveToken: async (uid: string, accessTokenResult: AccessToken) => {
-      app.logger.error('saving token: ', {uid, accessTokenResult})
-      await app.redis.set(getTokenRedisKey(uid), accessTokenResult)
-      await app.redis.expire(
-        getTokenRedisKey(uid),
-        accessTokenResult.expires_in
-      )
-    },
-    logger: app.logger,
-  }
-
-  app.passport.mount('citi', options)
   router.get(
     'citiDev.passportRelay',
     '/passport/citi/passport-relay',
@@ -52,13 +24,13 @@ export default (app: Application) => {
     '/citi-dev/cards',
     jwt,
     async (ctx: Context, next: () => Promise<void>) => {
-      ctx.citiOAuthOptions = options
+      ctx.citiOAuthOptions = app.config.passportCiti
       await next()
     },
     controller.citiDev.cards.getList
   )
 
   router.get('citiDev.token.get', '/citi-dev/token', async (ctx: Context) => {
-    ctx.body = await options.getToken(ctx.query.uid)
+    ctx.body = await app.config.passportCiti.getToken(ctx.query.uid)
   })
 }
