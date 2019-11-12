@@ -22,13 +22,14 @@ export default (app: Application) => {
       getTokenRedisKey
     ),
     saveToken: async (uid: string, accessTokenResult: AccessToken) => {
-      app.logger.info('saving token: ', {uid, accessTokenResult})
+      app.logger.error('saving token: ', {uid, accessTokenResult})
       await app.redis.set(getTokenRedisKey(uid), accessTokenResult)
       await app.redis.expire(
         getTokenRedisKey(uid),
         accessTokenResult.expires_in
       )
     },
+    logger: app.logger,
   }
 
   app.passport.mount('citi', options)
