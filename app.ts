@@ -1,11 +1,8 @@
 import assert = require('assert')
-import debug0 from 'debug'
 import {Application} from 'egg'
 import MemoryStorage from './app/common/MemoryStorage'
 import RedisStorage from './app/common/RedisStorage'
 import RefererCache from './app/common/RefererCache'
-
-const debug = debug0('uniheart')
 
 export default (app: Application) => {
   app.refererCache = new RefererCache(
@@ -14,8 +11,6 @@ export default (app: Application) => {
   )
 
   app.passport.verify(async (ctx, user) => {
-    ctx.logger.info('verifying...', user, ctx.query)
-    debug('user = ', user, ctx.query)
     const {provider, id, username, password} = user
     assert(provider, 'user.provider should exists')
     if (provider === 'local') {
