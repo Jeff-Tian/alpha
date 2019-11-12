@@ -1,8 +1,8 @@
 import assert = require('assert')
+import {AccessToken} from 'citi-oauth'
 // tslint:disable-next-line:no-submodule-imports
 import {app} from 'egg-mock/bootstrap'
-import nock = require('nock')
-import {AccessToken} from 'citi-oauth'
+import nock from 'nock'
 
 describe('test/app/controller/citiDev.test.ts', () => {
   it('should fail with 401 if not logged in', async () => {
