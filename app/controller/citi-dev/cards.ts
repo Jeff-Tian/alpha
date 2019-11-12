@@ -16,6 +16,11 @@ export default class CardsController extends Controller {
 
     const user = await ctx.service.user.get(ctx.state.user, 'citi')
     const accessToken = await citiOAuth.getToken(user.uid)
+
+    if (!accessToken) {
+      return ctx.redirect('/passport/citi')
+    }
+
     ctx.body = await citiOAuth.Cards.getCards(
       JSON.parse(accessToken).access_token
     )
