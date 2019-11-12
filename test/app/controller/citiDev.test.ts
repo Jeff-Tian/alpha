@@ -2,6 +2,7 @@ import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
 import {app} from 'egg-mock/bootstrap'
 import nock = require('nock')
+import {AccessToken} from 'citi-oauth'
 
 describe('test/app/controller/citiDev.test.ts', () => {
   it('should fail with 401 if not logged in', async () => {
@@ -54,6 +55,12 @@ describe('test/app/controller/citiDev.test.ts', () => {
     assert(
       result.text ===
         'Redirecting to /passport/citi/passport-relay?state=undefined.'
+    )
+
+    const res = await app.redis.get('access-token-citi-jie.tian@hotmail.com')
+    assert.deepStrictEqual(
+      (JSON.parse(res!) as AccessToken).access_token,
+      '123456'
     )
   })
 })

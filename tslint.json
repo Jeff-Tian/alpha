@@ -7,7 +7,7 @@
     "tslint-sonarts"
   ],
   "rules": {
-    "quotemark": [true, "single", "jsx-double"],
+    "quotemark": [false, "single", "jsx-double"],
     "no-console": [true, "dir", "log", "error", "warn"],
     "no-this-assignment": false,
     "no-object-literal-type-assertion": true,

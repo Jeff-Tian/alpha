@@ -27,8 +27,10 @@ export default class AppBootHook {
         getTokenRedisKey
       ),
       saveToken: async (uid: string, accessTokenResult: AccessToken) => {
-        app.logger.error('saving token: ', {uid, accessTokenResult})
-        await app.redis.set(getTokenRedisKey(uid), accessTokenResult)
+        await app.redis.set(
+          getTokenRedisKey(uid),
+          JSON.stringify(accessTokenResult)
+        )
         await app.redis.expire(
           getTokenRedisKey(uid),
           accessTokenResult.expires_in
