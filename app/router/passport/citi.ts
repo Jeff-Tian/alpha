@@ -19,18 +19,30 @@ export default (app: Application) => {
 
   const jwt = app.middleware.jwt(app.config.jwt)
 
+  const injectCitiOAuthOptions = async (
+    ctx: Context,
+    next: () => Promise<void>
+  ) => {
+    ctx.citiOAuthOptions = app.config.passportCiti
+    await next()
+  }
+
   router.get(
     'citiDev.cards.list',
     '/citi-dev/cards',
     jwt,
-    async (ctx: Context, next: () => Promise<void>) => {
-      ctx.citiOAuthOptions = app.config.passportCiti
-      await next()
-    },
+    injectCitiOAuthOptions,
     controller.citiDev.cards.getList
   )
 
   router.get('citiDev.token.get', '/citi-dev/token', async (ctx: Context) => {
     ctx.body = await app.config.passportCiti.getToken(ctx.query.uid)
   })
+
+  router.get(
+    'citiDev.onboarding.products',
+    '/citi-dev/onboarding/products',
+    injectCitiOAuthOptions,
+    controller.citiDev.onboarding.getProducts
+  )
 }
