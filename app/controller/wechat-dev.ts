@@ -44,6 +44,7 @@ export default class WechatDevController extends Controller {
     if (mode === 'raw') {
       const bufferStream = new stream.PassThrough()
       bufferStream.end(res.data)
+      // @ts-ignore
       bufferStream.pipe(ctx.response)
       return
     }
