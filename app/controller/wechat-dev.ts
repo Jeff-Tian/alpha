@@ -1,6 +1,5 @@
 import {Controller} from 'egg'
 import querystring from 'querystring'
-import stream from 'stream'
 import WechatOAuth from 'wechat-oauth-ts'
 import {KeySecretSelection} from '../validate/GetAccessTokenRequest'
 
@@ -42,10 +41,8 @@ export default class WechatDevController extends Controller {
           )
 
     if (mode === 'raw') {
-      const bufferStream = new stream.PassThrough()
-      bufferStream.end(res.data)
-      // @ts-ignore
-      bufferStream.pipe(ctx.response)
+      ctx.type = 'jpg'
+      ctx.body = res.data
       return
     }
 
