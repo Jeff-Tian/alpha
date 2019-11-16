@@ -1,6 +1,6 @@
-import { EggAppConfig, PowerPartial } from 'egg'
+import {EggAppConfig, PowerPartial} from 'egg'
 import redisUrlParse from 'redis-url-parse'
-import { v4 as uuid } from 'uuid'
+import {v4 as uuid} from 'uuid'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -94,8 +94,10 @@ export default () => {
     csrf: {
       queryName: process.env.EGG_SECURITY_CSRF_NAME,
       bodyName: process.env.EGG_SECURITY_CSRF_CONTENT,
-      ignore: '/endpoints/wechat/message',
-    }
+      ignore: ctx =>
+        ctx.path.startsWith('/endpoints/wechat/message') ||
+        ctx.path.startsWith('/citi-dev'),
+    },
   }
 
   config.jwt = {
