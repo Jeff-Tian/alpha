@@ -85,4 +85,25 @@ describe('test/app/controller/citiDev.test.ts', () => {
 
     assert.deepStrictEqual(result.body, {})
   })
+
+  it('should apply', async () => {
+    const applied = {
+      applicationId: 'ZOW9IO793854',
+      applicationStage: 'PRESCREENING',
+      controlFlowId:
+        '6e3774334f724a2b7947663653712f52456f524c41797038516a59347a437549564a77755676376e616a733d',
+    }
+    nock('https://sandbox.apihub.citi.com')
+      .post('/gcb/api/v1/apac/onboarding/products/unsecured/applications')
+      .reply(200, applied)
+
+    app.mockCsrf()
+    const result = await app
+      .httpRequest()
+      .post('/citi-dev/onboarding/apply')
+      .set('accept', 'application/json')
+      .expect(200)
+
+    assert.deepStrictEqual(result.body, applied)
+  })
 })

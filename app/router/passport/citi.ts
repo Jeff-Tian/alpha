@@ -45,4 +45,11 @@ export default (app: Application) => {
     injectCitiOAuthOptions,
     controller.citiDev.onboarding.getProducts
   )
+
+  router.post(
+    'citiDev.onboarding.apply',
+    '/citi-dev/onboarding/apply',
+    injectCitiOAuthOptions,
+    controller.citiDev.onboarding.apply
+  )
 }

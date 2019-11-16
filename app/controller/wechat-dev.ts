@@ -42,7 +42,7 @@ export default class WechatDevController extends Controller {
 
     if (mode === 'raw') {
       ctx.type = 'jpg'
-      ctx.body = res.data
+      ctx.body = res
       return
     }
 
