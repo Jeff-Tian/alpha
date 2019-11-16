@@ -40,7 +40,10 @@ export const saveToken = app => async (
   accessTokenResult: AccessToken
 ) => {
   await app.redis.set(getTokenRedisKey(uid), JSON.stringify(accessTokenResult))
-  await app.redis.expire(getTokenRedisKey(uid), accessTokenResult.expires_in)
+  await app.redis.expire(
+    getTokenRedisKey(uid),
+    accessTokenResult.expires_in / 1000
+  )
 }
 
 export const deleteTokens = app => async (uid: string) => {
