@@ -1,5 +1,5 @@
 import {Controller} from 'egg'
-import {getInstance} from './citi-helper'
+import {getInstance} from '../../common/citi-helper'
 
 export default class CardsController extends Controller {
   public async getList() {

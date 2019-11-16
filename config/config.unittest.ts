@@ -1,4 +1,4 @@
-import { EggAppConfig, PowerPartial } from 'egg'
+import {EggAppConfig, PowerPartial} from 'egg'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -65,7 +65,8 @@ export default () => {
 
   config.sequelize = {
     dialect: 'mysql',
-    connectionUri: `mysql://root:${process.env.MYSQL_PWD || ''}@127.0.0.1:3306/alpha`,
+    connectionUri: `mysql://root:${process.env.MYSQL_PWD ||
+      ''}@127.0.0.1:3306/alpha`,
   }
 
   config.alinode = {
@@ -73,8 +74,8 @@ export default () => {
   }
 
   config.logger = {
-    level: 'INFO',
-    consoleLevel: 'INFO'
+    level: 'DEBUG',
+    consoleLevel: 'DEBUG',
   }
 
   return config

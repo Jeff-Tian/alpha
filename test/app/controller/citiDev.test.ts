@@ -5,6 +5,7 @@ import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
 
 describe('test/app/controller/citiDev.test.ts', () => {
+  after(() => nock.restore())
   it('should fail with 401 if not logged in', async () => {
     const result = await app
       .httpRequest()
@@ -56,7 +57,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
 
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/apac/onboarding/products?')
-      .reply(200, {})
+      .reply(200, {data: '1234'})
 
     const result = await app
       .httpRequest()
@@ -83,7 +84,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
       .set('accept', 'application/json')
       .expect(200)
 
-    assert.deepStrictEqual(result.body, {})
+    assert.deepStrictEqual(result.body, {data: '1234'})
   })
 
   it('should apply', async () => {
@@ -105,5 +106,22 @@ describe('test/app/controller/citiDev.test.ts', () => {
       .expect(200)
 
     assert.deepStrictEqual(result.body, applied)
+  })
+})
+
+describe.skip('retry', () => {
+  it('should get application status even failed once', async () => {
+    nock('https://sandbox.apihub.citi.com')
+      .get('/gcb/api/v1/apac/onboarding/products/unsecured/applications/1234')
+      .times(1)
+      .reply(401, 'Request failed with status code 401')
+
+    const result = await app
+      .httpRequest()
+      .get('/citi-dev/onboarding/get-application-status/1234')
+      .set('accept', 'application/json')
+      .expect(200)
+
+    assert.deepStrictEqual(result.body, {})
   })
 })

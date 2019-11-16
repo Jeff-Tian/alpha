@@ -1,13 +1,9 @@
 import assert = require('assert')
-import {AccessToken} from 'citi-oauth'
 import {Application} from 'egg'
-// tslint:disable-next-line:no-submodule-imports
-import fp from 'lodash/fp'
+import {getToken, saveToken} from './app/common/citi-helper'
 import MemoryStorage from './app/common/MemoryStorage'
 import RedisStorage from './app/common/RedisStorage'
 import RefererCache from './app/common/RefererCache'
-
-const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
 export default class AppBootHook {
   private readonly app: Application
@@ -21,21 +17,8 @@ export default class AppBootHook {
 
     app.config.passportCiti = {
       ...app.config.passportCiti,
-      getToken: fp.compose(
-        (o: any) => o as AccessToken,
-        async (s: string) => app.redis.get(s),
-        getTokenRedisKey
-      ),
-      saveToken: async (uid: string, accessTokenResult: AccessToken) => {
-        await app.redis.set(
-          getTokenRedisKey(uid),
-          JSON.stringify(accessTokenResult)
-        )
-        await app.redis.expire(
-          getTokenRedisKey(uid),
-          accessTokenResult.expires_in
-        )
-      },
+      getToken: getToken(app),
+      saveToken: saveToken(app),
       logger: app.logger,
     }
   }
