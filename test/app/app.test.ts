@@ -1,6 +1,6 @@
 import assert = require('assert')
 import mm from 'egg-mock'
-import * as path from 'path'
+import path from 'path'
 import runscript = require('runscript')
 
 const baseDir = path.resolve(__dirname, '../..')

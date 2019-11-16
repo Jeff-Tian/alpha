@@ -1,7 +1,7 @@
 import assert = require('assert')
 import mm from 'egg-mock'
 import nock = require('nock')
-import * as path from 'path'
+import path from 'path'
 import runscript = require('runscript')
 
 const baseDir = path.resolve(__dirname, '../..')
@@ -17,7 +17,10 @@ describe('test/passport-weapp-yiqifen.test.ts', () => {
   })
 
   describe('compiling code and run tests', () => {
-    afterEach(mm.restore)
+    afterEach(() => {
+      nock.cleanAll()
+      mm.restore()
+    })
 
     let app
 

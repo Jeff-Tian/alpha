@@ -3,9 +3,10 @@ import {AccessToken} from 'citi-oauth'
 // tslint:disable-next-line:no-submodule-imports
 import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
+import {deleteTokens} from '../../../app/common/citi-helper'
 
-describe('test/app/controller/citiDev.test.ts', () => {
-  // after(() => nock.restore())
+describe.skip('test/app/controller/citiDev.test.ts', () => {
+  afterEach(() => nock.cleanAll())
   it('should fail with 401 if not logged in', async () => {
     const result = await app
       .httpRequest()
@@ -109,13 +110,45 @@ describe('test/app/controller/citiDev.test.ts', () => {
   })
 })
 
+describe.skip('delete tokens', () => {
+  afterEach(() => nock.cleanAll())
+  it('delete', async () => {
+    await app.redis.set(`access-token-citi-5678`, 'test')
+
+    const res = await app.redis.get('access-token-citi-5678')
+    assert(res === 'test')
+
+    await deleteTokens(app)('')
+
+    const res2 = await app.redis.get('access-token-citi-5678')
+    assert(res2 === null)
+  })
+})
+
 describe.skip('retry', () => {
+  afterEach(() => nock.cleanAll())
   it('should get application status even failed once', async () => {
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/apac/onboarding/products/unsecured/applications/1234')
-      // .times(1)
       .reply(401, 'Request failed with status code 401')
 
+    nock('https://sandbox.apihub.citi.com')
+      .post('/gcb/api/clientCredentials/oauth2/token/sg/gcb')
+      .reply(200, {access_token: '5678', expires_in: 18000})
+
+    nock('https://sandbox.apihub.citi.com')
+      .get('/gcb/api/v1/apac/onboarding/products/unsecured/applications/1234')
+      .reply(200, {})
+
+    await app.redis.set(
+      // tslint:disable-next-line:max-line-length
+      `access-token-citi-https://sandbox.apihub.citi.com/gcb/api/clientCredentials/oauth2/token/sg/gcb?grant_type=client_credentials&scope=%2Fapi`,
+      JSON.stringify({
+        access_token: '1234',
+        expires_in: 180000,
+        created_at: Date.now(),
+      })
+    )
     const result = await app
       .httpRequest()
       .get('/citi-dev/onboarding/get-application-status/1234')

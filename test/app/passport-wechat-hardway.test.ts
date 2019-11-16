@@ -1,23 +1,26 @@
 import assert = require('assert')
 import mm from 'egg-mock'
 import nock from 'nock'
-import * as path from 'path'
+import path from 'path'
 import runscript = require('runscript')
 
 const baseDir = path.resolve(__dirname, '../..')
 
 describe('test/passport-wechat-hardway.test.ts', () => {
   before(async () => {
-    await runscript('ets', { cwd: baseDir })
-    await runscript(`tsc -p ${baseDir}/tsconfig.json`, { cwd: baseDir })
+    await runscript('ets', {cwd: baseDir})
+    await runscript(`tsc -p ${baseDir}/tsconfig.json`, {cwd: baseDir})
   })
 
   after(async () => {
-    await runscript('ets clean', { cwd: baseDir })
+    await runscript('ets clean', {cwd: baseDir})
   })
 
   describe('compiling code and run tests', () => {
-    afterEach(mm.restore)
+    afterEach(() => {
+      nock.cleanAll()
+      mm.restore()
+    })
 
     let app
 
@@ -45,11 +48,13 @@ describe('test/passport-wechat-hardway.test.ts', () => {
       assert(
         // tslint:disable-next-line:max-line-length
         `https://open.weixin.qq.com/connect/oauth2/authorize?appid=xxx&redirect_uri=%2Fpassport%2Fwechat-hardway%2Fcallback&response_type=code&scope=snsapi_base&state=1234#wechat_redirect` ===
-        res.headers.location
+          res.headers.location
       )
 
       nock('https://api.weixin.qq.com')
-        .get('/sns/oauth2/access_token?appid=xxx&secret=yyy&code=5678&grant_type=authorization_code')
+        .get(
+          '/sns/oauth2/access_token?appid=xxx&secret=yyy&code=5678&grant_type=authorization_code'
+        )
         .reply(200, {})
 
       await runningApp

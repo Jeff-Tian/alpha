@@ -1,4 +1,4 @@
-import assert from 'assert'
+import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
 import {app} from 'egg-mock/bootstrap'
 

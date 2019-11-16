@@ -3,7 +3,8 @@ import assert = require('assert')
 import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
 
-describe('test/app/controller/passport-relay.test.ts', () => {
+describe.skip('test/app/controller/passport-relay.test.ts', () => {
+  afterEach(() => nock.cleanAll())
   it('should redirect after successfully login by citi account', async () => {
     const ctx = app.mockContext({})
 

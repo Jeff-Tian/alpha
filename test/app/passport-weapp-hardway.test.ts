@@ -1,7 +1,7 @@
 import assert = require('assert')
 import mm from 'egg-mock'
 import nock = require('nock')
-import * as path from 'path'
+import path from 'path'
 import runscript = require('runscript')
 
 const baseDir = path.resolve(__dirname, '../..')
@@ -17,7 +17,10 @@ describe('test/passport-weapp-hardway.test.ts', () => {
   })
 
   describe('compiling code and run tests', () => {
-    afterEach(mm.restore)
+    afterEach(() => {
+      nock.cleanAll()
+      mm.restore()
+    })
 
     let app
 
@@ -39,7 +42,7 @@ describe('test/passport-weapp-hardway.test.ts', () => {
       nock('https://api.weixin.qq.com')
         .get(/\/sns\/jscode2session.+/)
         .reply(200, {
-          unionid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8' ,
+          unionid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8',
           openid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf9',
           session_key: 'DUsPOa8AOYZqqaCvyB//wg==',
         })

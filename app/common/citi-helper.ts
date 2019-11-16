@@ -1,6 +1,6 @@
 import CitiOAuth, {AccessToken} from 'citi-oauth'
 // tslint:disable-next-line:no-submodule-imports
-import fp from 'lodash/fp'
+// import fp from 'lodash/fp'
 
 export const getInstance = ctx =>
   new CitiOAuth(
@@ -14,12 +14,26 @@ export const getInstance = ctx =>
 
 export const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
-export const getToken = app =>
-  fp.compose(
-    (o: any) => o as AccessToken,
-    async (s: string) => app.redis.get(s),
-    getTokenRedisKey
-  )
+// tslint:disable-next-line:no-commented-code
+// export const getToken = app =>
+//   fp.compose(
+//     (o: any) => o as AccessToken,
+//     async (s: string) => {
+//       app.logger.info('getting token by ...', {s})
+//       const token = await app.redis.get(s)
+//       app.logger.info('got token by ...', {s, token})
+//       return token
+//     },
+//     getTokenRedisKey
+//   )
+
+export const getToken = app => async (uid: string) => {
+  const s = getTokenRedisKey(uid)
+  app.logger.info('getting token by ...', {s})
+  const token = await app.redis.get(s)
+  app.logger.info('got token by ...', {s, token})
+  return token
+}
 
 export const saveToken = app => async (
   uid: string,
@@ -29,16 +43,40 @@ export const saveToken = app => async (
   await app.redis.expire(getTokenRedisKey(uid), accessTokenResult.expires_in)
 }
 
-const deleteTokens = app => async (uid: string) => {
-  const keys = (await app.redis.keys(getTokenRedisKey(uid) + '*')) || []
-  await Promise.all(keys.map(async (key: string) => app.redis.del(key)))
+export const deleteTokens = app => async (uid: string) => {
+  const pattern = getTokenRedisKey(uid) + '*'
+  const keys = (await app.redis.keys(pattern)) || []
+  app.logger.info('redis keys = ', {keys, pattern})
+
+  // tslint:disable-next-line:prefer-for-of
+  for (let i = 0; i < keys.length; i++) {
+    app.logger.info('deleting ... ', {key: keys[i]})
+    await app.redis.del(keys[i])
+    app.logger.info('deleted ... ', {key: keys[i]})
+  }
+
+  // await Promise.all(
+  //   keys.map(async (key: string) => {
+  //     app.logger.info('deleting ... ', {key})
+  //     await app.redis.del(key)
+  //     app.logger.info('deleted ...', {key})
+  //   })
+  // )
+  app.logger.info('deleted all ', {
+    keys: (await app.redis.keys(pattern)) || [],
+  })
 }
 
 export const retryHandlers = app => [
   {
     error: /Request failed with status code 401/,
     handler: async () => {
-      await deleteTokens(app)('')
+      // tslint:disable-next-line:no-console
+      console.log('handling...............................................')
+      const asyncDeleteTokens = deleteTokens(app)
+      await asyncDeleteTokens('')
+      // tslint:disable-next-line:no-console
+      console.log('handled.')
     },
   },
 ]
