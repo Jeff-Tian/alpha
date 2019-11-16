@@ -52,4 +52,11 @@ export default (app: Application) => {
     injectCitiOAuthOptions,
     controller.citiDev.onboarding.apply
   )
+
+  router.get(
+    'citiDev.onboarding.getApplicationStatus',
+    '/citi-dev/onboarding/get-application-status/:applicationId',
+    injectCitiOAuthOptions,
+    controller.citiDev.onboarding.getApplicationStatus
+  )
 }

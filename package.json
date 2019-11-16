@@ -37,7 +37,7 @@
     "antd": "^3.10.0",
     "bizcharts": "^3.2.2",
     "bizcharts-plugin-slider": "^2.0.3",
-    "citi-oauth": "^1.5.2",
+    "citi-oauth": "^1.6.1",
     "class-transformer": "latest",
     "class-validator": "latest",
     "classnames": "^2.2.6",

@@ -1,15 +1,5 @@
-import CitiOAuth from 'citi-oauth'
 import {Controller} from 'egg'
-
-const getInstance = ctx =>
-  new CitiOAuth(
-    ctx.citiOAuthOptions.key,
-    ctx.citiOAuthOptions.secret,
-    ctx.citiOAuthOptions.successReturnToOrRedirect,
-    ctx.citiOAuthOptions.saveToken,
-    ctx.citiOAuthOptions.getToken,
-    ctx.logger
-  )
+import {getInstance} from './citi-helper'
 
 export default class OnboardingController extends Controller {
   public async getProducts() {
@@ -22,5 +12,13 @@ export default class OnboardingController extends Controller {
     const {ctx} = this
 
     ctx.body = await getInstance(ctx).Onboarding.apply(ctx.body)
+  }
+
+  public async getApplicationStatus() {
+    const {ctx} = this
+
+    ctx.body = await getInstance(ctx).Onboarding.getApplicationStatus(
+      ctx.params.applicationId
+    )
   }
 }
