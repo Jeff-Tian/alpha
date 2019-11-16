@@ -104,7 +104,7 @@ export default () => {
     secret: process.env.EGG_JWT_SECRET || 'uniheart',
   }
 
-  const redisUri = process.env.REDISTOGO_URL
+  const redisUri = process.env.REDIS_URI
   const parsed = redisUrlParse(redisUri)
 
   config.redis = {
