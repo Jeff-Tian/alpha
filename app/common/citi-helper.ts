@@ -30,8 +30,8 @@ export const saveToken = app => async (
 }
 
 const deleteTokens = app => async (uid: string) => {
-  const keys = await app.redis.keys(getTokenRedisKey(uid) + '*')
-  ;(keys || []).map(async (key: string) => app.redis.del(key))
+  const keys = (await app.redis.keys(getTokenRedisKey(uid) + '*')) || []
+  await Promise.all(keys.map(async (key: string) => app.redis.del(key)))
 }
 
 export const retryHandlers = app => [
