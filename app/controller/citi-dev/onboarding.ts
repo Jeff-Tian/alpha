@@ -17,8 +17,13 @@ export default class OnboardingController extends Controller {
   public async apply() {
     const {ctx} = this
 
+    ctx.logger.info('applying by ', {data: ctx.request.body})
+    if (!ctx.request.body) {
+      ctx.throw(422, '申请数据不能为空！')
+    }
+
     await retry(ctx.app)(async () => {
-      ctx.body = await getInstance(ctx).Onboarding.apply(ctx.body)
+      ctx.body = await getInstance(ctx).Onboarding.apply(ctx.request.body)
     })
   }
 

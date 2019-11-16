@@ -5,7 +5,7 @@ import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
 import {deleteTokens} from '../../../app/common/citi-helper'
 
-describe.skip('test/app/controller/citiDev.test.ts', () => {
+describe('test/app/controller/citiDev.test.ts', () => {
   afterEach(() => nock.cleanAll())
   it('should fail with 401 if not logged in', async () => {
     const result = await app
@@ -49,17 +49,6 @@ describe.skip('test/app/controller/citiDev.test.ts', () => {
         emails: [{emailAddress: 'jie.tian@hotmail.com'}],
       })
 
-    nock('https://sandbox.apihub.citi.com')
-      .post('/gcb/api/clientCredentials/oauth2/token/sg/gcb')
-      .reply(200, {
-        access_token: '1234',
-        expires_in: 1800,
-      })
-
-    nock('https://sandbox.apihub.citi.com')
-      .get('/gcb/api/v1/apac/onboarding/products?')
-      .reply(200, {data: '1234'})
-
     const result = await app
       .httpRequest()
       .get('/passport/citi/callback?code=1234')
@@ -79,6 +68,17 @@ describe.skip('test/app/controller/citiDev.test.ts', () => {
   })
 
   it('get all onboarding products', async () => {
+    nock('https://sandbox.apihub.citi.com')
+      .post('/gcb/api/clientCredentials/oauth2/token/sg/gcb')
+      .reply(200, {
+        access_token: '1234',
+        expires_in: 1800,
+      })
+
+    nock('https://sandbox.apihub.citi.com')
+      .get('/gcb/api/v1/apac/onboarding/products?')
+      .reply(200, {data: '1234'})
+
     const result = await app
       .httpRequest()
       .get('/citi-dev/onboarding/products')
@@ -103,6 +103,7 @@ describe.skip('test/app/controller/citiDev.test.ts', () => {
     const result = await app
       .httpRequest()
       .post('/citi-dev/onboarding/apply')
+      .send({test: 'hello'})
       .set('accept', 'application/json')
       .expect(200)
 
