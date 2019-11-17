@@ -1,6 +1,5 @@
 import CitiOAuth, { AccessToken } from 'citi-oauth'
-// tslint:disable-next-line:no-submodule-imports
-// import fp from 'lodash/fp'
+import R from 'ramda'
 
 export const getInstance = ctx =>
   new CitiOAuth(
@@ -14,26 +13,11 @@ export const getInstance = ctx =>
 
 export const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
-// tslint:disable-next-line:no-commented-code
-// export const getToken = app =>
-//   fp.compose(
-//     (o: any) => o as AccessToken,
-//     async (s: string) => {
-//       app.logger.info('getting token by ...', {s})
-//       const token = await app.redis.get(s)
-//       app.logger.info('got token by ...', {s, token})
-//       return token
-//     },
-//     getTokenRedisKey
-//   )
-
-export const getToken = app => async (uid: string) => {
-  const s = getTokenRedisKey(uid)
-  app.logger.info('getting token by ...', { s })
-  const token = await app.redis.get(s)
-  app.logger.info('got token by ...', { s, token })
-  return token
-}
+export const getToken = app =>
+  R.compose(
+    async (s: string) => app.redis.get(s),
+    getTokenRedisKey
+  )
 
 export const saveToken = app => async (
   uid: string,
