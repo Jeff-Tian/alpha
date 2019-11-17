@@ -1,4 +1,4 @@
-import CitiOAuth, {AccessToken} from 'citi-oauth'
+import CitiOAuth, { AccessToken } from 'citi-oauth'
 // tslint:disable-next-line:no-submodule-imports
 // import fp from 'lodash/fp'
 
@@ -29,9 +29,9 @@ export const getTokenRedisKey = (uid: string) => `access-token-citi-${uid}`
 
 export const getToken = app => async (uid: string) => {
   const s = getTokenRedisKey(uid)
-  app.logger.info('getting token by ...', {s})
+  app.logger.info('getting token by ...', { s })
   const token = await app.redis.get(s)
-  app.logger.info('got token by ...', {s, token})
+  app.logger.info('got token by ...', { s, token })
   return token
 }
 
@@ -42,20 +42,20 @@ export const saveToken = app => async (
   await app.redis.set(getTokenRedisKey(uid), JSON.stringify(accessTokenResult))
   await app.redis.expire(
     getTokenRedisKey(uid),
-    accessTokenResult.expires_in / 1000
+    Math.floor(accessTokenResult.expires_in / 1000)
   )
 }
 
 export const deleteTokens = app => async (uid: string) => {
   const pattern = getTokenRedisKey(uid) + '*'
   const keys = (await app.redis.keys(pattern)) || []
-  app.logger.info('redis keys = ', {keys, pattern})
+  app.logger.info('redis keys = ', { keys, pattern })
 
   // tslint:disable-next-line:prefer-for-of
   for (let i = 0; i < keys.length; i++) {
-    app.logger.info('deleting ... ', {key: keys[i]})
+    app.logger.info('deleting ... ', { key: keys[i] })
     await app.redis.del(keys[i])
-    app.logger.info('deleted ... ', {key: keys[i]})
+    app.logger.info('deleted ... ', { key: keys[i] })
   }
 
   // await Promise.all(

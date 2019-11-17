@@ -1,12 +1,11 @@
 import assert = require('assert')
-import {AccessToken} from 'citi-oauth'
+import { AccessToken } from 'citi-oauth'
 // tslint:disable-next-line:no-submodule-imports
-import {app} from 'egg-mock/bootstrap'
+import { app } from 'egg-mock/bootstrap'
 import nock from 'nock'
-import {deleteTokens} from '../../../app/common/citi-helper'
+import { deleteTokens } from '../../../app/common/citi-helper'
 
 describe('test/app/controller/citiDev.test.ts', () => {
-  afterEach(() => nock.cleanAll())
   it('should fail with 401 if not logged in', async () => {
     const result = await app
       .httpRequest()
@@ -46,7 +45,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/customers/profiles')
       .reply(200, {
-        emails: [{emailAddress: 'jie.tian@hotmail.com'}],
+        emails: [{ emailAddress: 'jie.tian@hotmail.com' }],
       })
 
     const result = await app
@@ -57,7 +56,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
 
     assert(
       result.text ===
-        'Redirecting to /passport/citi/passport-relay?state=undefined.'
+      'Redirecting to /passport/citi/passport-relay?state=undefined.'
     )
 
     const res = await app.redis.get('access-token-citi-jie.tian@hotmail.com')
@@ -77,7 +76,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
 
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/apac/onboarding/products?')
-      .reply(200, {data: '1234'})
+      .reply(200, { data: '1234' })
 
     const result = await app
       .httpRequest()
@@ -85,7 +84,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
       .set('accept', 'application/json')
       .expect(200)
 
-    assert.deepStrictEqual(result.body, {data: '1234'})
+    assert.deepStrictEqual(result.body, { data: '1234' })
   })
 
   it('should apply', async () => {
@@ -95,6 +94,16 @@ describe('test/app/controller/citiDev.test.ts', () => {
       controlFlowId:
         '6e3774334f724a2b7947663653712f52456f524c41797038516a59347a437549564a77755676376e616a733d',
     }
+
+    // tslint:disable-next-line:no-duplicate-string
+    nock('https://sandbox.apihub.citi.com')
+      .post('/gcb/api/authCode/oauth2/token/sg/gcb')
+      .reply(200, {
+        access_token: '123456',
+        expires_in: 1800,
+        scope: 'customers_profiles',
+      })
+
     nock('https://sandbox.apihub.citi.com')
       .post('/gcb/api/v1/apac/onboarding/products/unsecured/applications')
       .reply(200, applied)
@@ -103,7 +112,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
     const result = await app
       .httpRequest()
       .post('/citi-dev/onboarding/apply')
-      .send({test: 'hello'})
+      .send({ test: 'hello' })
       .set('accept', 'application/json')
       .expect(200)
 
@@ -135,7 +144,7 @@ describe.skip('retry', () => {
 
     nock('https://sandbox.apihub.citi.com')
       .post('/gcb/api/clientCredentials/oauth2/token/sg/gcb')
-      .reply(200, {access_token: '5678', expires_in: 18000})
+      .reply(200, { access_token: '5678', expires_in: 18000 })
 
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/apac/onboarding/products/unsecured/applications/1234')
