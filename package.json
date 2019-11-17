@@ -38,7 +38,7 @@
     "async-retry.ts": "^1.1.1",
     "bizcharts": "^3.2.2",
     "bizcharts-plugin-slider": "^2.0.3",
-    "citi-oauth": "^1.6.1",
+    "citi-oauth": "^1.6.2",
     "class-transformer": "latest",
     "class-validator": "latest",
     "classnames": "^2.2.6",
