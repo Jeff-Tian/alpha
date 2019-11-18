@@ -88,8 +88,8 @@ describe('test/app/controller/citiDev.test.ts', () => {
     assert.deepStrictEqual(result.body, {data: '1234'})
   })
 
+  // tslint:disable-next-line:no-big-function
   it('should apply', async () => {
-    // nock.cleanAll();
     const applied = {
       applicationId: 'ZOW9IO793854',
       applicationStage: 'PRESCREENING',
