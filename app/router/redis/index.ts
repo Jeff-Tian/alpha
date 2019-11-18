@@ -5,6 +5,5 @@ export default (app: Application) => {
 
   const subRouter = router.namespace('/redis')
 
-  // @ts-ignore
-  subRouter.get('RedisController.index', '/', controller.redis.index)
+  subRouter.get('RedisController.index', '/', controller.redis.redis.index)
 }

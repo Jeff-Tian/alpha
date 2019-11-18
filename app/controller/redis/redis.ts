@@ -5,10 +5,10 @@ export default class RedisController extends Controller {
     const {ctx} = this
 
     const keys = await ctx.app.redis.keys('*')
-    const res = {}
+    const res = new Array<any>()
 
     for (const key of keys) {
-      res[key] = await ctx.app.redis.get(key)
+      res.push({key, value: await ctx.app.redis.get(key)})
     }
 
     ctx.body = res
