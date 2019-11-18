@@ -3,7 +3,8 @@ import {AccessToken} from 'citi-oauth'
 // tslint:disable-next-line:no-submodule-imports
 import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
-import {deleteTokens} from '../../../app/common/citi-helper'
+import {deleteTokens, getTokenRedisKey} from '../../../app/common/citi-helper'
+import {injectCitiOAuthOptions} from '../../../app/middleware/citi/injectCitiOAuthOptions'
 
 // tslint:disable-next-line:no-big-function
 describe('test/app/controller/citiDev.test.ts', () => {
@@ -16,6 +17,39 @@ describe('test/app/controller/citiDev.test.ts', () => {
       .expect(401)
 
     assert.deepStrictEqual(result.body.code, 'credentials_required')
+  })
+
+  it('should get all cards if logged in ', async () => {
+    app.router.get(
+      '/test-citi-dev/cards',
+      injectCitiOAuthOptions(app),
+      app.controller.citiDev.cards.getList
+    )
+
+    app.mockContext({state: {user: '1234'}})
+    app.mockService('user', 'get', () => ({uid: '12345'}))
+    await app.redis.set(
+      getTokenRedisKey('12345'),
+      JSON.stringify({access_token: '9999', expires_in: 1800})
+    )
+
+    // tslint:disable-next-line:no-duplicate-string
+    nock('https://sandbox.apihub.citi.com')
+      .get('/gcb/api/v1/cards?cardFunction=ALL')
+      .reply(200, [{a: 'a'}])
+
+    // app.mockHttpclient(
+    //   'https://sandbox.apihub.citi.com/gcb/api/v1/cards?cardFunction=ALL',
+    //   {data: []}
+    // )
+
+    const result = await app
+      .httpRequest()
+      .get('/test-citi-dev/cards')
+      .set('accept', 'application/json')
+      .expect(200)
+
+    assert(result.body.length > 0)
   })
 
   it("gets user's token", async () => {

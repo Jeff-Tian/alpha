@@ -1,4 +1,5 @@
 import {Application, Context} from 'egg'
+import {injectCitiOAuthOptions} from '../../middleware/citi/injectCitiOAuthOptions'
 
 export default (app: Application) => {
   const {controller, router} = app
@@ -19,19 +20,11 @@ export default (app: Application) => {
 
   const jwt = app.middleware.jwt(app.config.jwt)
 
-  const injectCitiOAuthOptions = async (
-    ctx: Context,
-    next: () => Promise<void>
-  ) => {
-    ctx.citiOAuthOptions = app.config.passportCiti
-    await next()
-  }
-
   router.get(
     'citiDev.cards.list',
     '/citi-dev/cards',
     jwt,
-    injectCitiOAuthOptions,
+    injectCitiOAuthOptions(app),
     controller.citiDev.cards.getList
   )
 
@@ -42,21 +35,21 @@ export default (app: Application) => {
   router.get(
     'citiDev.onboarding.products',
     '/citi-dev/onboarding/products',
-    injectCitiOAuthOptions,
+    injectCitiOAuthOptions(app),
     controller.citiDev.onboarding.getProducts
   )
 
   router.post(
     'citiDev.onboarding.apply',
     '/citi-dev/onboarding/apply',
-    injectCitiOAuthOptions,
+    injectCitiOAuthOptions(app),
     controller.citiDev.onboarding.apply
   )
 
   router.get(
     'citiDev.onboarding.getApplicationStatus',
     '/citi-dev/onboarding/get-application-status/:applicationId',
-    injectCitiOAuthOptions,
+    injectCitiOAuthOptions(app),
     controller.citiDev.onboarding.getApplicationStatus
   )
 }

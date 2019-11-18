@@ -1,4 +1,4 @@
-import CitiOAuth, { AccessToken } from 'citi-oauth'
+import CitiOAuth, {AccessToken} from 'citi-oauth'
 import R from 'ramda'
 
 export const getInstance = ctx =>
@@ -33,15 +33,15 @@ export const saveToken = app => async (
 }
 
 export const deleteTokens = app => async (uid: string) => {
-  const pattern = getTokenRedisKey(uid) + '*'
+  const pattern = getTokenRedisKey(uid)
   const keys = (await app.redis.keys(pattern)) || []
-  app.logger.info('redis keys = ', { keys, pattern })
+  app.logger.info('redis keys = ', {keys, pattern})
 
   // tslint:disable-next-line:prefer-for-of
   for (let i = 0; i < keys.length; i++) {
-    app.logger.info('deleting ... ', { key: keys[i] })
-    await app.redis.del(keys[i])
-    app.logger.info('deleted ... ', { key: keys[i] })
+    app.logger.info('deleting ... ', {key: keys[i]})
+    // await app.redis.del(keys[i])
+    app.logger.info('deleted ... ', {key: keys[i]})
   }
 
   // await Promise.all(
