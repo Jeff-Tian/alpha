@@ -1,10 +1,11 @@
 import assert = require('assert')
-import { AccessToken } from 'citi-oauth'
+import {AccessToken} from 'citi-oauth'
 // tslint:disable-next-line:no-submodule-imports
-import { app } from 'egg-mock/bootstrap'
+import {app} from 'egg-mock/bootstrap'
 import nock from 'nock'
-import { deleteTokens } from '../../../app/common/citi-helper'
+import {deleteTokens} from '../../../app/common/citi-helper'
 
+// tslint:disable-next-line:no-big-function
 describe('test/app/controller/citiDev.test.ts', () => {
   it('should fail with 401 if not logged in', async () => {
     const result = await app
@@ -45,7 +46,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/customers/profiles')
       .reply(200, {
-        emails: [{ emailAddress: 'jie.tian@hotmail.com' }],
+        emails: [{emailAddress: 'jie.tian@hotmail.com'}],
       })
 
     const result = await app
@@ -56,7 +57,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
 
     assert(
       result.text ===
-      'Redirecting to /passport/citi/passport-relay?state=undefined.'
+        'Redirecting to /passport/citi/passport-relay?state=undefined.'
     )
 
     const res = await app.redis.get('access-token-citi-jie.tian@hotmail.com')
@@ -76,7 +77,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
 
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/apac/onboarding/products?')
-      .reply(200, { data: '1234' })
+      .reply(200, {data: '1234'})
 
     const result = await app
       .httpRequest()
@@ -84,7 +85,7 @@ describe('test/app/controller/citiDev.test.ts', () => {
       .set('accept', 'application/json')
       .expect(200)
 
-    assert.deepStrictEqual(result.body, { data: '1234' })
+    assert.deepStrictEqual(result.body, {data: '1234'})
   })
 
   it('should apply', async () => {
@@ -114,217 +115,217 @@ describe('test/app/controller/citiDev.test.ts', () => {
       .httpRequest()
       .post('/citi-dev/onboarding/apply')
       .send({
-        "product": {
-          "creditCardProduct": {
-            "productCode": "VC830",
-            "sourceCode": "WW5ARCE1",
-            "organization": "888",
-            "logo": "830",
-            "requestCreditShield": "false",
-            "embossName": "Matthew Hyden",
-            "billingAddress": "OFFICE_ADDRESS",
-            "cardDeliveryAddress": "OFFICE_ADDRESS",
-            "pinDeliveryAddress": "OFFICE_ADDRESS",
-            "giftCode": "gc123",
-            "creditLimitIncreaseIndicator": true
-          }
+        product: {
+          creditCardProduct: {
+            productCode: 'VC830',
+            sourceCode: 'WW5ARCE1',
+            organization: '888',
+            logo: '830',
+            requestCreditShield: 'false',
+            embossName: 'Matthew Hyden',
+            billingAddress: 'OFFICE_ADDRESS',
+            cardDeliveryAddress: 'OFFICE_ADDRESS',
+            pinDeliveryAddress: 'OFFICE_ADDRESS',
+            giftCode: 'gc123',
+            creditLimitIncreaseIndicator: true,
+          },
         },
-        "applicant": {
-          "ocr": {
-            "ocrReferenceNumber": "OCR456789434538922"
+        applicant: {
+          ocr: {
+            ocrReferenceNumber: 'OCR456789434538922',
           },
-          "motherMaidenName": "Lisa",
-          "name": {
-            "salutation": "MR",
-            "givenName": "Matthew",
-            "middleName": "Du",
-            "surname": "Hayden",
-            "localEnglishGivenName": "Matthew",
-            "localEnglishSurname": "Hayden",
-            "aliasName": "Matt",
-            "saluteBy": "SURNAME"
+          motherMaidenName: 'Lisa',
+          name: {
+            salutation: 'MR',
+            givenName: 'Matthew',
+            middleName: 'Du',
+            surname: 'Hayden',
+            localEnglishGivenName: 'Matthew',
+            localEnglishSurname: 'Hayden',
+            aliasName: 'Matt',
+            saluteBy: 'SURNAME',
           },
-          "demographics": {
-            "gender": "MALE",
-            "dateOfBirth": "1972-09-15",
-            "placeOfBirth": "Sydney",
-            "countryOfBirth": "SG",
-            "nationality": "SG",
-            "domicileCountryCode": "SG",
-            "permanentResidencyCountryCode": "SG",
-            "maritalStatus": "MARRIED",
-            "residencyStatus": "OWN_HOUSE",
-            "residenceType": "BUNGALOW",
-            "taxDomicileCountryCode": "SG",
-            "spokenLanguageCode": "ENGLISH",
-            "correspondenceLanguageCode": "ENGLISH"
+          demographics: {
+            gender: 'MALE',
+            dateOfBirth: '1972-09-15',
+            placeOfBirth: 'Sydney',
+            countryOfBirth: 'SG',
+            nationality: 'SG',
+            domicileCountryCode: 'SG',
+            permanentResidencyCountryCode: 'SG',
+            maritalStatus: 'MARRIED',
+            residencyStatus: 'OWN_HOUSE',
+            residenceType: 'BUNGALOW',
+            taxDomicileCountryCode: 'SG',
+            spokenLanguageCode: 'ENGLISH',
+            correspondenceLanguageCode: 'ENGLISH',
           },
-          "address": [
+          address: [
             {
-              "addressType": "OFFICE_ADDRESS",
-              "addressLine1": "40A Orchard Road",
-              "addressLine2": "#99-99 Macdonald House",
-              "addressLine3": "Orchard Avenue 2",
-              "addressLine4": "Street 65",
-              "cityName": "Singapore",
-              "state": "AM",
-              "postalCode": "345346",
-              "provinceCode": "Singapore",
-              "countryCode": "SG",
-              "okToMail": true,
-              "residenceDurationInYears": 5,
-              "residenceDurationInMonths": 4,
-              "countrySpecificAddress": {
-                "unitNumber": "99",
-                "floorNumber": "18",
-                "blockNumber": "19",
-                "buildingName": "Estella",
-                "estateName": "Marine Parade",
-                "streetNumber": "52",
-                "streetName": "Marine Parade",
-                "town": "SG"
-              }
-            }
-          ],
-          "email": [
-            {
-              "emailAddress": "matt.hayden@gmail.com",
-              "okToEmail": true,
-              "isPreferredEmailAddress": true
-            }
-          ],
-          "phone": [
-            {
-              "phoneType": "HOME_PHONE_NUMBER",
-              "phoneCountryCode": "65",
-              "areaCode": "0",
-              "phoneNumber": "64042321",
-              "okToSms": true,
-              "okToCall": true
-            }
-          ],
-          "contactPreference": {
-            "sendSmsAdviceFlag": true,
-            "sendEmailAdviceFlag": true,
-            "preferredMailingAddress": "HOME_ADDRESS",
-            "eStatementEnrollmentFlag": true
-          },
-          "contactConsent": {
-            "okToCall": true,
-            "okToMail": true,
-            "okToSms": true
-          },
-          "financialInformation": {
-            "hasForeseeableFinancialChanges": true,
-            "expenseDetails": [
-              {
-                "expenseType": "RENT_PAID",
-                "expenseAmount": 590.25,
-                "frequency": "MONTHLY"
-              }
-            ],
-            "incomeDetails": [
-              {
-                "incomeType": "DECLARED_FIXED",
-                "fixedAmount": 7590.25,
-                "variableAmount": 1590.25,
-                "frequency": "MONTHLY",
-                "otherIncomeDescription": "Rent"
-              }
-            ],
-            "existingLoanDetails": [
-              {
-                "monthlyInstallmentAmount": 250.25,
-                "outstandingBalanceAmount": 5000.25
-              }
-            ]
-          },
-          "education": {
-            "highestEducationLevel": "MASTER",
-            "yearOfGraduation": "2003",
-            "studentId": "STID234567",
-            "university": "NUS"
-          },
-          "employmentDetails": [
-            {
-              "employerName": "Citi Bank",
-              "jobTitle": "POLITICIAN",
-              "occupationCode": "ADMIN_SUPPORT_CLERICAL",
-              "industryCode": "ENVIRONMENTAL_CONTROLS",
-              "employmentDurationInYears": 5,
-              "employmentDurationInMonths": 3,
-              "employmentStatus": "EMPLOYED",
-              "monthsInPreviousEmployment": 5,
-              "yearsInPreviousEmployment": 4,
-              "accountantName": "Javier",
-              "accountantFirmName": "ACME",
-              "yearsInIndustry": 5,
-              "monthsInIndustry": 6
-            }
-          ],
-          "identificationDocumentDetails": [
-            {
-              "idType": "PASSPORT",
-              "idNumber": "S42258011",
-              "idExpiryDate": "2027-04-11",
-              "idIssueDate": "2017-04-12",
-              "idIssuePlace": "SG",
-              "idIssueState": "AM",
-              "idIssueCountry": "SG",
-              "isPrimaryId": true
-            }
-          ],
-          "additionalData": {
-            "numberOfDependents": "3",
-            "staffIndicator": true,
-            "businessNature": "TRAVEL_AGENCIES",
-            "emergencyContactName": "Pearline",
-            "emergencyContactPhoneNumber": "6164042321",
-            "overLimitConsentFlag": true,
-            "countrySpecificGroup": {
-              "bumiputraIndicator": true,
-              "disabilityIndicator": true,
-              "unionPayCardNumber": "5555666600008888",
-              "taxFileNumber": "656456737"
+              addressType: 'OFFICE_ADDRESS',
+              addressLine1: '40A Orchard Road',
+              addressLine2: '#99-99 Macdonald House',
+              addressLine3: 'Orchard Avenue 2',
+              addressLine4: 'Street 65',
+              cityName: 'Singapore',
+              state: 'AM',
+              postalCode: '345346',
+              provinceCode: 'Singapore',
+              countryCode: 'SG',
+              okToMail: true,
+              residenceDurationInYears: 5,
+              residenceDurationInMonths: 4,
+              countrySpecificAddress: {
+                unitNumber: '99',
+                floorNumber: '18',
+                blockNumber: '19',
+                buildingName: 'Estella',
+                estateName: 'Marine Parade',
+                streetNumber: '52',
+                streetName: 'Marine Parade',
+                town: 'SG',
+              },
             },
-            "referralGivenName": "Maxwell",
-            "referralSurname": "Gate"
-          },
-          "partnerCustomerDetails": {
-            "partnerCustomerInternalId": "ZOW9IO793855",
-            "partnerCustomerId": "P011100000125"
-          },
-          "consentDetails": [
+          ],
+          email: [
             {
-              "consentType": "PDP_CONSENT",
-              "isConsentGiven": true
+              emailAddress: 'matt.hayden@gmail.com',
+              okToEmail: true,
+              isPreferredEmailAddress: true,
+            },
+          ],
+          phone: [
+            {
+              phoneType: 'HOME_PHONE_NUMBER',
+              phoneCountryCode: '65',
+              areaCode: '0',
+              phoneNumber: '64042321',
+              okToSms: true,
+              okToCall: true,
+            },
+          ],
+          contactPreference: {
+            sendSmsAdviceFlag: true,
+            sendEmailAdviceFlag: true,
+            preferredMailingAddress: 'HOME_ADDRESS',
+            eStatementEnrollmentFlag: true,
+          },
+          contactConsent: {
+            okToCall: true,
+            okToMail: true,
+            okToSms: true,
+          },
+          financialInformation: {
+            hasForeseeableFinancialChanges: true,
+            expenseDetails: [
+              {
+                expenseType: 'RENT_PAID',
+                expenseAmount: 590.25,
+                frequency: 'MONTHLY',
+              },
+            ],
+            incomeDetails: [
+              {
+                incomeType: 'DECLARED_FIXED',
+                fixedAmount: 7590.25,
+                variableAmount: 1590.25,
+                frequency: 'MONTHLY',
+                otherIncomeDescription: 'Rent',
+              },
+            ],
+            existingLoanDetails: [
+              {
+                monthlyInstallmentAmount: 250.25,
+                outstandingBalanceAmount: 5000.25,
+              },
+            ],
+          },
+          education: {
+            highestEducationLevel: 'MASTER',
+            yearOfGraduation: '2003',
+            studentId: 'STID234567',
+            university: 'NUS',
+          },
+          employmentDetails: [
+            {
+              employerName: 'Citi Bank',
+              jobTitle: 'POLITICIAN',
+              occupationCode: 'ADMIN_SUPPORT_CLERICAL',
+              industryCode: 'ENVIRONMENTAL_CONTROLS',
+              employmentDurationInYears: 5,
+              employmentDurationInMonths: 3,
+              employmentStatus: 'EMPLOYED',
+              monthsInPreviousEmployment: 5,
+              yearsInPreviousEmployment: 4,
+              accountantName: 'Javier',
+              accountantFirmName: 'ACME',
+              yearsInIndustry: 5,
+              monthsInIndustry: 6,
+            },
+          ],
+          identificationDocumentDetails: [
+            {
+              idType: 'PASSPORT',
+              idNumber: 'S42258011',
+              idExpiryDate: '2027-04-11',
+              idIssueDate: '2017-04-12',
+              idIssuePlace: 'SG',
+              idIssueState: 'AM',
+              idIssueCountry: 'SG',
+              isPrimaryId: true,
+            },
+          ],
+          additionalData: {
+            numberOfDependents: '3',
+            staffIndicator: true,
+            businessNature: 'TRAVEL_AGENCIES',
+            emergencyContactName: 'Pearline',
+            emergencyContactPhoneNumber: '6164042321',
+            overLimitConsentFlag: true,
+            countrySpecificGroup: {
+              bumiputraIndicator: true,
+              disabilityIndicator: true,
+              unionPayCardNumber: '5555666600008888',
+              taxFileNumber: '656456737',
+            },
+            referralGivenName: 'Maxwell',
+            referralSurname: 'Gate',
+          },
+          partnerCustomerDetails: {
+            partnerCustomerInternalId: 'ZOW9IO793855',
+            partnerCustomerId: 'P011100000125',
+          },
+          consentDetails: [
+            {
+              consentType: 'PDP_CONSENT',
+              isConsentGiven: true,
             },
             {
-              "consentType": "PARTNER_CONSENT",
-              "isConsentGiven": true
-            }
+              consentType: 'PARTNER_CONSENT',
+              isConsentGiven: true,
+            },
           ],
-          "selfDeclaration": {
-            "totalActiveCreditCardLimitAmount": 23000.25,
-            "anticipatedIncomeDecreaseCode": "Yes",
-            "loanTakenIndicator": true,
-            "monthlyRepaymentForAllExtLoans": 5000.25
+          selfDeclaration: {
+            totalActiveCreditCardLimitAmount: 23000.25,
+            anticipatedIncomeDecreaseCode: 'Yes',
+            loanTakenIndicator: true,
+            monthlyRepaymentForAllExtLoans: 5000.25,
           },
-          "kycInformation": {
-            "selfPublicFigureDeclarationFlag": true,
-            "publicFigureOfficeStatus": "Active",
-            "publicFigureOfficeDetails": "Department of education and training",
-            "publicFigureOfficeStartDate": "2017-04-12",
-            "publicFigureOfficeEndDate": "2020-04-11",
-            "isRelatedToSeniorPublicFigure": true,
-            "relatedSeniorPublicFigureName": "Dan Lee",
-            "relatedSpfCountryOfGovernment": "SG",
-            "relatedSeniorPublicFigureDepartment": "Ministry",
-            "relationshipWithSeniorPublicFigure": "Father",
-            "relatedSeniorPublicFigureLastName": "Lee",
-            "usTaxStatus": "EXCEPTED_NFFE",
-            "usTaxId": "US234567"
-          }
+          kycInformation: {
+            selfPublicFigureDeclarationFlag: true,
+            publicFigureOfficeStatus: 'Active',
+            publicFigureOfficeDetails: 'Department of education and training',
+            publicFigureOfficeStartDate: '2017-04-12',
+            publicFigureOfficeEndDate: '2020-04-11',
+            isRelatedToSeniorPublicFigure: true,
+            relatedSeniorPublicFigureName: 'Dan Lee',
+            relatedSpfCountryOfGovernment: 'SG',
+            relatedSeniorPublicFigureDepartment: 'Ministry',
+            relationshipWithSeniorPublicFigure: 'Father',
+            relatedSeniorPublicFigureLastName: 'Lee',
+            usTaxStatus: 'EXCEPTED_NFFE',
+            usTaxId: 'US234567',
+          },
         },
       })
       .set('accept', 'application/json')
@@ -358,7 +359,7 @@ describe.skip('retry', () => {
 
     nock('https://sandbox.apihub.citi.com')
       .post('/gcb/api/clientCredentials/oauth2/token/sg/gcb')
-      .reply(200, { access_token: '5678', expires_in: 18000 })
+      .reply(200, {access_token: '5678', expires_in: 18000})
 
     nock('https://sandbox.apihub.citi.com')
       .get('/gcb/api/v1/apac/onboarding/products/unsecured/applications/1234')
