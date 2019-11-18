@@ -27,7 +27,7 @@ export const saveToken = app => async (
   await app.redis.set(getTokenRedisKey(uid), JSON.stringify(accessTokenResult))
   await app.redis.expire(
     getTokenRedisKey(uid),
-    Math.floor(accessTokenResult.expires_in / 1000)
+    Math.floor(accessTokenResult.expires_in)
   )
   app.logger.info('saved token by ...', {uid, accessTokenResult})
 }
