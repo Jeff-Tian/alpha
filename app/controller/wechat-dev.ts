@@ -51,7 +51,8 @@ export default class WechatDevController extends Controller {
     }
 
     if (mode === 'proxy') {
-      await this.proxy(ctx, res)
+      ctx.type = 'jpg'
+      ctx.body = (await ctx.curl(res, {streaming: true})).res
       return
     }
 
@@ -107,11 +108,6 @@ export default class WechatDevController extends Controller {
     ctx.body = await wechatOAuth.code2Session(ctx.query.code)
   }
 
-  public async passportStart() {
-    const {ctx} = this
-    ctx.body = 'ok'
-  }
-
   public async passportCallback() {
     const {ctx} = this
 
@@ -151,14 +147,6 @@ export default class WechatDevController extends Controller {
     } else {
       ctx.body = accessTokenResult
     }
-  }
-
-  private async proxy(ctx, res: any) {
-    const result = await ctx.curl(res)
-    for (const key of result.headers) {
-      ctx.set(key, result.headers[key])
-    }
-    ctx.body = result.data
   }
 
   private getWechatOAuthClient() {
