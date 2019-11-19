@@ -1,5 +1,5 @@
 import {EggAppConfig, EggAppInfo, PowerPartial} from 'egg'
-import * as path from 'path'
+import path from 'path'
 import {v4 as uuid} from 'uuid'
 
 export default (appInfo: EggAppInfo) => {
