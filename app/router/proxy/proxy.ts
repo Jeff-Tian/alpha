@@ -6,4 +6,5 @@ export default (app: Application) => {
   const subRouter = router.namespace('/proxy')
 
   subRouter.get('/', controller.proxy.proxy.get)
+  subRouter.get('/convert', controller.proxy.proxy.convert)
 }
