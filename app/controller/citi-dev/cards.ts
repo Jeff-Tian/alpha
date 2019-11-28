@@ -7,7 +7,7 @@ export default class CardsController extends Controller {
 
     const citiOAuth = getInstance(ctx)
 
-    const user = await ctx.service.user.get(ctx.state.user, 'citi')
+    const user: any = await ctx.service.user.get(ctx.state.user, 'citi')
     const accessToken = await citiOAuth.getToken(user.uid)
 
     if (!accessToken) {

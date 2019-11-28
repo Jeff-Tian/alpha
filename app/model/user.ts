@@ -1,14 +1,27 @@
 import {Application} from 'egg'
+import {Column, Model, Sequelize, Table} from 'sequelize-typescript'
 
-export default (app: Application) => {
-  const {STRING, INTEGER, DATE} = app.Sequelize
-
-  const userModel = app.model.define('user', {
-    id: {type: INTEGER, primaryKey: true, autoIncrement: true},
-    display_name: STRING,
-    created_at: DATE,
-    updated_at: DATE,
+@Table({
+  tableName: 'users',
+})
+class User extends Model<User> {
+  @Column({
+    primaryKey: true,
+    autoIncrement: true,
   })
+  id: number
 
-  return class extends userModel {}
+  @Column
+  display_name: string
+
+  @Column
+  created_at: Date
+
+  @Column
+  updated_at: Date
+}
+
+export default (_: Application, sequelize: Sequelize) => {
+  sequelize.addModels([User])
+  return User
 }

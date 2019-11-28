@@ -1,18 +1,43 @@
 import {Application} from 'egg'
+import {Column, DataType, Model, Sequelize, Table} from 'sequelize-typescript'
 
-export default (app: Application) => {
-  const {STRING, INTEGER, DATE, TEXT, BOOLEAN} = app.Sequelize
-
-  return app.model.define('oauthApp', {
-    id: {type: INTEGER, primaryKey: true, autoIncrement: true},
-    redirectUris: TEXT,
-    grants: TEXT,
-    name: STRING,
-    description: TEXT,
-    created_at: DATE,
-    updated_at: DATE,
-    approved: BOOLEAN,
-    client_id: STRING,
-    client_secret: STRING,
+@Table({tableName: 'oauth-apps'})
+class OauthApp extends Model<OauthApp> {
+  @Column({
+    primaryKey: true,
+    autoIncrement: true,
   })
+  id: number
+
+  @Column(DataType.TEXT)
+  redirectUris: string
+
+  @Column(DataType.TEXT)
+  grants: string
+
+  @Column(DataType.STRING)
+  name: string
+
+  @Column(DataType.TEXT)
+  description
+
+  @Column(DataType.DATE)
+  created_at
+
+  @Column(DataType.DATE)
+  updated_at
+
+  @Column(DataType.BOOLEAN)
+  approved
+
+  @Column(DataType.STRING)
+  client_id: string
+
+  @Column(DataType.STRING)
+  client_secret: string
+}
+
+export default (_: Application, sequelize: Sequelize) => {
+  sequelize.addModels([OauthApp])
+  return OauthApp
 }

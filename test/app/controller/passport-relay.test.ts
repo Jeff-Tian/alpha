@@ -33,7 +33,7 @@ describe.skip('test/app/controller/passport-relay.test.ts', () => {
 
     // assert(ctx.isAuthenticated())
 
-    const user = await ctx.service.user.get('jie.tian@hotmail.com')
+    const user: any = await ctx.service.user.get('jie.tian@hotmail.com')
 
     assert.ok(user)
     assert(user.id > 0)

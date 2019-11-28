@@ -1,30 +1,32 @@
-import assert = require('assert');
-import { Service } from 'egg'
+import assert = require('assert')
+import {Service} from 'egg'
 
 export default class User extends Service {
   public async find(username, password) {
-    const { ctx } = this
+    const {ctx} = this
 
-    ctx.logger.info('finding user: ', { username, password })
+    ctx.logger.info('finding user: ', {username, password})
     return ctx.model.User.findOne({})
   }
 
   public async get(userId, provider = 'citi') {
-    const { ctx } = this;
-    ctx.logger.info('getting user by: ', { userId, provider })
+    const {ctx} = this
+    ctx.logger.info('getting user by: ', {userId, provider})
 
     assert.ok(userId)
 
-    const auth = await ctx.model.Authorization.findOne({ uid: userId, provider });
+    const auth = await ctx.model.Authorization.findOne({
+      where: {uid: userId, provider},
+    })
 
     return {
-      ... (await ctx.model.User.findByPk(auth ? auth.user_id : userId)).get(),
-      ...auth.get()
+      ...(await ctx.model.User.findByPk(auth ? auth.user_id : userId))!.get(),
+      ...auth!.get(),
     }
   }
 
   public async register(user) {
-    const { ctx } = this
+    const {ctx} = this
 
     const transaction = await ctx.model.transaction({})
     try {
@@ -32,7 +34,7 @@ export default class User extends Service {
         {
           display_name: user.displayName,
         },
-        { transaction }
+        {transaction}
       )
 
       await ctx.model.Authorization.create(
@@ -44,7 +46,7 @@ export default class User extends Service {
           updated_at: new Date(),
           profile: JSON.stringify(user.profile),
         },
-        { transaction }
+        {transaction}
       )
 
       await transaction.commit()

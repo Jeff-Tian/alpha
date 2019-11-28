@@ -36,7 +36,7 @@ describe('test/models.test.ts', () => {
 
     it('should show models', () => {
       assert(app.model.config.database === 'alpha')
-      assert(typeof app.model.models.authorization === 'function')
+      assert(typeof app.model.Authorization === 'function')
     })
   })
 })

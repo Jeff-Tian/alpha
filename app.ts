@@ -80,7 +80,6 @@ export default class AppBootHook {
 
         const existedUser = await ctx.model.User.findOne({
           where: {id: user_id},
-          attributes: {},
         })
         if (existedUser) {
           return user

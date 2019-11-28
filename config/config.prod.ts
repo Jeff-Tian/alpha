@@ -75,9 +75,18 @@ export default () => {
     },
   }
 
+  const sqlUri = process.env.CLEARDB_DATABASE_URL
+  const parsedSqlUri = redisUrlParse(sqlUri)
+
   config.sequelize = {
+    Sequelize: require('sequelize-typescript').Sequelize,
     dialect: 'mysql',
-    connectionUri: process.env.CLEARDB_DATABASE_URL,
+    host: parsedSqlUri.host,
+    port: parsedSqlUri.port,
+    database: parsedSqlUri.database,
+    username: parsedSqlUri.username,
+    password: parsedSqlUri.password,
+    // connectionUri: process.env.CLEARDB_DATABASE_URL,
   }
 
   config.alinode = {

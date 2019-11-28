@@ -64,9 +64,11 @@ export default () => {
   }
 
   config.sequelize = {
+    Sequelize: require('sequelize-typescript').Sequelize,
     dialect: 'mysql',
-    connectionUri: `mysql://root:${process.env.MYSQL_PWD ||
-      ''}@127.0.0.1:3306/alpha`,
+    host: '127.0.0.1',
+    port: 3306,
+    database: 'alpha',
   }
 
   config.alinode = {
