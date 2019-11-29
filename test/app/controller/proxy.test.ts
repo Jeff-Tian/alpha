@@ -1,9 +1,9 @@
 import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
-import {app} from 'egg-mock/bootstrap'
+import { app } from 'egg-mock/bootstrap'
 
 describe('test/app/controller/proxy.test.ts', () => {
-  it('should proxy html', async () => {
+  const getBaidu = async () => {
     const res = await app
       .httpRequest()
       .get(`/proxy?url=${encodeURIComponent('https://www.baidu.com')}`)
@@ -11,18 +11,25 @@ describe('test/app/controller/proxy.test.ts', () => {
       .expect(200)
 
     assert(res.text.includes('</html>'))
-  })
+  }
 
-  it('should convert', async () => {
+  const getLaji = async () => {
     const res = await app
       .httpRequest()
-      .get(
-        `/proxy/convert?url=${encodeURIComponent(
-          'https://cdn-global1.unicareer.com/uni-classroom-pc-bff/dev/%E9%A9%AC%E7%8E%89%E7%9A%84%E5%89%AF%E6%9C%AC1574230081124.xlsx'
-        )}`
-      )
+      .get(`/proxy?url=${'https%3A%2F%2Fyiqifen.pa-ca.me%2Fshare%2Fa%2Fshare%2Fapi%2FqueryGarbage%3Ftype%3D%E6%B9%BF%E5%9E%83%E5%9C%BE'}`)
+      // tslint:disable-next-line:no-duplicate-string
       .expect(200)
 
-    assert(res.headers['content-type'] === 'application/octet-stream')
+    assert(res.body instanceof Array)
+  }
+
+  it('should proxy html', async () => {
+    await app.redis.flushall();
+    await getBaidu()
   })
+
+  it('should get from cache', getBaidu)
+
+  it('shoudl get laji', getLaji)
+  it('shoudl get laji from cach', getLaji)
 })

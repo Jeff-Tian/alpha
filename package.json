@@ -43,7 +43,6 @@
     "class-validator": "latest",
     "classnames": "^2.2.6",
     "debug": "latest",
-    "doc-giggle": "^1.0.1",
     "dva": "^2.4.0",
     "egg": "^2.25.0",
     "egg-alinode": "^2.0.1",

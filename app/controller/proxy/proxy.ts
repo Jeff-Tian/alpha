@@ -1,21 +1,23 @@
-import {convert} from 'doc-giggle'
-import {Controller} from 'egg'
+import { Controller } from 'egg'
 
 export default class ProxyController extends Controller {
   public async get() {
-    const {ctx} = this
+    const { ctx } = this
 
-    ctx.type = 'html'
-    ctx.body = (await ctx.curl(ctx.query.url, {streaming: true})).res
+    const { data } = (await ctx.curl(ctx.query.url, { streaming: false, retry: 3, timeout: [3000, 30000] }))
+
+    ctx.app.redis.set(ctx.query.url, data.toString('hex'))
+    ctx.app.redis.expire(ctx.query.url, process.env.PROXY_TIMEOUT ? Number(process.env.PROXY_TIMEOUT) : 60 * 60 * 12)
+
+    const final = data.toString()
+
+    try {
+      ctx.type = 'json'
+      ctx.body = JSON.parse(final)
+    } catch (ex) {
+      ctx.type = 'html'
+      ctx.bod = final
+    }
   }
 
-  public async convert() {
-    const {ctx} = this
-
-    const url = ctx.query.url
-    const res = await convert(url)
-
-    ctx.type = res.response.headers['Content-Type']
-    ctx.body = res.data
-  }
 }
