@@ -1,6 +1,6 @@
-import {EggAppConfig, PowerPartial} from 'egg'
+import { EggAppConfig, PowerPartial } from 'egg'
 import redisUrlParse from 'redis-url-parse'
-import {v4 as uuid} from 'uuid'
+import { v4 as uuid } from 'uuid'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -75,18 +75,10 @@ export default () => {
     },
   }
 
-  const sqlUri = process.env.CLEARDB_DATABASE_URL
-  const parsedSqlUri = redisUrlParse(sqlUri)
-
   config.sequelize = {
     Sequelize: require('sequelize-typescript').Sequelize,
     dialect: 'mysql',
-    host: parsedSqlUri.host,
-    port: parsedSqlUri.port,
-    database: parsedSqlUri.database,
-    username: parsedSqlUri.username,
-    password: parsedSqlUri.password,
-    // connectionUri: process.env.CLEARDB_DATABASE_URL,
+    connectionUri: process.env.CLEARDB_DATABASE_URL,
   }
 
   config.alinode = {
