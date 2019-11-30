@@ -10,7 +10,6 @@
 
 [![Quality gate](https://sonarcloud.io/api/project_badges/quality_gate?project=Jeff-Tian_alpha)](https://sonarcloud.io/dashboard?id=Jeff-Tian_alpha)
 
-
 ## QuickStart
 
 ### Development
@@ -41,6 +40,7 @@ travis encrypt $(heroku auth:token) --add deploy.api_key --pro
 ```
 
 ### Check logs
+
 ```bash
 heroku logs --tail -a uniheart
 ```
@@ -56,6 +56,10 @@ heroku logs --tail -a uniheart
 - Node.js 8.x
 - Typescript 2.8+
 
+### Models
+
+![](./models.svg)
 
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FJeff-Tian%2Falpha.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FJeff-Tian%2Falpha?ref=badge_large)

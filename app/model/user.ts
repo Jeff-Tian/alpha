@@ -11,7 +11,7 @@ class User extends Model<User> {
   })
   id: number
 
-  @Column
+  @Column({comment: '显示的名称'})
   display_name: string
 
   @Column

@@ -1,8 +1,11 @@
 {
-  "name": "alpha",
-  "version": "1.0.0",
+  "name": "@jeff-tian/alpha",
+  "version": "0.0.0-development",
   "description": "I am Alpha, I am Omega.",
-  "private": true,
+  "private": false,
+  "publishConfig": {
+    "access": "public"
+  },
   "egg": {
     "typescript": true,
     "declarations": true
@@ -20,14 +23,16 @@
     "test:frontend": "cd app/web && umi test && cd ../.. || cd ../..",
     "cov": "egg-bin cov",
     "tsc": "ets && tsc -p tsconfig.json",
-    "ci": "npm run test:frontend && npm run migrate && npm test && npm run tsc",
+    "ci": "npm run lint && npm run test:frontend && npm run migrate && npm test && npm run tsc",
     "autod": "autod",
     "lint": "tslint --project . -c tslint.json",
     "clean": "ets clean",
     "migrate": "npx sequelize db:migrate",
     "log": "heroku logs --tail -a uniheart",
     "build": "APP_ROOT=$PWD/app/web umi build",
-    "sync": "./script/sync.js"
+    "sync": "./script/sync.js",
+    "tplant": "tplant --input app/model/**/*.ts --output models.svg",
+    "semantic-release": "semantic-release"
   },
   "dependencies": {
     "@antv/data-set": "^0.9.6",
@@ -127,6 +132,7 @@
     "runscript": "latest",
     "sequelize-cli": "^5.5.0",
     "sinon": "^7.4.1",
+    "tplant": "^2.3.1",
     "tslib": "^1.9.0",
     "tslint": "^5.20.1",
     "tslint-config-egg": "^1.0.0",
@@ -138,7 +144,8 @@
     "typescript": "^3.0.0",
     "umi": "^2.1.2",
     "umi-plugin-ga": "^1.1.3",
-    "umi-plugin-react": "^1.1.1"
+    "umi-plugin-react": "^1.1.1",
+    "semantic-release": "^15.13.31"
   },
   "engines": {
     "node": ">=8.9.0"
