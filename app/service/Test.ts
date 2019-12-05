@@ -1,4 +1,4 @@
-import {Service} from 'egg'
+import { Service } from 'egg';
 
 /**
  * Test Service
@@ -11,6 +11,6 @@ export default class Test extends Service {
       configEnv: this.config.env,
       processVersions: process.versions,
       assets: this.config.assets,
-    }
+    };
   }
 }

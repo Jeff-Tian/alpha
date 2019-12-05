@@ -1,5 +1,5 @@
-import {Application} from 'egg'
-import {Column, Model, Sequelize, Table} from 'sequelize-typescript'
+import { Application } from 'egg';
+import { Column, Model, Sequelize, Table } from 'sequelize-typescript';
 
 @Table({
   tableName: 'users',
@@ -11,7 +11,7 @@ class User extends Model<User> {
   })
   id: number
 
-  @Column({comment: '显示的名称'})
+  @Column({ comment: '显示的名称' })
   display_name: string
 
   @Column
@@ -22,6 +22,6 @@ class User extends Model<User> {
 }
 
 export default (_: Application, sequelize: Sequelize) => {
-  sequelize.addModels([User])
-  return User
-}
+  sequelize.addModels([ User ]);
+  return User;
+};

@@ -1,5 +1,5 @@
-import {IsEnum, IsOptional} from 'class-validator'
-import {KeySecretSelection} from './GetAccessTokenRequest'
+import { IsEnum, IsOptional } from 'class-validator';
+import { KeySecretSelection } from './GetAccessTokenRequest';
 
 export default class GetAccessTokenRequest {
   @IsOptional()

@@ -1,9 +1,9 @@
-import { IsOptional } from 'class-validator'
-import GetAccessTokenRequest from './GetAccessTokenRequest'
+import { IsOptional } from 'class-validator';
+import GetAccessTokenRequest from './GetAccessTokenRequest';
 
 export default class JsSDKSignRequest extends GetAccessTokenRequest {
     @IsOptional()
-    ticket: string
+  ticket: string
 
     @IsOptional()
     url: string

@@ -1,26 +1,26 @@
-import {Controller} from 'egg'
+import { Controller } from 'egg';
 
 export default class UserController extends Controller {
   public async logout() {
-    const {ctx} = this
+    const { ctx } = this;
 
-    ctx.logout()
-    ctx.redirect(ctx.get('referer') || '/')
+    ctx.logout();
+    ctx.redirect(ctx.get('referer') || '/');
   }
 
   public async code() {
-    const {ctx} = this
+    const { ctx } = this;
 
-    ctx.body = ctx.query
+    ctx.body = ctx.query;
   }
 
   public async authenticate() {
-    const {ctx} = this
-    ctx.body = ctx.query
+    const { ctx } = this;
+    ctx.body = ctx.query;
   }
 
   public async current() {
-    const {ctx} = this
+    const { ctx } = this;
 
     ctx.body = {
       name: 'Serati Ma',
@@ -71,6 +71,6 @@ export default class UserController extends Controller {
       },
       address: '西湖区工专路 77 号',
       phone: '0752-268888888',
-    }
+    };
   }
 }

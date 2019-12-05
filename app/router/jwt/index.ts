@@ -1,15 +1,15 @@
-import { Application } from 'egg'
+import { Application } from 'egg';
 
 export default (app: Application) => {
-    const { controller, router } = app
+  const { controller, router } = app;
 
-    const subRouter = router.namespace('/jwt')
+  const subRouter = router.namespace('/jwt');
 
-    const jwt = app.middleware.jwt(app.config.jwt);
+  const jwt = app.middleware.jwt(app.config.jwt);
 
-    subRouter.get('/', jwt, controller.jwt.index);
-    subRouter.get('/login', controller.jwt.login);
-    subRouter.get('/success', jwt, controller.jwt.success);
-    subRouter.get('/user', jwt, controller.jwt.user);
-    subRouter.get('/unauthorerror', jwt, controller.jwt.unauthorerror);
-}
+  subRouter.get('/', jwt, controller.jwt.index);
+  subRouter.get('/login', controller.jwt.login);
+  subRouter.get('/success', jwt, controller.jwt.success);
+  subRouter.get('/user', jwt, controller.jwt.user);
+  subRouter.get('/unauthorerror', jwt, controller.jwt.unauthorerror);
+};

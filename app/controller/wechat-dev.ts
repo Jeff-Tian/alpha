@@ -1,87 +1,87 @@
-import {Controller} from 'egg'
-import querystring from 'querystring'
-import WechatOAuth from 'wechat-oauth-ts'
-import {KeySecretSelection} from '../validate/GetAccessTokenRequest'
+import { Controller } from 'egg';
+import querystring from 'querystring';
+import WechatOAuth from 'wechat-oauth-ts';
+import { KeySecretSelection } from '../validate/GetAccessTokenRequest';
 
 export default class WechatDevController extends Controller {
   public async getAccessToken() {
-    const {ctx} = this
-    const wechatOAuth = this.getWechatOAuthClient()
-    ctx.body = await wechatOAuth.getClientAccessToken()
+    const { ctx } = this;
+    const wechatOAuth = this.getWechatOAuthClient();
+    ctx.body = await wechatOAuth.getClientAccessToken();
   }
 
   public async getQRCode() {
-    const {ctx} = this
-    const {ticket} = ctx.query
-    let {mode} = ctx.query
+    const { ctx } = this;
+    const { ticket } = ctx.query;
+    let { mode } = ctx.query;
 
     if (!mode) {
-      mode = 'redirect'
+      mode = 'redirect';
     }
 
-    const wechatOAuth = this.getWechatOAuthClient()
+    const wechatOAuth = this.getWechatOAuthClient();
 
     const res = ticket
       ? // tslint:disable-next-line:max-line-length
-        mode === 'raw'
+      mode === 'raw'
         ? await wechatOAuth.getQRCode(ticket)
         : await wechatOAuth.getQRCodeLinkByTicket(ticket)
       : // tslint:disable-next-line:max-line-length
-        mode === 'raw'
+      mode === 'raw'
         ? await wechatOAuth.getQRCode(
-            ctx.query.data
-              ? JSON.parse(decodeURIComponent(ctx.query.data))
-              : undefined
-          )
+          ctx.query.data
+            ? JSON.parse(decodeURIComponent(ctx.query.data))
+            : undefined,
+        )
         : await wechatOAuth.getQRCodeLink(
-            ctx.query.data
-              ? JSON.parse(decodeURIComponent(ctx.query.data))
-              : undefined,
-            ctx.query.token
-          )
+          ctx.query.data
+            ? JSON.parse(decodeURIComponent(ctx.query.data))
+            : undefined,
+          ctx.query.token,
+        );
 
     if (mode === 'raw') {
-      ctx.type = 'jpg'
-      ctx.body = res
-      return
+      ctx.type = 'jpg';
+      ctx.body = res;
+      return;
     }
 
     if (mode === 'redirect') {
-      return ctx.redirect(res)
+      return ctx.redirect(res);
     }
 
     if (mode === 'proxy') {
-      ctx.type = 'jpg'
-      ctx.body = (await ctx.curl(res, {streaming: true})).res
-      return
+      ctx.type = 'jpg';
+      ctx.body = (await ctx.curl(res, { streaming: true })).res;
+      return;
     }
 
-    ctx.throw(423, 'Unknown error')
+    ctx.throw(423, 'Unknown error');
   }
 
   public async jsSDKSign() {
-    const {ctx} = this
+    const { ctx } = this;
 
-    const wechatOAuth = this.getWechatOAuthClient()
+    const wechatOAuth = this.getWechatOAuthClient();
 
     ctx.body = {
       ...(await wechatOAuth.jsSDKSign(
         ctx.query.url || ctx.get('referer'),
-        ctx.query.ticket
+        ctx.query.ticket,
       )),
       appId: wechatOAuth.appId,
-    }
+    };
   }
 
   public async message() {
-    const {ctx} = this
-    const message = ctx.request.body
+    const { ctx } = this;
+    const message = ctx.request.body;
 
-    ctx.logger.info('get message from wechat: ', {message})
+    ctx.logger.info('get message from wechat: ', { message });
 
     const clients = JSON.parse(
-      process.env.WECHAT_REDIRECT_CLIENTS || JSON.stringify([])
-    )
+      process.env.WECHAT_REDIRECT_CLIENTS || JSON.stringify([]),
+    );
 
     const results = (await Promise.all(
       clients.map(c =>
@@ -93,38 +93,38 @@ export default class WechatDevController extends Controller {
           headers: {
             'content-type': 'application/xml',
           },
-        })
-      )
-    )).map((r: any) => r.status)
+        }),
+      ),
+    )).map((r: any) => r.status);
 
-    ctx.logger.info('redirect results: ', results)
+    ctx.logger.info('redirect results: ', results);
 
-    ctx.body = {message, redirects: results}
+    ctx.body = { message, redirects: results };
   }
 
   public async code2Session() {
-    const {ctx} = this
-    const wechatOAuth = this.getWechatOAuthClient()
-    ctx.body = await wechatOAuth.code2Session(ctx.query.code)
+    const { ctx } = this;
+    const wechatOAuth = this.getWechatOAuthClient();
+    ctx.body = await wechatOAuth.code2Session(ctx.query.code);
   }
 
   public async passportCallback() {
-    const {ctx} = this
+    const { ctx } = this;
 
     if (
-      ['/passport/weapp/callback', '/passport/weapp-yiqifen/callback'].indexOf(
-        ctx.path
+      [ '/passport/weapp/callback', '/passport/weapp-yiqifen/callback' ].indexOf(
+        ctx.path,
       ) >= 0
     ) {
-      return (ctx.body = ctx.user)
+      return (ctx.body = ctx.user);
     }
 
-    const referer = await ctx.app.refererCache.get(ctx.query.state)
+    const referer = await ctx.app.refererCache.get(ctx.query.state);
 
-    await ctx.app.refererCache.delete(ctx.query.state)
+    await ctx.app.refererCache.delete(ctx.query.state);
 
     if (ctx.app.env === 'unittest') {
-      ctx.body = {...ctx.query, referer}
+      ctx.body = { ...ctx.query, referer };
     }
 
     const oauthClient = new WechatOAuth(
@@ -133,32 +133,32 @@ export default class WechatDevController extends Controller {
       ].key,
       ctx.app.config.passportWechat.clients[
         KeySecretSelection.PASSPORT_HARDWAY
-      ].secret
-    )
+      ].secret,
+    );
 
-    const accessTokenResult = await oauthClient.getAccessToken(ctx.query.code)
+    const accessTokenResult = await oauthClient.getAccessToken(ctx.query.code);
 
     if (referer) {
       ctx.redirect(
         referer +
           (referer.indexOf('?') > 0 ? '&' : '?') +
-          querystring.stringify(accessTokenResult)
-      )
+          querystring.stringify(accessTokenResult),
+      );
     } else {
-      ctx.body = accessTokenResult
+      ctx.body = accessTokenResult;
     }
   }
 
   private getWechatOAuthClient() {
-    const {ctx} = this
-    const {select} = ctx.query
-    let {key, secret} = ctx.query
+    const { ctx } = this;
+    const { select } = ctx.query;
+    let { key, secret } = ctx.query;
 
     if (select !== KeySecretSelection.CUSTOMIZED) {
-      key = this.app.config.passportWechat.clients[select].key
-      secret = this.app.config.passportWechat.clients[select].secret
+      key = this.app.config.passportWechat.clients[select].key;
+      secret = this.app.config.passportWechat.clients[select].secret;
     }
 
-    return new WechatOAuth(key, secret)
+    return new WechatOAuth(key, secret);
   }
 }

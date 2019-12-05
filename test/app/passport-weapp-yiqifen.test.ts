@@ -1,43 +1,43 @@
 import assert = require('assert')
-import mm from 'egg-mock'
+import mm from 'egg-mock';
 import nock = require('nock')
-import path from 'path'
+import path from 'path';
 import runscript = require('runscript')
 
-const baseDir = path.resolve(__dirname, '../..')
+const baseDir = path.resolve(__dirname, '../..');
 
 describe('test/passport-weapp-yiqifen.test.ts', () => {
   before(async () => {
-    await runscript('ets', {cwd: baseDir})
-    await runscript(`tsc -p ${baseDir}/tsconfig.json`, {cwd: baseDir})
-  })
+    await runscript('ets', { cwd: baseDir });
+    await runscript(`tsc -p ${baseDir}/tsconfig.json`, { cwd: baseDir });
+  });
 
   after(async () => {
-    await runscript('ets clean', {cwd: baseDir})
-  })
+    await runscript('ets clean', { cwd: baseDir });
+  });
 
   describe('compiling code and run tests', () => {
     afterEach(() => {
-      nock.cleanAll()
-      mm.restore()
-    })
+      nock.cleanAll();
+      mm.restore();
+    });
 
-    let app
+    let app;
 
     before(async () => {
       app = mm.app({
         baseDir: '../..',
-      })
+      });
 
-      assert(app.config.env === 'unittest')
+      assert(app.config.env === 'unittest');
 
-      return app.ready()
-    })
+      return app.ready();
+    });
 
     it('callback', async () => {
       app.mockContext({
         traceId: '1234',
-      })
+      });
 
       nock('https://api.weixin.qq.com')
         .get(/\/sns\/jscode2session.+/)
@@ -45,13 +45,13 @@ describe('test/passport-weapp-yiqifen.test.ts', () => {
           unionid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf8',
           openid: 'odrHN4p1UMWRdQfMK4xm9dtQXvf9',
           session_key: 'DUsPOa8AOYZqqaCvyB//wg==',
-        })
+        });
 
-      const runningApp = app.httpRequest()
+      const runningApp = app.httpRequest();
 
       await runningApp
         .get(`/passport/weapp-yiqifen/callback?code=5678&state=${1234}`)
-        .expect(200)
-    })
-  })
-})
+        .expect(200);
+    });
+  });
+});

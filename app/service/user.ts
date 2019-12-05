@@ -1,41 +1,41 @@
 import assert = require('assert')
-import {Service} from 'egg'
+import { Service } from 'egg';
 
 export default class User extends Service {
   public async find(username, password) {
-    const {ctx} = this
+    const { ctx } = this;
 
-    ctx.logger.info('finding user: ', {username, password})
-    return ctx.model.User.findOne({})
+    ctx.logger.info('finding user: ', { username, password });
+    return ctx.model.User.findOne({});
   }
 
   public async get(userId, provider = 'citi') {
-    const {ctx} = this
-    ctx.logger.info('getting user by: ', {userId, provider})
+    const { ctx } = this;
+    ctx.logger.info('getting user by: ', { userId, provider });
 
-    assert.ok(userId)
+    assert.ok(userId);
 
     const auth = await ctx.model.Authorization.findOne({
-      where: {uid: userId, provider},
-    })
+      where: { uid: userId, provider },
+    });
 
     return {
       ...(await ctx.model.User.findByPk(auth ? auth.user_id : userId))!.get(),
       ...auth!.get(),
-    }
+    };
   }
 
   public async register(user) {
-    const {ctx} = this
+    const { ctx } = this;
 
-    const transaction = await ctx.model.transaction({})
+    const transaction = await ctx.model.transaction({});
     try {
       const systemUser = await ctx.model.User.create(
         {
           display_name: user.displayName,
         },
-        {transaction}
-      )
+        { transaction },
+      );
 
       await ctx.model.Authorization.create(
         {
@@ -46,18 +46,18 @@ export default class User extends Service {
           updated_at: new Date(),
           profile: JSON.stringify(user.profile),
         },
-        {transaction}
-      )
+        { transaction },
+      );
 
-      await transaction.commit()
+      await transaction.commit();
 
-      return user
+      return user;
     } catch (err) {
-      await transaction.rollback()
+      await transaction.rollback();
 
-      ctx.logger.error('========== Error ===== Transaction =======>', err)
+      ctx.logger.error('========== Error ===== Transaction =======>', err);
 
-      throw err
+      throw err;
     }
   }
 }

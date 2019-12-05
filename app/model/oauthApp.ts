@@ -1,7 +1,7 @@
-import {Application} from 'egg'
-import {Column, DataType, Model, Sequelize, Table} from 'sequelize-typescript'
+import { Application } from 'egg';
+import { Column, DataType, Model, Sequelize, Table } from 'sequelize-typescript';
 
-@Table({tableName: 'oauth-apps'})
+@Table({ tableName: 'oauth-apps' })
 class OauthApp extends Model<OauthApp> {
   @Column({
     primaryKey: true,
@@ -38,6 +38,6 @@ class OauthApp extends Model<OauthApp> {
 }
 
 export default (_: Application, sequelize: Sequelize) => {
-  sequelize.addModels([OauthApp])
-  return OauthApp
-}
+  sequelize.addModels([ OauthApp ]);
+  return OauthApp;
+};

@@ -11,14 +11,14 @@ export default {
   },
 
   effects: {
-    *submitAdvancedForm({payload}, {call}) {
-      // tslint:disable-next-line:no-console
-      console.log('payload', payload, call)
+    *submitAdvancedForm(/* {payload}, {call} */): object {
+      // console.log('payload', payload, call)
+      yield null
     },
   },
 
   reducers: {
-    saveStepFormData(state, {payload}) {
+    saveStepFormData(state, {payload}): object {
       return {
         ...state,
         step: {

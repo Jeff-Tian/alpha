@@ -1,10 +1,10 @@
-import {Controller} from 'egg'
-import * as os from 'os'
-import * as util from 'util'
+import { Controller } from 'egg';
+import * as os from 'os';
+import * as util from 'util';
 
 export default class OSController extends Controller {
   public async info() {
-    const {ctx} = this
+    const { ctx } = this;
     ctx.body = {
       EOL: os.EOL,
       arch: os.arch(),
@@ -23,6 +23,6 @@ export default class OSController extends Controller {
       type: os.type(),
       uptime: os.uptime(),
       userInfo: util.inspect(os.userInfo()),
-    }
+    };
   }
 }

@@ -1,6 +1,6 @@
 import assert = require('assert')
 // tslint:disable-next-line:no-submodule-imports
-import {app} from 'egg-mock/bootstrap'
+import { app } from 'egg-mock/bootstrap';
 
 // tslint:disable-next-line:no-big-function
 describe('test/app/controller/redis.test.ts', () => {
@@ -10,8 +10,8 @@ describe('test/app/controller/redis.test.ts', () => {
       .get('/redis/')
       // tslint:disable-next-line:no-duplicate-string
       .set('accept', 'application/json')
-      .expect(200)
+      .expect(200);
 
-    assert(res.body.length >= 0)
-  })
-})
+    assert(res.body.length >= 0);
+  });
+});

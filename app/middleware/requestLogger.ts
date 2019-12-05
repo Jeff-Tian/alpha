@@ -4,9 +4,9 @@ export default () => async (ctx, next) => {
     param: ctx.param,
     body: ctx.request.body,
     path: ctx.path,
-  })
+  });
 
-  await next()
+  await next();
 
   ctx.logger.info('Request Done: ', {
     query: ctx.query,
@@ -14,5 +14,5 @@ export default () => async (ctx, next) => {
     // body: ctx.request.body,
     method: ctx.method,
     // response: ctx.body,
-  })
-}
+  });
+};

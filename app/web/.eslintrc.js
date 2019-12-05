@@ -6,7 +6,8 @@ module.exports = {
     ecmaFeatures: {
       jsx: false,
     },
-    project: '../../../tsconfig.json',
+    // project: '../../../tsconfig.json',
+    project: './app/web/tsconfig.eslint.json',
   },
   extends: [
     'airbnb',
@@ -27,7 +28,7 @@ module.exports = {
   },
   rules: {
     'react/jsx-filename-extension': [1, {extensions: ['.js']}],
-    'react/tsx-filename-extension': [1, {extensions: ['.ts']}],
+    // 'react/tsx-filename-extension': [1, {extensions: ['.ts']}],
     'react/jsx-wrap-multilines': 0,
     'react/prop-types': 0,
     'react/forbid-prop-types': 0,

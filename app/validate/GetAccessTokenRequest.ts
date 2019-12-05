@@ -1,4 +1,4 @@
-import { IsEnum, IsOptional } from 'class-validator'
+import { IsEnum, IsOptional } from 'class-validator';
 
 export enum KeySecretSelection {
   PASSPORT_HARDWAY = 'wechat-hardway',
