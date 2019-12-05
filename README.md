@@ -58,7 +58,7 @@ heroku logs --tail -a uniheart
 
 ### Models
 
-![](./models.svg)
+![Model UML Diagram](https://github.com/Jeff-Tian/alpha/releases/download/v1.0.0/models.svg)
 
 ## License
 
