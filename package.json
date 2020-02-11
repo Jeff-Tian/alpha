@@ -149,15 +149,14 @@
     "node": ">=8.9.0"
   },
   "ci": {
-    "type": "travis, appveyor, azure-pipelines",
+    "type": "appveyor, azure-pipelines",
     "os": {
       "travis": "",
       "azure-pipelines": "linux, windows, macos"
     },
     "npminstall": false,
-    "version": "8, 9, 10",
+    "version": "10",
     "command": {
-      "travis": "ci",
       "appveyor": "ci",
       "azure-pipelines": "test:frontend"
     },

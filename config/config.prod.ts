@@ -117,5 +117,15 @@ export default () => {
     },
   };
 
+  config.oss = {
+    client: {
+      accessKeyId: process.env.OSS_ACCESS_KEY_ID,
+      accessKeySecret: process.env.OSS_ACCESS_KEY_SECRET,
+      bucket: process.env.OSS_BUCKET,
+      endpoint: process.env.OSS_ENDPOINT || 'oss-cn-shanghai.aliyuncs.com',
+      timeout: process.env.OSS_TIMEOUT || '60s',
+    },
+  };
+
   return config;
 };
