@@ -1,5 +1,4 @@
 environment:
-  MYSQL_PWD: 'Password12!'
   matrix:
     - nodejs_version: '8'
     - nodejs_version: '9'
@@ -12,9 +11,6 @@ install:
   - '@ECHO Redis Started'
   - ps: Install-Product node $env:nodejs_version
   - npm i
-
-before_test:
-  - mysqladmin --host=localhost --user=root --password=%MYSQL_PWD% create alpha
 
 test_script:
   - node --version

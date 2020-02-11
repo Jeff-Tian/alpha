@@ -101,6 +101,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-error-display',
   },
+
+  oss: {
+    enable: true,
+    package: 'egg-oss',
+  },
 };
 
 export default plugin;
