@@ -25,4 +25,5 @@ export default (app: Application) => {
   const subRouter = router.namespace('/proxy');
 
   subRouter.get('/', cacheResult, controller.proxy.proxy.get);
+  subRouter.get('/pipe-file', controller.proxy.proxy.pipeFile);
 };

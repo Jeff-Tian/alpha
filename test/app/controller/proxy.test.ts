@@ -7,7 +7,6 @@ describe('test/app/controller/proxy.test.ts', () => {
     const res = await app
       .httpRequest()
       .get(`/proxy?url=${encodeURIComponent('https://www.baidu.com')}`)
-      // tslint:disable-next-line:no-duplicate-string
       .expect(200);
 
     assert(res.text.includes('</html>'));
@@ -19,4 +18,10 @@ describe('test/app/controller/proxy.test.ts', () => {
   });
 
   it('should get from cache', getBaidu);
+
+  it('pipes file', async () => {
+    const res = await app.httpRequest().get(`/proxy?url=${encodeURIComponent('http://libre-office.oss-cn-shanghai.aliyuncs.com/%25E4%25BD%259C%25E4%25B8%259A1581528201606.pdf')}`).expect(200);
+
+    assert(res.text.length > 0);
+  });
 });

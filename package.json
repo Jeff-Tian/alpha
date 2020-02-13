@@ -71,6 +71,7 @@
     "egg-view-assets": "^1.0.0",
     "egg-view-pug": "^1.0.0",
     "enquire-js": "0.2.1",
+    "file-name-expert": "^1.0.0",
     "hash.js": "1.1.5",
     "konva": "^4.0.5",
     "lodash": "^4.17.15",
