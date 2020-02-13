@@ -1,6 +1,6 @@
-import FileNameExpert from 'file-name-expert';
 import { Controller } from 'egg';
-
+// eslint-disable-next-line @typescript-eslint/no-var-requires
+const FileNameExpert = require('file-name-expert').default;
 export default class ProxyController extends Controller {
   public async get() {
     const { ctx } = this;
@@ -27,6 +27,6 @@ export default class ProxyController extends Controller {
 
     this.ctx.attachment(FileNameExpert.getFileNameFromUrl(url));
     this.ctx.set('Content-Type', 'application/octet-stream');
-    ctx.body = await ctx.curl(url, { streaming: true, retry: 3, timeout: [300, 30000] });
+    ctx.body = (await ctx.curl(url, { streaming: true, retry: 3, timeout: [10000, 30000] })).res;
   }
 }

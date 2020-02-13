@@ -20,8 +20,9 @@ describe('test/app/controller/proxy.test.ts', () => {
   it('should get from cache', getBaidu);
 
   it('pipes file', async () => {
-    const res = await app.httpRequest().get(`/proxy?url=${encodeURIComponent('http://libre-office.oss-cn-shanghai.aliyuncs.com/%25E4%25BD%259C%25E4%25B8%259A1581528201606.pdf')}`).expect(200);
+    const res = await app.httpRequest().get(`/proxy/pipe-file?url=${encodeURIComponent('http://libre-office.oss-cn-shanghai.aliyuncs.com/%25E4%25BD%259C%25E4%25B8%259A1581528201606.pdf')}`).expect(200);
 
-    assert(res.text.length > 0);
+    assert(res.status === 200);
+    assert(res.body.length > 0);
   });
 });
