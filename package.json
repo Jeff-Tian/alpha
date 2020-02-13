@@ -32,7 +32,8 @@
     "build": "APP_ROOT=$PWD/app/web umi build",
     "sync": "./script/sync.js",
     "tplant": "tplant --input app/model/**/*.ts --output models.svg",
-    "semantic-release": "semantic-release"
+    "semantic-release": "semantic-release",
+    "i:taobao": "npm i --registry=https://registry.npm.taobao.org"
   },
   "dependencies": {
     "@antv/data-set": "^0.9.6",
