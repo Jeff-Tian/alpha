@@ -19,7 +19,7 @@ describe('test/app/controller/proxy.test.ts', () => {
 
   it('should get from cache', getBaidu);
 
-  it('pipes file', async () => {
+  it.skip('pipes file', async () => {
     const res = await app.httpRequest().get(`/proxy/pipe-file?url=${encodeURIComponent('http://libre-office.oss-cn-shanghai.aliyuncs.com/%25E4%25BD%259C%25E4%25B8%259A1581528201606.pdf')}`).expect(200);
 
     assert(res.status === 200);
