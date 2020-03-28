@@ -128,6 +128,18 @@ export default (appInfo: EggAppInfo) => {
     },
   }
 
+  config.keycloak = {
+    middleware: {
+      logout: '/keycloak/logout',
+      admin: '/keycloak/',
+    },
+    base: {
+      store: true,
+      cookies: false,
+    },
+    kcConfig: require('../keycloak.json'),
+  };
+
   // the return config will combines to EggAppConfig
   return {
     ...config,

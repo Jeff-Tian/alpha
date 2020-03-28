@@ -106,6 +106,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-oss',
   },
+
+  keycloak: {
+    enable: true,
+    package: 'egg-keycloak',
+  },
 };
 
 export default plugin;
