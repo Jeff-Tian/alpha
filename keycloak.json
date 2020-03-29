@@ -1,7 +1,6 @@
 {
     "realm": "UniHeart",
-    "bearer-only": false,
     "auth-server-url": "https://keycloak-jeff-tian.cloud.okteto.net/auth",
     "ssl-required": "external",
-    "resource": "service-nodejs"
+    "resource": "UniHeart-Client"
 }
