@@ -109,7 +109,7 @@ const plugin: EggPlugin = {
 
   keycloak: {
     enable: true,
-    package: 'egg-keycloak',
+    package: '@jeff-tian/egg-keycloak',
   },
 
   sessionRedis: {
