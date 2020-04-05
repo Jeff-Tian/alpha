@@ -10,13 +10,9 @@ jobs:
     vmImage: ${{ parameters.vmImage }}
   strategy:
     matrix:
-      node_8:
-        node_version: 8
-      node_9:
-        node_version: 9
       node_10:
         node_version: 10
-    maxParallel: 3
+    maxParallel: 1
   steps:
   - task: NodeTool@0
     inputs:
