@@ -66,6 +66,7 @@
     "egg-redis": "^2.4.0",
     "egg-scripts": "^2.6.0",
     "egg-sequelize-x": "3.2.0",
+    "egg-session-redis": "^2.1.0",
     "egg-tracer": "^1.1.0",
     "egg-useragent-ts": "0.0.1",
     "egg-view": "^2.1.2",

@@ -115,6 +115,7 @@ export default () => {
       password: parsed.password,
       db: parsed.database,
     },
+    agent: true,
   };
 
   config.oss = {

@@ -111,6 +111,11 @@ const plugin: EggPlugin = {
     enable: true,
     package: 'egg-keycloak',
   },
+
+  sessionRedis: {
+    enable: true,
+    package: 'egg-session-redis',
+  },
 };
 
 export default plugin;
