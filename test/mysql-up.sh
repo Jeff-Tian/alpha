@@ -13,7 +13,7 @@ else
 fi
 
 # shellcheck disable=SC2016
-mysql -h 127.0.0.1 -u root -e 'CREATE DATABASE IF NOT EXISTS `alpha`;'
+docker exec -i $container_name mysql <<< 'CREATE DATABASE IF NOT EXISTS `alpha`;' || exit 1
 # shellcheck disable=SC2016
 echo 'database `alpha` is there'
 

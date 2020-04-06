@@ -10,7 +10,7 @@ export default (appInfo: EggAppInfo) => {
   config.keys = appInfo.name + '_1559644196238_5958';
 
   // add your egg config in here
-  config.middleware = ['notfoundHandler', 'requestLogger'];
+  config.middleware = [ 'notfoundHandler', 'requestLogger' ];
 
   // add your special config in here
   const bizConfig = {
@@ -49,14 +49,14 @@ export default (appInfo: EggAppInfo) => {
 
   config.oAuth2Server = {
     debug: true,
-    grants: ['password', 'client_credentials'],
+    grants: [ 'password', 'client_credentials' ],
   };
 
   config.bodyParser = {
     enable: true,
-    enableTypes: ['json', 'form', 'text'],
+    enableTypes: [ 'json', 'form', 'text' ],
     extendTypes: {
-      text: ['text/xml', 'application/xml'],
+      text: [ 'text/xml', 'application/xml' ],
     },
     jsonLimit: '1mb',
     formLimit: '1mb',
@@ -64,7 +64,7 @@ export default (appInfo: EggAppInfo) => {
 
   config.multipart = {
     mode: 'stream',
-    fileExtensions: ['.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt'],
+    fileExtensions: [ '.docx', '.xlsx', '.pptx', '.doc', '.xls', '.ppt' ],
   };
 
   config.view = {
