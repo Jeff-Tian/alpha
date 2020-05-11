@@ -1,35 +1,37 @@
-import { EggAppConfig, PowerPartial } from 'egg';
-import redisUrlParse from 'redis-url-parse';
-import { v4 as uuid } from 'uuid';
+import {EggAppConfig, PowerPartial} from 'egg'
+import redisUrlParse from 'redis-url-parse'
+import {v4 as uuid} from 'uuid'
 
 export default () => {
-  const config: PowerPartial<EggAppConfig> = {};
+  const config: PowerPartial<EggAppConfig> = {}
 
   config.passportGithub = {
     key: process.env['passport-github-key']!,
     secret: process.env['passport-github-secret']!,
     callbackURL: 'https://uniheart.herokuapp.com/passport/github/callback',
     proxy: false,
-  };
+  }
 
   config.passportWechat = {
     clients: {
       wechat: {
         key: process.env['passport-wechat-key']!,
         secret: process.env['passport-wechat-secret']!,
-        callbackURL: 'https://uniheart.herokuapp.com/passport/wechat/callback',
+        callbackURL:
+          process.env['passport-wechat-callback-url'] ||
+          'https://uniheart.pa-ca.me/passport/wechat/callback',
       },
       'wechat-hardway': {
         key: process.env['passport-wechat-key-hardway']!,
         secret: process.env['passport-wechat-secret-hardway']!,
-        loginURL: 'https://uniheart.herokuapp.com/passport/wechat-hardway/',
+        loginURL: 'https://uniheart.pa-ca.me/passport/wechat-hardway/',
         callbackURL:
-          'https://uniheart.herokuapp.com/passport/wechat-hardway/callback',
+          'https://uniheart.pa-ca.me/passport/wechat-hardway/callback',
         scope: 'snsapi_base',
         state: ctx => ctx.traceId,
       },
     },
-  };
+  }
 
   config.passportWeapp = {
     clients: {
@@ -45,7 +47,7 @@ export default () => {
         successReturnToOrRedirect: '',
       },
     },
-  };
+  }
 
   config.passportCiti = {
     key: process.env['passport-citi-key']!,
@@ -53,13 +55,13 @@ export default () => {
     callbackURL: 'https://uniheart.herokuapp.com/passport/citi/callback',
     state: app => {
       return req => {
-        const state = uuid();
-        const referer = req.query.redirect_uri || req.headers.referer;
+        const state = uuid()
+        const referer = req.query.redirect_uri || req.headers.referer
 
         if (referer) {
-          app.logger.info('referer = ', referer);
+          app.logger.info('referer = ', referer)
 
-          app.refererCache.save(state, referer).then();
+          app.refererCache.save(state, referer).then()
 
           app.logger.info('state = ', {
             state,
@@ -67,29 +69,29 @@ export default () => {
             headers: req.headers,
             query: req.query,
             url: req.url,
-          });
+          })
         }
 
-        return state;
-      };
+        return state
+      }
     },
-  };
+  }
 
   config.sequelize = {
     Sequelize: require('sequelize-typescript').Sequelize,
     dialect: 'mysql',
     connectionUri: process.env.CLEARDB_DATABASE_URL,
-  };
+  }
 
   config.alinode = {
     enable: true,
     appid: process.env['alinode-appid']!,
     secret: process.env['alinode-secret']!,
-  };
+  }
 
   config.logger = {
     disableConsoleAfterReady: !process.env.EGG_LOGGER,
-  };
+  }
 
   config.security = {
     csrf: {
@@ -99,14 +101,14 @@ export default () => {
         ctx.path.startsWith('/endpoints/wechat/message') ||
         ctx.path.startsWith('/citi-dev'),
     },
-  };
+  }
 
   config.jwt = {
     secret: process.env.EGG_JWT_SECRET || 'uniheart',
-  };
+  }
 
-  const redisUri = process.env.REDIS_URI;
-  const parsed = redisUrlParse(redisUri);
+  const redisUri = process.env.REDIS_URI
+  const parsed = redisUrlParse(redisUri)
 
   config.redis = {
     client: {
@@ -116,7 +118,7 @@ export default () => {
       db: parsed.database,
     },
     agent: true,
-  };
+  }
 
   config.oss = {
     client: {
@@ -126,7 +128,7 @@ export default () => {
       endpoint: process.env.OSS_ENDPOINT || 'oss-cn-shanghai.aliyuncs.com',
       timeout: process.env.OSS_TIMEOUT || '60s',
     },
-  };
+  }
 
-  return config;
-};
+  return config
+}
