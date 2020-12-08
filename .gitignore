@@ -31,3 +31,5 @@ config/manifest.json
 app/public
 
 **/*.d.ts
+
+mysql-data

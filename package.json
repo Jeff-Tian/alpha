@@ -11,9 +11,9 @@
     "declarations": true
   },
   "scripts": {
-    "start": "egg-scripts start --daemon --title=egg-server-alpha",
-    "stop": "egg-scripts stop --title=egg-server-alpha",
-    "dev": "sh test/mysql-up.sh&&cross-env NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
+    "start": "docker-compose up -d &&egg-scripts start --daemon --title=egg-server-alpha",
+    "stop": "docker-compose down &&egg-scripts stop --title=egg-server-alpha",
+    "dev": "docker-compose up -d --remove-orphans&&node_modules/.bin/cross-env NODE_ENV=local EGG_SERVER_ENV=local node_modules/.bin/egg-bin dev",
     "debug": "egg-bin debug",
     "test-with-full-trace": "egg-bin test TESTS test/app/passport-wechat-hardway.test.ts --full-trace",
     "test": "npm run migrate&&egg-bin test",
