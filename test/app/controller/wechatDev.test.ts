@@ -25,7 +25,7 @@ describe('test/app/controller/wechatDev.test.ts', () => {
       .httpRequest()
       .get('/wechat-dev/access_token?select=wechat')
       .expect(500)
-      .expect(/invalid appid hint/);
+      .expect(/invalid appid/);
   });
 
   it.skip('should proxy wechat qrcode', async () => {

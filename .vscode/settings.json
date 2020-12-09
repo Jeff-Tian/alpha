@@ -6,5 +6,7 @@
       "language": "typescript",
       "autoFix": true
     }
-  ]
+  ],
+  "editor.snippetSuggestions": "bottom",
+  "editor.suggest.snippetsPreventQuickSuggestions": false
 }
