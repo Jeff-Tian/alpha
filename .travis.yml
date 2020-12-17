@@ -1,36 +1,32 @@
 language: node_js
 node_js:
-  - '12'
+- '12'
 services:
-  - mysql
-  - redis-server
+- mysql
+- redis-server
 before_install:
-  - mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
+- mysql -e 'CREATE DATABASE IF NOT EXISTS alpha;'
 script:
-  - npm run ci
+- npm run ci
 after_script:
-  - npm i codecov && codecov
-
+- npm i codecov && codecov
 jobs:
   include:
-    # Define the release stage that runs semantic-release
-    - stage: release
-      node_js: 10
-      # Advanced: optionally overwrite your default `script` step to skip the tests
-      # script: skip
-      deploy:
-        provider: script
-        skip_cleanup: true
-        script:
-          - npx semantic-release
-    - stage: deploy to heroku
-      node_js: 10
-      deploy:
-        after_script: skip
-        before_install: skip
-        script: skip
-        provider: heroku
-        api_key:
-          secure: ltVu6NxV6u6XHCV3MiCnH9ZHJp3TjOMYWrIWuljPfF2WDq4ha/c6bIUwkj6X/SJSvu6n6oX0cQJ0pS6r2CFDH3hnHznXVQc+9K+zqO2FUPLlPH+MmJe4EX3nnmE5FblEr9Ov8H2wPiyJ12zIbnyl6tUsIwyMrD/YoRlykaJ7vB6UnmXap9TIT3pJuXqC7an1z08Kql9s9VsnOiRerhU8Swv/0147RG90YJVW//BaP53PcsPGF7C+u96GJWnVjvUyuIZRUxK6DBxPpZDvLs/do2wP+I1PMISOhfcSVHRoFIu16uTtByAuNbgagiamNYFdbqA7tntk/owS4PPOUrPjx80bySJhL3rl10J5WNt0fgVyN6JLORHfGUwjp8kFNXiuzQHPqjVr4Xdi6PkMONhbg5WSdXZX5+QgBUxc27CWKxikTXuo9sJEJRT8TejuypE+Sb8aW22vb8H0tikRv6CwkzIaMATqjC7/+LUDS44Y5xcbkSSXkTQ99MLI8d1Ll9rwo/Y2kISSqiEfiDBF8tHqnAXg6ZxzUXAsp6Bd71ndj+gfbCJGHegUuMhK0ar8RZ9vlS5RuCT+FydTDaEUEEeotmLLmDF+MY3ltIem5t+AdfyxmIMvhONWcbov5x+H1O0DVMJWR+H6C4KFQ9ERJTTpYPPeV4x0XgBMbQ7FX8Wptgc=
-        app: uniheart
-        skip_cleanup: true
+  - stage: release
+    node_js: 12
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script:
+      - npx semantic-release
+  - stage: deploy to heroku
+    node_js: 12
+    deploy:
+      after_script: skip
+      before_install: skip
+      script: skip
+      provider: heroku
+      api_key:
+        secure: ASxdVBQmfptdOXlhdlmFVIVXvzuiukeXgaIBurdtgQ++j+SwxMb0fHtk7xOnoXr6BgQca0fgW60pJsbe645Fl2XybHqvTWciBjxPoZMitl3otLc6ZNdjlYA2fZvRqOTBEMsNw22jUyzHHpuNcKlkQhVQUouMaPGArbeYIc+xAHldMcSoLQ5gb7X4DF08S2JnITNoG3SoEU4NcG03kwtuAQfxdvuEA87yjbkhxFIK4HvSK6Zoju7CA4Oe4CiSZlqk3GWDGjMiYECVPQetYjG9IYlvXyt8EbuhoxCfE2r777HJ9z0VBadpkSTW3TB7I/vcBr20M38pAtbbK91o8xTN4P7eG0+zNDfJgGQl931rKTr7sZ1W9zgN3avG9lGdGs/cRmwbaDlVkcZnW+yzeOKCYb0ruO20h2D9G6Csloe1XCl2VUgyRzv2YJ3UGo7fyzvTfOPZ4Oq4im4Y39nOO4K6dUxxKS+pgf/nFSGID1tIk6fvZf48ZrgLzWyHhMQHdUqq1llfvIwzrCuQ0mWZmUaGX3fiEMd8AAxbU1q3JYMQ042/8lJ9e71oHNnchlicbVTO/3c6fbWggQmQlVg8WU02uyQ1ppEXz8eNVxx7BB6Hn8NkTKYb6g6H4a7QrOrmt8dUzV6gV/2jT9RluRqrqXGyreP3VHWzK9kIAExgNAR+gao=
+      app: uniheart
+      skip_cleanup: true
