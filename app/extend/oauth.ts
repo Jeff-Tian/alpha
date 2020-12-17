@@ -14,6 +14,7 @@ export default (app: Application) => {
       this.ctx.logger.info('getting client...', {
         clientId,
         clientSecret,
+        // eslint-disable-next-line prefer-rest-params
         args: arguments,
       });
 

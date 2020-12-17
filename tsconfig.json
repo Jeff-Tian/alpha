@@ -25,5 +25,5 @@
     "inlineSourceMap": true,
     "sourceMap": false
   },
-  "exclude": ["app/public", "app/views", "node_modules*", "app/web"]
+  "exclude": ["app/public", "app/views", "node_modules*", "app/web"],
 }

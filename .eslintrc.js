@@ -21,4 +21,5 @@ module.exports = {
     semi: 'off',
     '@typescript-eslint/no-this-alias': 'off',
   },
+  ignorePatterns: ['app/web'],
 }

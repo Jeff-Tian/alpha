@@ -1,4 +1,3 @@
-// tslint:disable-next-line:no-implicit-dependencies no-submodule-imports
 import Artist from '@/components/Artist'
 import assert from 'power-assert'
 import sinon from 'sinon'

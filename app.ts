@@ -106,6 +106,7 @@ export default class AppBootHook {
     //   ctx.logger.error(err)
     // })
 
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
     // @ts-ignore
     process.on('unhandledRejection', error => {
       // Will print "unhandledRejection err is not defined"

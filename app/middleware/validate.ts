@@ -14,7 +14,7 @@ const typeMap = new Map([
   [ 'wechatDev.jsSDKSign', JsSDKSignRequest ],
 ]);
 
-export default async (ctx: Context, next: () => {}) => {
+export default async (ctx: Context, next: () => unknown) => {
   const type = typeMap.get(ctx.routerName);
 
   assert.ok(type);

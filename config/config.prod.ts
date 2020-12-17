@@ -78,6 +78,7 @@ export default () => {
   }
 
   config.sequelize = {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
     Sequelize: require('sequelize-typescript').Sequelize,
     dialect: 'mysql',
     connectionUri: process.env.CLEARDB_DATABASE_URL,
