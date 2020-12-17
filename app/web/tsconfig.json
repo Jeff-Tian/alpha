@@ -10,7 +10,8 @@
     "inlineSourceMap": true,
     "baseUrl": ".",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["src/*"],
+      "@@/*": ["./src/.umi/*"]
     },
     "allowSyntheticDefaultImports": true,
     "experimentalDecorators": true

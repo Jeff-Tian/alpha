@@ -1,6 +1,6 @@
 import React from 'react';
-import { FormattedMessage } from 'umi/locale';
-import Link from 'umi/link';
+import { FormattedMessage } from 'umi';
+import {Link} from 'umi';
 import PageHeader from '@/components/PageHeader';
 import { connect } from 'dva';
 import GridContent from './GridContent';

@@ -4,7 +4,6 @@
 
 [![Build Status](https://travis-ci.com/Jeff-Tian/alpha.svg?branch=master)](https://travis-ci.com/Jeff-Tian/alpha)
 [![codecov](https://codecov.io/gh/Jeff-Tian/alpha/branch/master/graph/badge.svg)](https://codecov.io/gh/Jeff-Tian/alpha)
-[![Build status](https://ci.appveyor.com/api/projects/status/ghg9xa44co8h025p?svg=true)](https://ci.appveyor.com/project/Jeff-Tian/alpha)
 [![Git commit with emojis!](https://img.shields.io/badge/gitmoji-git%20commit%20with%20emojis!-brightgreen.svg)](https://gitmoji.js.org)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FJeff-Tian%2Falpha.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FJeff-Tian%2Falpha?ref=badge_shield)
 

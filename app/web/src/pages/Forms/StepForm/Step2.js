@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'dva';
 import { Form, Input, Button, Alert, Divider } from 'antd';
-import router from 'umi/router';
+import {history} from 'umi';
 import { digitUppercase } from '@/utils/utils';
 import styles from './style.less';
 
@@ -24,7 +24,7 @@ class Step2 extends React.PureComponent {
     const { form, data, dispatch, submitting } = this.props;
     const { getFieldDecorator, validateFields } = form;
     const onPrev = () => {
-      router.push('/form/step-form/info');
+      history.push('/form/step-form/info');
     };
     const onValidateForm = e => {
       e.preventDefault();

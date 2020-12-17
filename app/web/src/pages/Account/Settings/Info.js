@@ -1,27 +1,38 @@
-import React, { Component } from 'react';
-import { connect } from 'dva';
-import router from 'umi/router';
-import { FormattedMessage } from 'umi/locale';
-import { Menu } from 'antd';
-import GridContent from '@/components/PageHeaderWrapper/GridContent';
-import styles from './Info.less';
+import React, {Component} from 'react'
+import {connect} from 'dva'
+import {history} from 'umi'
+import {FormattedMessage} from 'umi'
+import {Menu} from 'antd'
+import GridContent from '@/components/PageHeaderWrapper/GridContent'
+import styles from './Info.less'
 
-const { Item } = Menu;
+const {Item} = Menu
 
-@connect(({ user }) => ({
+@connect(({user}) => ({
   currentUser: user.currentUser,
 }))
 class Info extends Component {
   constructor(props) {
-    super(props);
-    const { match, location } = props;
+    super(props)
+    const {match, location} = props
     const menuMap = {
-      base: <FormattedMessage id="app.settings.menuMap.basic" defaultMessage="Basic Settings" />,
+      base: (
+        <FormattedMessage
+          id="app.settings.menuMap.basic"
+          defaultMessage="Basic Settings"
+        />
+      ),
       security: (
-        <FormattedMessage id="app.settings.menuMap.security" defaultMessage="Security Settings" />
+        <FormattedMessage
+          id="app.settings.menuMap.security"
+          defaultMessage="Security Settings"
+        />
       ),
       binding: (
-        <FormattedMessage id="app.settings.menuMap.binding" defaultMessage="Account Binding" />
+        <FormattedMessage
+          id="app.settings.menuMap.binding"
+          defaultMessage="Account Binding"
+        />
       ),
       notification: (
         <FormattedMessage
@@ -29,86 +40,92 @@ class Info extends Component {
           defaultMessage="New Message Notification"
         />
       ),
-    };
-    const key = location.pathname.replace(`${match.path}/`, '');
+    }
+    const key = location.pathname.replace(`${match.path}/`, '')
     this.state = {
       mode: 'inline',
       menuMap,
       selectKey: menuMap[key] ? key : 'base',
-    };
+    }
   }
 
   static getDerivedStateFromProps(props, state) {
-    const { match, location } = props;
-    let selectKey = location.pathname.replace(`${match.path}/`, '');
-    selectKey = state.menuMap[selectKey] ? selectKey : 'base';
+    const {match, location} = props
+    let selectKey = location.pathname.replace(`${match.path}/`, '')
+    selectKey = state.menuMap[selectKey] ? selectKey : 'base'
     if (selectKey !== state.selectKey) {
-      return { selectKey };
+      return {selectKey}
     }
-    return null;
+    return null
   }
 
   componentDidMount() {
-    window.addEventListener('resize', this.resize);
-    this.resize();
+    window.addEventListener('resize', this.resize)
+    this.resize()
   }
 
   componentWillUnmount() {
-    window.removeEventListener('resize', this.resize);
+    window.removeEventListener('resize', this.resize)
   }
 
   getmenu = () => {
-    const { menuMap } = this.state;
-    return Object.keys(menuMap).map(item => <Item key={item}>{menuMap[item]}</Item>);
-  };
+    const {menuMap} = this.state
+    return Object.keys(menuMap).map(item => (
+      <Item key={item}>{menuMap[item]}</Item>
+    ))
+  }
 
   getRightTitle = () => {
-    const { selectKey, menuMap } = this.state;
-    return menuMap[selectKey];
-  };
+    const {selectKey, menuMap} = this.state
+    return menuMap[selectKey]
+  }
 
-  selectKey = ({ key }) => {
-    router.push(`/account/settings/${key}`);
+  selectKey = ({key}) => {
+    history.push(`/account/settings/${key}`)
     this.setState({
       selectKey: key,
-    });
-  };
+    })
+  }
 
   resize = () => {
     if (!this.main) {
-      return;
+      return
     }
     requestAnimationFrame(() => {
-      let mode = 'inline';
-      const { offsetWidth } = this.main;
+      let mode = 'inline'
+      const {offsetWidth} = this.main
       if (this.main.offsetWidth < 641 && offsetWidth > 400) {
-        mode = 'horizontal';
+        mode = 'horizontal'
       }
       if (window.innerWidth < 768 && offsetWidth > 400) {
-        mode = 'horizontal';
+        mode = 'horizontal'
       }
       this.setState({
         mode,
-      });
-    });
-  };
+      })
+    })
+  }
 
   render() {
-    const { children, currentUser } = this.props;
+    const {children, currentUser} = this.props
     if (!currentUser.userid) {
-      return '';
+      return ''
     }
-    const { mode, selectKey } = this.state;
+    const {mode, selectKey} = this.state
     return (
       <GridContent>
         <div
           className={styles.main}
           ref={ref => {
-            this.main = ref;
+            this.main = ref
           }}
         >
           <div className={styles.leftmenu}>
-            <Menu mode={mode} selectedKeys={[selectKey]} onClick={this.selectKey}>
+            <Menu
+              mode={mode}
+              selectedKeys={[selectKey]}
+              onClick={this.selectKey}
+            >
               {this.getmenu()}
             </Menu>
           </div>
@@ -118,8 +135,8 @@ class Info extends Component {
           </div>
         </div>
       </GridContent>
-    );
+    )
   }
 }
 
-export default Info;
+export default Info

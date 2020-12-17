@@ -1,19 +1,19 @@
-import React, { Fragment } from 'react';
-import { connect } from 'dva';
-import { Button, Row, Col } from 'antd';
-import router from 'umi/router';
-import Result from '@/components/Result';
-import styles from './style.less';
+import React, {Fragment} from 'react'
+import {connect} from 'dva'
+import {Button, Row, Col} from 'antd'
+import {history} from 'umi'
+import Result from '@/components/Result'
+import styles from './style.less'
 
-@connect(({ form }) => ({
+@connect(({form}) => ({
   data: form.step,
 }))
 class Step3 extends React.PureComponent {
   render() {
-    const { data } = this.props;
+    const {data} = this.props
     const onFinish = () => {
-      router.push('/form/step-form/info');
-    };
+      history.push('/form/step-form/info')
+    }
     const information = (
       <div className={styles.information}>
         <Row>
@@ -49,7 +49,7 @@ class Step3 extends React.PureComponent {
           </Col>
         </Row>
       </div>
-    );
+    )
     const actions = (
       <Fragment>
         <Button type="primary" onClick={onFinish}>
@@ -57,7 +57,7 @@ class Step3 extends React.PureComponent {
         </Button>
         <Button>查看账单</Button>
       </Fragment>
-    );
+    )
     return (
       <Result
         type="success"
@@ -67,8 +67,8 @@ class Step3 extends React.PureComponent {
         actions={actions}
         className={styles.result}
       />
-    );
+    )
   }
 }
 
-export default Step3;
+export default Step3

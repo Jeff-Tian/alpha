@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import router from 'umi/router';
-import { connect } from 'dva';
-import { Input } from 'antd';
-import PageHeaderWrapper from '@/components/PageHeaderWrapper';
+import React, {Component} from 'react'
+import {history} from 'umi'
+import {connect} from 'dva'
+import {Input} from 'antd'
+import PageHeaderWrapper from '@/components/PageHeaderWrapper'
 
 @connect()
 class SearchList extends Component {
   handleTabChange = key => {
-    const { match } = this.props;
+    const {match} = this.props
     switch (key) {
       case 'articles':
-        router.push(`${match.url}/articles`);
-        break;
+        history.push(`${match.url}/articles`)
+        break
       case 'applications':
-        router.push(`${match.url}/applications`);
-        break;
+        history.push(`${match.url}/applications`)
+        break
       case 'projects':
-        router.push(`${match.url}/projects`);
-        break;
+        history.push(`${match.url}/projects`)
+        break
       default:
-        break;
+        break
     }
   }
 
-  handleFormSubmit = (value) => {
+  handleFormSubmit = value => {
     // eslint-disable-next-line
-    console.log(value);
+    console.log(value)
   }
 
   render() {
@@ -42,21 +42,21 @@ class SearchList extends Component {
         key: 'applications',
         tab: '应用',
       },
-    ];
+    ]
 
     const mainSearch = (
-      <div style={{ textAlign: 'center' }}>
+      <div style={{textAlign: 'center'}}>
         <Input.Search
           placeholder="请输入"
           enterButton="搜索"
           size="large"
           onSearch={this.handleFormSubmit}
-          style={{ width: 522 }}
+          style={{width: 522}}
         />
       </div>
-    );
+    )
 
-    const { match, children, location } = this.props;
+    const {match, children, location} = this.props
 
     return (
       <PageHeaderWrapper
@@ -73,8 +73,8 @@ class SearchList extends Component {
           ))}
         </Switch> */}
       </PageHeaderWrapper>
-    );
+    )
   }
 }
 
-export default SearchList;
+export default SearchList
