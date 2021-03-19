@@ -30,7 +30,7 @@
     "clean": "ets clean",
     "migrate": "npx sequelize db:migrate",
     "log": "heroku logs --tail -a uniheart",
-    "build": "cd app/web && umi build && cd ../..",
+    "build": "echo skipped#APP_ROOT=$PWD/app/web umi build",
     "sync": "./script/sync.js",
     "tplant": "tplant --input app/model/**/*.ts --output models.svg",
     "semantic-release": "semantic-release",
