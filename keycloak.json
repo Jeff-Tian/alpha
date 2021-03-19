@@ -1,6 +1,6 @@
 {
     "realm": "UniHeart",
-    "auth-server-url": "https://unilock-jeff-tian.cloud.okteto.net/auth",
+    "auth-server-url": "https://keycloak.jiwai.win/auth",
     "ssl-required": "external",
     "resource": "UniHeart-Client"
 }
