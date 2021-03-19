@@ -33,3 +33,4 @@ app/public
 **/*.d.ts
 
 mysql-data
+app/web/src/.umi-production
