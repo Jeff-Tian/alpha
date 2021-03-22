@@ -30,7 +30,7 @@ jobs:
           MYSQL_ALLOW_EMPTY_PASSWORD: yes
           MYSQL_DATABASE: alpha
         ports:
-          - 3306
+          - 3306:3306
         options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
 
     strategy:
@@ -47,6 +47,8 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: ${{ matrix.node-version }}
+
+      - uses: c-hive/gha-yarn-cache@v1
 
       - name: Install Dependencies
         run: yarn
