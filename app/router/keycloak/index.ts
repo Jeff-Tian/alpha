@@ -10,7 +10,7 @@ export default (app: Application) => {
     '/login',
     app.keycloak.protect(),
     async ctx => {
-      ctx.body = 'Keycloak login...'
+      ctx.body = ctx.session['keycloak-token']
     },
   )
 
