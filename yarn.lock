@@ -9660,12 +9660,13 @@ egg-schedule@^3.6.0:
     safe-timers "^1.1.0"
     utility "^1.16.3"
 
-egg-scripts@2.6.0:
-  version "2.6.0"
-  resolved "https://registry.yarnpkg.com/egg-scripts/-/egg-scripts-2.6.0.tgz#381f23ffc762b843b5604d53b72d5be9285a859b"
-  integrity sha512-mvWerkQ7yt5vP9YrsFa+Qhac6nLa7BYl4I6XD0OmfR6VPk3FIfWQsf0z4jo8X3Rs+9SsUWuis8neTPjywBOXAg==
+egg-scripts@2.8.1:
+  version "2.8.1"
+  resolved "https://registry.yarnpkg.com/egg-scripts/-/egg-scripts-2.8.1.tgz#0b39bf9fedbb02856eb66c6b8a54e6b294b99485"
+  integrity sha512-odM4XzJvemJKUzFR9dlnmXRHDK/AQvQqch21ulz68IYMhypKj3lzO1mGyLbNTodFrfOvR5qfBcM95tJJ/a2IGA==
   dependencies:
     common-bin "^2.7.1"
+    debug "^3.1.0"
     egg-utils "^2.3.0"
     moment "^2.19.2"
     mz "^2.7.0"
