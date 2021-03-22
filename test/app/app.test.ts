@@ -86,7 +86,7 @@ describe('test/app.test.ts', () => {
         .expect(302);
     });
 
-    it('should redirect to wechat oauth url', () => {
+    it.skip('should redirect to wechat oauth url', () => {
       return app
         .httpRequest()
         .get('/passport/wechat')

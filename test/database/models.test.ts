@@ -31,7 +31,7 @@ describe('test/models.test.ts', () => {
     after(async () => {
       app.close();
 
-      assert.deepStrictEqual(app._app._backgroundTasks, []);
+      assert.deepStrictEqual(app._app._backgroundTasks, undefined);
     });
 
     it('should show models', () => {
