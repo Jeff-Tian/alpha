@@ -4,8 +4,6 @@ const cacheResult = async (ctx, next) => {
   const cache = await ctx.app.redis.get(ctx.query.url);
 
   if (cache) {
-    ctx.logger.info('got cache = ', cache);
-
     const final = new Buffer(cache, 'hex').toString();
     try {
       ctx.type = 'json';
@@ -25,5 +23,6 @@ export default (app: Application) => {
   const subRouter = router.namespace('/proxy');
 
   subRouter.get('/', cacheResult, controller.proxy.proxy.get);
+  subRouter.post('/', controller.proxy.proxy.post);
   subRouter.get('/pipe-file', controller.proxy.proxy.pipeFile);
 };

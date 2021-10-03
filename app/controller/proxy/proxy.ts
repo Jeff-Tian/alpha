@@ -21,6 +21,23 @@ export default class ProxyController extends Controller {
     }
   }
 
+  public async post() {
+    const { ctx } = this;
+
+    const { data } = (await ctx.curl(ctx.query.url, {
+      streaming: false,
+      retry: 3,
+      timeout: [ 3000, 30000 ],
+      method: 'POST',
+      type: 'POST',
+      contentType: 'json',
+      data: ctx.request.body,
+      dataType: 'json',
+    }));
+
+    ctx.body = data;
+  }
+
   public async pipeFile() {
     const { ctx } = this;
     const { url } = ctx.query;

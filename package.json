@@ -17,7 +17,7 @@
     "debug": "egg-bin debug",
     "test-with-full-trace": "egg-bin test TESTS test/app/passport-wechat-hardway.test.ts --full-trace",
     "test": "npm run migrate&&egg-bin test",
-    "test-local-changed": "bash -c \"export DOCKER_HOST='tcp://0.0.0.0:2375'&&test/mysql-up.sh&&test/redis-up.sh\"&&npm run migrate&&egg-bin test --changed",
+    "test-local-changed": "npm run migrate&&egg-bin test --changed",
     "test-local": "npm run lint -- --fix && npm test",
     "start:dev-env": "docker-compose up -d --remove-orphans",
     "stop:dev-env": "docker-compose down",

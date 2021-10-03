@@ -58,7 +58,8 @@ export default () => {
     successReturnToOrRedirect: '/passport/citi/passport-relay',
     state: app => {
       return () => {
-        app.refererCache.save('4321', '1234').then()
+        app.refererCache.save('4321', '1234')
+          .then()
 
         return '4321'
       }
@@ -81,6 +82,14 @@ export default () => {
   config.logger = {
     level: 'DEBUG',
     consoleLevel: 'DEBUG',
+  }
+
+  config.security = {
+    csrf: {
+      ignore: ctx =>
+        ctx.path.startsWith('/endpoints/wechat/message') ||
+        ctx.path.startsWith('/citi-dev') || ctx.path.startsWith('/proxy'),
+    },
   }
 
   return config
