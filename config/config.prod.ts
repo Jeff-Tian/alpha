@@ -1,6 +1,6 @@
-import { EggAppConfig, PowerPartial } from 'egg'
+import {EggAppConfig, PowerPartial} from 'egg'
 import redisUrlParse from 'redis-url-parse'
-import { v4 as uuid } from 'uuid'
+import {v4 as uuid} from 'uuid'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
@@ -103,6 +103,12 @@ export default () => {
         ctx.path.startsWith('/endpoints/wechat/message') ||
         ctx.path.startsWith('/citi-dev') || ctx.path.startsWith('/proxy'),
     },
+    domainWhiteList: [ '*' ],
+  }
+
+  config.cors = {
+    origin: '*',
+    allowMethods: 'GET,PATCH,PUT,POST,DELETE,OPTIONS',
   }
 
   config.jwt = {
