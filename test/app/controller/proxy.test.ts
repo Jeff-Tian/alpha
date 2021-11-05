@@ -9,6 +9,7 @@ describe('test/app/controller/proxy.test.ts', () => {
       .get(`/proxy?url=${encodeURIComponent('https://www.baidu.com')}`)
       .expect(200)
 
+    assert(res.headers.get('access-control-allow-origin') === '*')
     assert(res.text.includes('</html>'))
   }
 

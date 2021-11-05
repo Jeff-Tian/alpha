@@ -25,4 +25,5 @@ export default (app: Application) => {
   subRouter.get('/', cacheResult, controller.proxy.proxy.get);
   subRouter.post('/', controller.proxy.proxy.post);
   subRouter.get('/pipe-file', controller.proxy.proxy.pipeFile);
+  subRouter.get('/no-cache', controller.proxy.proxy.get);
 };
