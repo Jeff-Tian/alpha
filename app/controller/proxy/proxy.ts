@@ -26,6 +26,8 @@ export default class ProxyController extends Controller {
 
     const final = data.toString();
 
+    ctx.set('access-control-allow-origin', '*');
+
     try {
       ctx.type = 'json';
       ctx.body = JSON.parse(final);
