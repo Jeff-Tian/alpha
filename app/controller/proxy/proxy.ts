@@ -12,10 +12,8 @@ export default class ProxyController extends Controller {
     const { data, headers, status } = res;
 
     if (data instanceof Buffer) {
-      console.log('Buffer received from!');
-
       ctx.status = status;
-      ctx.set(headers);
+      ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
       ctx.body = data;
 
       return;
@@ -25,6 +23,8 @@ export default class ProxyController extends Controller {
     ctx.app.redis.expire(ctx.query.url, process.env.PROXY_TIMEOUT ? Number(process.env.PROXY_TIMEOUT) : 60 * 60 * 12);
 
     const final = data.toString();
+
+    ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
 
     try {
       ctx.type = 'json';
