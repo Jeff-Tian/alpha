@@ -44,9 +44,9 @@ export default class ProxyController extends Controller {
       timeout: [ 3000, 30000 ],
       method: 'POST',
       type: 'POST',
-      contentType: 'json',
+      contentType: ctx.get('Content-Type') ?? 'json',
       data: ctx.request.body,
-      dataType: 'json',
+      dataType: ctx.get('accept') ?? 'json',
     }));
 
     ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
