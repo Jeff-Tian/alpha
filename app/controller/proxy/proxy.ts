@@ -38,7 +38,7 @@ export default class ProxyController extends Controller {
   public async post() {
     const { ctx } = this;
 
-    const { data } = (await ctx.curl(ctx.query.url, {
+    const { data, headers } = (await ctx.curl(ctx.query.url, {
       streaming: false,
       retry: 3,
       timeout: [ 3000, 30000 ],
@@ -49,6 +49,7 @@ export default class ProxyController extends Controller {
       dataType: 'json',
     }));
 
+    ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
     ctx.body = data;
   }
 
