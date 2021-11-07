@@ -47,6 +47,9 @@ export default class ProxyController extends Controller {
       contentType: ctx.get('Content-Type') ?? 'json',
       data: ctx.request.body,
       dataType: ctx.query.dataType ?? 'json',
+      headers: {
+        cookie: ctx.query.cookie ?? ctx.get('cookie'),
+      },
     }));
 
     ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
