@@ -50,7 +50,8 @@ export default class ProxyController extends Controller {
     }));
 
     ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
-    ctx.body = data;
+
+    ctx.body = { ...data, headers }
   }
 
   public async pipeFile() {
