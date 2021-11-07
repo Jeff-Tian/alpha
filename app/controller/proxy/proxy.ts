@@ -5,7 +5,7 @@ export default class ProxyController extends Controller {
   public async get() {
     const { ctx } = this;
 
-    const res = (await ctx.curl(ctx.query.url, { streaming: false, retry: 3, timeout: [3000, 30000] }));
+    const res = (await ctx.curl(ctx.query.url, { streaming: false, retry: 3, timeout: [ 3000, 30000 ] }));
 
     console.log('res = ', res);
 
@@ -41,14 +41,16 @@ export default class ProxyController extends Controller {
     const { data, headers } = (await ctx.curl(ctx.query.url, {
       streaming: false,
       retry: 3,
-      timeout: [3000, 30000],
+      timeout: [ 3000, 30000 ],
       method: 'POST',
       type: 'POST',
       contentType: ctx.get('Content-Type') ?? 'json',
       data: ctx.request.body,
       dataType: ctx.query.dataType ?? 'json',
       headers: {
-        ...ctx.request.headers,
+        authority: ctx.request.headers.authority,
+        origin: ctx.request.headers.origin,
+        referer: ctx.request.headers.referer,
         cookie: ctx.query.cookie ?? ctx.get('cookie'),
       },
     }));
@@ -65,7 +67,7 @@ export default class ProxyController extends Controller {
     this.ctx.attachment(FileNameExpert.getFileNameFromUrl(url));
     this.ctx.set('Content-Type', 'application/octet-stream');
     ctx.body = (await ctx.curl(url, {
-      streaming: true, retry: 3, timeout: [10000, 30000],
+      streaming: true, retry: 3, timeout: [ 10000, 30000 ],
       followRedirect: true,
     })).res;
   }
