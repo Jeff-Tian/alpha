@@ -1,6 +1,24 @@
 import { Controller } from 'egg';
 // eslint-disable-next-line @typescript-eslint/no-var-requires
 const FileNameExpert = require('file-name-expert').default;
+
+export const curlirize = config => {
+  const headers = config.headers?.common ?? config.headers;
+
+  const serializedHeaders = headers ? Object.keys(headers).map(key => `--header "${key}: ${headers[key]}"`) : [];
+
+  const cmd = `cURL to replay: curl -X ${config.method} "${config.url}${
+    config.params ? `?${new URLSearchParams(config.params).toString()}` : ''
+  }" ${serializedHeaders.join(' ')} `;
+
+  if (config.data) {
+    return cmd + `--data '${config.data}'`;
+  }
+
+  return cmd;
+};
+
+
 export default class ProxyController extends Controller {
   public async get() {
     const { ctx } = this;
@@ -38,7 +56,7 @@ export default class ProxyController extends Controller {
   public async post() {
     const { ctx } = this;
 
-    const { data, headers } = (await ctx.curl(ctx.query.url, {
+    const { data, headers, config } = (await ctx.curl(ctx.query.url, {
       streaming: false,
       retry: 3,
       timeout: [ 3000, 30000 ],
@@ -57,7 +75,9 @@ export default class ProxyController extends Controller {
 
     ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
 
-    ctx.body = { ...data, headers }
+    console.log('curl to replay: ', curlirize(config))
+
+    ctx.body = { ...data, headers };
   }
 
   public async pipeFile() {
