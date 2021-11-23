@@ -48,9 +48,9 @@ export default class ProxyController extends Controller {
       data: ctx.request.body,
       dataType: ctx.query.dataType ?? 'json',
       headers: {
-        authority: ctx.request.headers.authority,
-        origin: ctx.request.headers.origin,
-        referer: ctx.request.headers.referer,
+        authority: ctx.query.authority ?? ctx.get('authority'),
+        origin: ctx.query.origin ?? ctx.get('origin'),
+        referer: ctx.referer ?? ctx.get('referer'),
         cookie: ctx.query.cookie ?? ctx.get('cookie'),
       },
     }));
