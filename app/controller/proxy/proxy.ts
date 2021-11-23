@@ -56,7 +56,7 @@ export default class ProxyController extends Controller {
   public async post() {
     const { ctx } = this;
 
-    const { data, headers, config } = (await ctx.curl(ctx.query.url, {
+    const { data, headers } = (await ctx.curl(ctx.query.url, {
       streaming: false,
       retry: 3,
       timeout: [ 3000, 30000 ],
@@ -75,7 +75,7 @@ export default class ProxyController extends Controller {
 
     ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
 
-    console.log('curl to replay: ', curlirize(config))
+    console.log('curl to replay: ', curlirize({ headers, method: 'POST', url: ctx.query.url, params: {}, data: ctx.request.body }));
 
     ctx.body = { ...data, headers };
   }
