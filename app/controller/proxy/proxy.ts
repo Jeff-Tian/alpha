@@ -5,14 +5,14 @@ const FileNameExpert = require('file-name-expert').default;
 export const curlirize = config => {
   const headers = config.headers?.common ?? config.headers;
 
-  const serializedHeaders = headers ? Object.keys(headers).map(key => `--header "${key}: ${headers[key]}"`) : [];
+  const serializedHeaders = headers ? Object.keys(headers).map(key => `--header '${key}: ${headers[key]}'`) : [];
 
   const cmd = `cURL to replay: curl -X ${config.method} "${config.url}${
     config.params ? `?${new URLSearchParams(config.params).toString()}` : ''
   }" ${serializedHeaders.join(' ')} `;
 
   if (config.data) {
-    return cmd + `--data '${config.data}'`;
+    return cmd + `--data-binary $'${config.data}'`;
   }
 
   return cmd;
@@ -59,9 +59,11 @@ export default class ProxyController extends Controller {
     const requestHeaders = {
       authority: ctx.query.authority ?? ctx.get('authority'),
       origin: ctx.query.origin ?? ctx.get('origin'),
-      referer: ctx.referer ?? ctx.get('referer'),
+      referer: ctx.query.referer ?? ctx.get('referer'),
       cookie: ctx.query.cookie ?? ctx.get('cookie'),
     }
+
+    console.log('curling: ', curlirize({ headers: requestHeaders, method: 'POST', url: ctx.query.url, params: {}, data: JSON.stringify(ctx.request.body) }));
 
     const { data, headers } = (await ctx.curl(ctx.query.url, {
       streaming: false,
@@ -76,8 +78,6 @@ export default class ProxyController extends Controller {
     }));
 
     ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
-
-    console.log('curl to replay: ', curlirize({ headers: requestHeaders, method: 'POST', url: ctx.query.url, params: {}, data: JSON.stringify(ctx.request.body) }));
 
     ctx.body = { ...data, headers };
   }
