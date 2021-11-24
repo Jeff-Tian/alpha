@@ -56,6 +56,13 @@ export default class ProxyController extends Controller {
   public async post() {
     const { ctx } = this;
 
+    const requestHeaders = {
+      authority: ctx.query.authority ?? ctx.get('authority'),
+      origin: ctx.query.origin ?? ctx.get('origin'),
+      referer: ctx.referer ?? ctx.get('referer'),
+      cookie: ctx.query.cookie ?? ctx.get('cookie'),
+    }
+
     const { data, headers } = (await ctx.curl(ctx.query.url, {
       streaming: false,
       retry: 3,
@@ -65,17 +72,12 @@ export default class ProxyController extends Controller {
       contentType: ctx.get('Content-Type') ?? 'json',
       data: ctx.request.body,
       dataType: ctx.query.dataType ?? 'json',
-      headers: {
-        authority: ctx.query.authority ?? ctx.get('authority'),
-        origin: ctx.query.origin ?? ctx.get('origin'),
-        referer: ctx.referer ?? ctx.get('referer'),
-        cookie: ctx.query.cookie ?? ctx.get('cookie'),
-      },
+      headers: requestHeaders,
     }));
 
     ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' });
 
-    console.log('curl to replay: ', curlirize({ headers, method: 'POST', url: ctx.query.url, params: {}, data: ctx.request.body }));
+    console.log('curl to replay: ', curlirize({ headers: requestHeaders, method: 'POST', url: ctx.query.url, params: {}, data: JSON.stringify(ctx.request.body) }));
 
     ctx.body = { ...data, headers };
   }
