@@ -72,7 +72,7 @@ export default class ProxyController extends Controller {
       method: 'POST',
       type: 'POST',
       contentType: ctx.get('Content-Type') ?? 'json',
-      data: ctx.request.body,
+      data: JSON.stringify(ctx.request.body),
       dataType: ctx.query.dataType ?? 'json',
       headers: requestHeaders,
     }));
