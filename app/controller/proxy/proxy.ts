@@ -28,9 +28,15 @@ export default class ProxyController extends Controller {
         const {data, headers, status} = res;
 
         if (data instanceof Buffer) {
-            ctx.status = status;
-            ctx.set({...headers, 'Access-Control-Allow-Origin': '*'});
-            ctx.body = data;
+            if (ctx.query.format === 'json') {
+                ctx.body = {
+                    raw: data.toString()
+                };
+            } else {
+                ctx.status = status;
+                ctx.set({...headers, 'Access-Control-Allow-Origin': '*'});
+                ctx.body = data;
+            }
 
             return;
         }
