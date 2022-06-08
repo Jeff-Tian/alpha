@@ -20,6 +20,10 @@ export const curlirize = config => {
 
 
 export default class ProxyController extends Controller {
+    /**
+     * query.url: url to be proxied
+     * query.format: output format
+     */
     public async get() {
         const {ctx} = this;
 
@@ -64,6 +68,10 @@ export default class ProxyController extends Controller {
         }
     }
 
+    /**
+     * query.url: url to be proxied
+     * query.dataType: dataType passed to outgoing request
+     */
     public async post() {
         const {ctx} = this;
 
