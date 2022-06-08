@@ -23,19 +23,27 @@ Don't tsc compile at development mode, if you had run `tsc` then you need to `np
 
 ### Deploy
 
-- to localhost
+#### to localhost
 
 ```bash
 $ npm run tsc
 $ npm start
 ```
 
-- to heroku
+#### to heroku
 
 Automatically. If failed by token expired then you can update the token by
 
 ```bash
 travis encrypt $(heroku auth:token) --add deploy.api_key --pro
+```
+
+Or deploy to heroku manually by
+
+```shell
+heroku login
+heroku git:remote -a alpha
+git push heroku master
 ```
 
 ### Check logs
