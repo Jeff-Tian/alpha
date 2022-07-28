@@ -56,7 +56,7 @@ export default class ProxyController extends Controller {
     ctx.type = 'json'
 
     try {
-      ctx.body = JSON.parse(final)
+      ctx.body = {...JSON.parse(final), headers}
     } catch (ex) {
       if (ctx.query.format === 'json') {
         ctx.body = {
