@@ -36,6 +36,7 @@ export default class ProxyController extends Controller {
       if (ctx.query.format === 'json') {
         ctx.body = {
           raw: data.toString(),
+          headers
         }
       } else {
         ctx.status = status
