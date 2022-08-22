@@ -13,7 +13,7 @@
   "scripts": {
     "start": "docker-compose up -d &&egg-scripts start --daemon --title=egg-server-alpha",
     "stop": "docker-compose down &&egg-scripts stop --title=egg-server-alpha",
-    "dev": "npm run start:dev-env&&node_modules/.bin/cross-env NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
+    "dev": "npm run start:dev-env&&cross-env NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
     "debug": "egg-bin debug",
     "test-with-full-trace": "egg-bin test TESTS test/app/passport-wechat-hardway.test.ts --full-trace",
     "test": "npm run migrate&&egg-bin test",

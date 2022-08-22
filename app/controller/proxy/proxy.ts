@@ -33,20 +33,24 @@ export default class ProxyController extends Controller {
     const { data, headers, status } = res
 
     if (data instanceof Buffer) {
+      ctx.logger.info('format is ', { format: ctx.query.format })
       if (ctx.query.format === 'json') {
         ctx.body = {
           raw: data.toString(),
-          headers
+          headers,
         }
       } else {
+        ctx.logger.info('headers are ', { headers })
         ctx.status = status
         ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' })
         ctx.body = data
       }
 
+      ctx.logger.info('data is buffer for ', { url: ctx.query.url })
       return
     }
 
+    ctx.logger.info('data is not buffer for ', { url: ctx.query.url })
     ctx.app.redis.set(ctx.query.url, data.toString('hex'))
     ctx.app.redis.expire(ctx.query.url, process.env.PROXY_TIMEOUT ? Number(process.env.PROXY_TIMEOUT) : 60 * 60 * 12)
 
@@ -57,7 +61,7 @@ export default class ProxyController extends Controller {
     ctx.type = 'json'
 
     try {
-      ctx.body = {...JSON.parse(final), headers}
+      ctx.body = { ...JSON.parse(final), headers }
     } catch (ex) {
       if (ctx.query.format === 'json') {
         ctx.body = {

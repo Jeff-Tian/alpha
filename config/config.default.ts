@@ -113,7 +113,7 @@ export default (appInfo: EggAppInfo) => {
   }
 
   config.errorDisplay = {
-    isProd: () => process.env.isPord === 'true',
+    isProd: () => process.env.isProd === 'true',
   }
 
   config.oss = {
