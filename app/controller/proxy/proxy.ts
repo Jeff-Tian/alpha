@@ -51,8 +51,8 @@ export default class ProxyController extends Controller {
     }
 
     ctx.logger.info('data is not buffer for ', { url: ctx.query.url })
-    ctx.app.redis.set(ctx.query.url, data.toString('hex'))
-    ctx.app.redis.expire(ctx.query.url, process.env.PROXY_TIMEOUT ? Number(process.env.PROXY_TIMEOUT) : 60 * 60 * 12)
+    // ctx.app.redis.set(ctx.query.url, data.toString('hex'))
+    // ctx.app.redis.expire(ctx.query.url, process.env.PROXY_TIMEOUT ? Number(process.env.PROXY_TIMEOUT) : 60 * 60 * 12)
 
     const final = data.toString()
 

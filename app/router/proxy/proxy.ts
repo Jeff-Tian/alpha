@@ -1,5 +1,7 @@
 import { Application } from 'egg';
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-ignore
 const cacheResult = async (ctx, next) => {
   const cache = await ctx.app.redis.get(ctx.query.url);
 
@@ -22,7 +24,7 @@ export default (app: Application) => {
 
   const subRouter = router.namespace('/proxy');
 
-  subRouter.get('/', cacheResult, controller.proxy.proxy.get);
+  subRouter.get('/', controller.proxy.proxy.get);
   subRouter.post('/', controller.proxy.proxy.post);
   subRouter.get('/pipe-file', controller.proxy.proxy.pipeFile);
   subRouter.get('/no-cache', controller.proxy.proxy.get);
