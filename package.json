@@ -90,7 +90,7 @@
     "lodash-decorators": "6.0.0",
     "memoize-one": "4.0.0",
     "mime-types": "2.1.26",
-    "moment": "2.22.2",
+    "moment": "2.29.4",
     "mysql2": "1.7.0",
     "numeral": "2.0.6",
     "nzh": "1.0.3",
