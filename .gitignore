@@ -34,3 +34,9 @@ app/public
 
 mysql-data
 app/web/src/.umi-production
+
+
+.env
+.fun
+bootstrap
+template.yml

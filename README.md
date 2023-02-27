@@ -13,10 +13,23 @@
 
 ### Development
 
+```shell
+nvm use v15.4.0
+```
+
 ```bash
 $ npm i
 $ npm run dev
 $ open http://localhost:7001/
+```
+
+If you use yarn, then you can 
+
+```shell
+yarn 
+yarn dev
+open http://localhost:7001/ # for backend api ready
+open http://localhost:10000/ # for frontend ready
 ```
 
 Don't tsc compile at development mode, if you had run `tsc` then you need to `npm run clean` before `npm run dev`.
@@ -60,7 +73,7 @@ heroku logs --tail -a uniheart
 
 ### Requirement
 
-- Node.js 8.x
+- Node.js 15.4.0
 - Typescript 2.8+
 
 ### Models

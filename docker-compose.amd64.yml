@@ -1,3 +1,5 @@
+# for intel/amd64
+
 version: '3'
 services:
   redis:
@@ -5,7 +7,7 @@ services:
     ports:
       - '6379:6379'
   local-mysql:
-    image: mariadb:10.5.8
+    image: 'mysql:5.7'
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: '1'
     ports:
@@ -14,7 +16,16 @@ services:
       - ./mysql-data:/var/lib/mysql
       - ./database:/docker-entrypoint-initdb.d
     healthcheck:
-      test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+      test: [ 'CMD', 'mysqladmin', 'ping', '-h', 'localhost' ]
       timeout: 20s
       retries: 10
 
+  phpmyadmin:
+    depends_on:
+      local-mysql:
+        condition: service_healthy
+    image: phpmyadmin/phpmyadmin
+    ports:
+      - '8080:80'
+    environment:
+      PMA_HOST: local-mysql
