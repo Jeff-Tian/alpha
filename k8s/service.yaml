@@ -1,0 +1,16 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: alpha
+  annotations:
+    dev.okteto.com/auto-ingress: 'true'
+spec:
+  type: ClusterIP
+  ports:
+    - name: tcp
+      port: 5000
+      protocol: TCP
+      targetPort: 5000
+  selector:
+    app: alpha
+    tier: backend

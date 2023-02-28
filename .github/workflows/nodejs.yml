@@ -68,7 +68,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
       - run: echo "${{secrets.DOCKER_PASSWORD}}" | docker login -u "${{secrets.DOCKER_USERNAME}}" --password-stdin
-      - run: git_hash=$(git rev-parse --short "GITHUB_SHA")
+      - run: git_hash=$(git rev-parse master)
       - run: sh .github/dockerize.sh ${{ github.sha }}
 
   deploy-okteto:
@@ -84,7 +84,9 @@ jobs:
       - run: npm i -g k8ss
       - run: echo -e "machine github.com\n  login ${{secrets.GH_TOKEN}}" > ~/.netrc
       - run: git clone https://github.com/Jeff-Tian/k8s-config.git ${HOME}/k8s-config
-      - run: k8ss switch --cluster=okteto --namespace=jeff-tian&&kubectl set image deployment face-swap face-swap=jefftian/face-swap:${{ github.sha }}
+      - run: k8ss switch --cluster=okteto --namespace=jeff-tian
+      - run: kubectl apply -k k8s
+      - run: kubectl set image deployment alpha alpha=jefftian/alpha:${{ github.sha }}
 #
 #      - uses: akhileshns/heroku-deploy@v3.12.12 # This is the action
 #        with:
