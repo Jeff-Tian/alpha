@@ -11,7 +11,7 @@
     "declarations": true
   },
   "scripts": {
-    "start": "docker-compose up -d &&egg-scripts start --daemon --title=egg-server-alpha",
+    "start": "egg-scripts start --daemon --title=egg-server-alpha",
     "stop": "docker-compose down &&egg-scripts stop --title=egg-server-alpha",
     "dev": "npm run start:dev-env&&cross-env NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
     "debug": "egg-bin debug",
