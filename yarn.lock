@@ -2525,10 +2525,18 @@
   dependencies:
     "@types/node" "*"
 
+"@types/empower-core@*":
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/@types/empower-core/-/empower-core-1.2.1.tgz#561fc0b454b34e96bf976ed59e36695c54904c61"
+  integrity sha512-Xil5SHiyOa/kgpw5iWwzCn1L5cL1r9eBOGeMVp7MNK21ibzewPF8UK71t5Sew3MhBYysR46jrD+sSxFw6/0BUA==
+
 "@types/empower@*":
-  version "1.2.30"
-  resolved "https://registry.yarnpkg.com/@types/empower/-/empower-1.2.30.tgz#c7cfc14b3a61e54c74c674c1fbc91ba2df0d1392"
-  integrity sha1-x8/BSzph5Ux0xnTB+8kbot8NE5I=
+  version "1.2.32"
+  resolved "https://registry.yarnpkg.com/@types/empower/-/empower-1.2.32.tgz#5bad0229f7b72835677d11764e18b5d959451d57"
+  integrity sha512-eOVhBTyotB+I6VXdS8gE4J9eqdRzuohpxrV1X1v4WRWhUnmlB2sBKerqAAjw4WTQdQGcUOebRSeL3X991OiFiA==
+  dependencies:
+    "@types/empower-core" "*"
+    "@types/power-assert-formatter" "*"
 
 "@types/eslint-visitor-keys@^1.0.0":
   version "1.0.0"
@@ -2788,14 +2796,14 @@
     "@types/express" "*"
 
 "@types/power-assert-formatter@*":
-  version "1.4.29"
-  resolved "https://registry.yarnpkg.com/@types/power-assert-formatter/-/power-assert-formatter-1.4.29.tgz#d423428085cb2a16c6a1c8b96e4b0bed22936aa8"
-  integrity sha512-K3kBfCD4xnx+W5xLVbkyiKUKHvkZBL3R2fS3/wSoFJORcXdzN3ir13zTok1wNnH+hbv8Wc+YTWJDyqEdNsEXzg==
+  version "1.4.30"
+  resolved "https://registry.yarnpkg.com/@types/power-assert-formatter/-/power-assert-formatter-1.4.30.tgz#424df0d544d362699bc92a61068b51b04778cea5"
+  integrity sha512-QpLIRAdxW9dgGanSJc18RL1J8IYYHRarrkC2fuXxtBFC37PPcfquJiVzj12j5WR3LbVyK4n2FcRBZ11JckjXyA==
 
 "@types/power-assert@^1.4.29":
-  version "1.5.3"
-  resolved "https://registry.yarnpkg.com/@types/power-assert/-/power-assert-1.5.3.tgz#9e415f8d5703375c3d5d7bf912ca7ac334faf0c6"
-  integrity sha512-PzV9RX7RRUBYLxp52ipXo9dSvBnqVR09mcvGt3hXuzoJt0EUpPPv0X3btjCQqrhQ1xLbyt0dfPiGfRfrZB4G0A==
+  version "1.5.8"
+  resolved "https://registry.yarnpkg.com/@types/power-assert/-/power-assert-1.5.8.tgz#cf501bb12df154e9c81cae1b5c3850bfeab546bb"
+  integrity sha512-WL6zeV1mKirC3bngOC1Nv0psFz0BMPJaLORCHH21LrQ2ZjiY5RZnF0GWVle3cZyfgJijZpqNDF6mpkm51hRDBw==
   dependencies:
     "@types/empower" "*"
     "@types/power-assert-formatter" "*"
@@ -7515,9 +7523,9 @@ cookie@^0.4.0:
   integrity sha512-ZwrFkGJxUR3EIoXtO+yVE69Eb7KlixbaeAWfBQB9vVsNn/o+Yw69gBWSSDK825hQNdN+wF8zELf3dFNl/kxkUA==
 
 cookiejar@^2.1.0:
-  version "2.1.2"
-  resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.2.tgz#dd8a235530752f988f9a0844f3fc589e3111125c"
-  integrity sha512-Mw+adcfzPxcPeI+0WlvRrr/3lGVO0bD75SxX6811cxSh1Wbxx7xZBGK1eVtDf6si8rg2lhnUjsVLMFMfbRIuwA==
+  version "2.1.4"
+  resolved "https://registry.yarnpkg.com/cookiejar/-/cookiejar-2.1.4.tgz#ee669c1fea2cf42dc31585469d193fef0d65771b"
+  integrity sha512-LDx6oHrK+PhzLKJU9j5S7/Y3jM/mUHvD/DeI1WQmJn652iPC5Y4TBzC9l+5OMOXlyTTA+SmVUPm0HQUwpD5Jqw==
 
 cookies@~0.8.0:
   version "0.8.0"
@@ -8422,7 +8430,15 @@ detect-port-alt@1.1.6:
     address "^1.0.1"
     debug "^2.6.0"
 
-detect-port@^1.2.1, detect-port@^1.3.0:
+detect-port@^1.2.1:
+  version "1.5.1"
+  resolved "https://registry.yarnpkg.com/detect-port/-/detect-port-1.5.1.tgz#451ca9b6eaf20451acb0799b8ab40dff7718727b"
+  integrity sha512-aBzdj76lueB6uUst5iAs7+0H/oOjqI5D16XUWxlWMIMROhcM0rfsNVk93zTngq1dDNpoXRr++Sus7ETAExppAQ==
+  dependencies:
+    address "^1.0.1"
+    debug "4"
+
+detect-port@^1.3.0:
   version "1.3.0"
   resolved "https://registry.yarnpkg.com/detect-port/-/detect-port-1.3.0.tgz#d9c40e9accadd4df5cac6a782aefd014d573d1f1"
   integrity sha512-E+B1gzkl2gqxt1IhUzwjrxBKRqx1UzC3WLONHinn8S3T6lwV/agVCyitiFOsGJ/eYuEUBvD71MZHy3Pv1G9doQ==
@@ -11088,9 +11104,9 @@ formdata-node@^4.3.3:
     web-streams-polyfill "4.0.0-beta.3"
 
 formidable@^1.2.0:
-  version "1.2.2"
-  resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.2.2.tgz#bf69aea2972982675f00865342b982986f6b8dd9"
-  integrity sha512-V8gLm+41I/8kguQ4/o1D3RIHRmhYFG4pnNyonvua+40rqcEmT4+V71yaZ3B457xbbgCsCfjSPi65u/W6vK1U5Q==
+  version "1.2.6"
+  resolved "https://registry.yarnpkg.com/formidable/-/formidable-1.2.6.tgz#d2a51d60162bbc9b4a055d8457a7c75315d1a168"
+  integrity sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==
 
 formstream@^1.1.0:
   version "1.1.0"
@@ -11615,7 +11631,7 @@ globby@^11.0.1, globby@^11.0.2:
 globby@^6.1.0:
   version "6.1.0"
   resolved "https://registry.yarnpkg.com/globby/-/globby-6.1.0.tgz#f5a6d70e8395e21c858fb0489d64df02424d506c"
-  integrity sha1-9abXDoOV4hyFj7BInWTfAkJNUGw=
+  integrity sha512-KVbFv2TQtbzCoxAnfD6JcHZTYCzyliEaaeM/gH8qQdkKr5s0OP9scEgvdcngyk7AVdY6YVW/TJHd+lQ/Df3Daw==
   dependencies:
     array-union "^1.0.1"
     glob "^7.0.3"
@@ -14061,7 +14077,14 @@ known-css-properties@^0.21.0:
   resolved "https://registry.yarnpkg.com/known-css-properties/-/known-css-properties-0.21.0.tgz#15fbd0bbb83447f3ce09d8af247ed47c68ede80d"
   integrity sha512-sZLUnTqimCkvkgRS+kbPlYW5o8q5w1cu+uIisKpEWkj31I8mx8kNG162DwRav8Zirkva6N5uoFsm9kzK4mUXjw==
 
-ko-sleep@^1.0.2, ko-sleep@^1.0.3:
+ko-sleep@^1.0.2:
+  version "1.1.4"
+  resolved "https://registry.yarnpkg.com/ko-sleep/-/ko-sleep-1.1.4.tgz#56462fba835e07bb8c26cfa083f9893a3fde5469"
+  integrity sha512-s05WGpvvzyTuRlRE8fM7ru2Z3O+InbJuBcckTWKg2W+2c1k6SnFa3IfiSSt0/peFrlYAXgNoxuJWWVNmWh+K/A==
+  dependencies:
+    ms "*"
+
+ko-sleep@^1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/ko-sleep/-/ko-sleep-1.0.3.tgz#28a2a0a1485e8b7f415ff488dee17d24788ab082"
   integrity sha1-KKKgoUhei39BX/SI3uF9JHiKsII=
@@ -15550,6 +15573,11 @@ move-concurrently@^1.0.1:
     rimraf "^2.5.4"
     run-queue "^1.0.3"
 
+ms@*, ms@^2.0.0, ms@^2.1.1, ms@^2.1.3:
+  version "2.1.3"
+  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
+  integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
+
 ms@2.0.0:
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.0.0.tgz#5608aeadfc00be6c2901df5f9861788de0d597c8"
@@ -15564,11 +15592,6 @@ ms@2.1.2:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.2.tgz#d09d1f357b443f493382a8eb3ccd183872ae6009"
   integrity sha512-sGkPx+VjMtmA6MX27oA4FBFELFCZZ4S4XqeGOXCv68tT+jb3vk/RyaKWP0PTKyWtmLSM0b+adUTEvbs1PEaH2w==
-
-ms@^2.0.0, ms@^2.1.1, ms@^2.1.3:
-  version "2.1.3"
-  resolved "https://registry.yarnpkg.com/ms/-/ms-2.1.3.tgz#574c8138ce1d2b5861f0b44579dbadd60c6615b2"
-  integrity sha512-6FlzubTLZG3J2a/NVCAleEhjzq5oxgHyaCU9yYXvcLsvoVaHJq/s5xXI6/XXP6tz7R9xAOtHnSO/tXtF3WRTlA==
 
 muk-prop@^1.0.0:
   version "1.2.1"
@@ -18433,10 +18456,17 @@ qs@6.7.0:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.7.0.tgz#41dc1a015e3d581f1621776be31afb2876a9b1bc"
   integrity sha512-VCdBRNFTX1fyE7Nb6FYoURo/SPe62QCaAyzJvUjwRaIsc+NePBEniHlvxFmmX56+HZphIGtV0XeCirBtpDrTyQ==
 
-qs@^6.4.0, qs@^6.5.1, qs@^6.5.2, qs@^6.9.1, qs@^6.9.4:
+qs@^6.4.0, qs@^6.5.2, qs@^6.9.1, qs@^6.9.4:
   version "6.10.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.10.0.tgz#8b6519121ab291c316a3e4d49cecf6d13d8c7fe5"
   integrity sha512-yjACOWijC6L/kmPZZAsVBNY2zfHSIbpdpL977quseu56/8BZ2LoF5axK2bGhbzhVKt7V9xgWTtpyLbxwIoER0Q==
+  dependencies:
+    side-channel "^1.0.4"
+
+qs@^6.5.1:
+  version "6.11.0"
+  resolved "https://registry.yarnpkg.com/qs/-/qs-6.11.0.tgz#fd0d963446f7a65e1367e01abd85429453f0c37a"
+  integrity sha512-MvjoMCJwEarSbUYk5O+nmoSzSutSsTwF85zcHPQ9OrlFoZOYIjaqBAJIqIXjptyD5vThxGq52Xu/MaJzRkIk4Q==
   dependencies:
     side-channel "^1.0.4"
 

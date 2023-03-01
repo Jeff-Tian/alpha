@@ -15,7 +15,7 @@
     "stop": "docker-compose down &&egg-scripts stop --title=egg-server-alpha",
     "dev": "npm run start:dev-env&&cross-env NODE_ENV=local EGG_SERVER_ENV=local egg-bin dev",
     "debug": "egg-bin debug",
-    "test-with-full-trace": "egg-bin test TESTS test/app/passport-wechat-hardway.test.ts --full-trace",
+    "test-with-full-trace": "egg-bin test TESTS test/app/controller/proxy.test.ts --full-trace",
     "test": "npm run migrate&&egg-bin test",
     "test-local-changed": "yarn start:dev-env&&npm run migrate&&egg-bin test --changed",
     "test-local": "npm run lint -- --fix && npm test",

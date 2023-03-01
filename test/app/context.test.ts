@@ -1,6 +1,5 @@
-import assert = require('assert')
 // tslint:disable-next-line: no-submodule-imports
-import { app } from 'egg-mock/bootstrap';
+import { app, assert } from 'egg-mock/bootstrap';
 
 describe('test/app.test.ts', () => {
   describe('basic', () => {

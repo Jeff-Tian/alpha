@@ -3,6 +3,8 @@ import { EggAppConfig, PowerPartial } from 'egg'
 export default () => {
   const config: PowerPartial<EggAppConfig> = {}
 
+  config.keys = 'alpha_1559644196238_5958'
+
   config.passportLocal = {
     usernameField: 'username',
     // tslint:disable-next-line:no-hardcoded-credentials

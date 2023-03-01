@@ -22,9 +22,9 @@ export const curlirize = config => {
 
 export default class ProxyController extends Controller {
   /**
-   * query.url: url to be proxied
-   * query.format: output format
-   */
+     * query.url: url to be proxied
+     * query.format: output format
+     */
   public async get() {
     const { ctx } = this
 
@@ -40,13 +40,18 @@ export default class ProxyController extends Controller {
           headers,
         }
       } else {
-        ctx.logger.info('headers are ', { headers })
+        ctx.logger.info('headers are ', { ...headers })
         ctx.status = status
-        ctx.set({ ...headers, 'Access-Control-Allow-Origin': '*' })
+        ctx.logger.info('current headers = ', ctx.headers);
+        ctx.set({
+          'Content-Type': headers['content-type'],
+          'Access-Control-Allow-Origin': '*',
+          'Set-Cookie': headers['set-cookie'],
+        })
         ctx.body = data
       }
 
-      ctx.logger.info('data is buffer for ', { url: ctx.query.url })
+      ctx.logger.info('data is buffer for ', { url: ctx.query.url, data: data.toString('utf-8') })
       return
     }
 
@@ -75,9 +80,9 @@ export default class ProxyController extends Controller {
   }
 
   /**
-   * query.url: url to be proxied
-   * query.dataType: dataType passed to outgoing request
-   */
+     * query.url: url to be proxied
+     * query.dataType: dataType passed to outgoing request
+     */
   public async post() {
     const { ctx } = this
 
