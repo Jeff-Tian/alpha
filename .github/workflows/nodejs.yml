@@ -81,6 +81,7 @@ jobs:
     steps:
       - uses: actions/checkout@v3
 
+      - run: mkdir ${HOME}/.aws
       - run: echo -e "[lambda-doc-rotary]\naws_access_key_id = ${{secrets.AWS_ACCESS_KEY}}\naws_secret_access_key = ${{secrets.AWS_SECRET_KEY}}\n" > ~/.aws/config
 
       - run: wget https://github.com/mozilla/sops/releases/download/v3.7.3/sops-v3.7.3.linux.amd64
