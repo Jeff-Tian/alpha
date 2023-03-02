@@ -32,7 +32,7 @@ spec:
           imagePullPolicy: Always
           name: alpha
           ports:
-            - containerPort: 5000
+            - containerPort: 7001
               name: http
               protocol: TCP
           resources:
@@ -45,7 +45,7 @@ spec:
           envFrom: []
           readinessProbe:
             httpGet:
-              port: 5000
+              port: 7001
               path: /
       restartPolicy: Always
       terminationGracePeriodSeconds: 30
