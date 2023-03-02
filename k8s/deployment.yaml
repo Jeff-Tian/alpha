@@ -42,7 +42,9 @@ spec:
             requests:
               cpu: 250m
               memory: 256Mi
-          envFrom: []
+          envFrom:
+            - secretRef:
+                name: alpha-secrets
 #          readinessProbe:
 #            httpGet:
 #              port: 7001
