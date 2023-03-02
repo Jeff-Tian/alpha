@@ -10,14 +10,11 @@ RUN \
 
 WORKDIR /usr/src/app
 
-COPY package.json /usr/src/app/
-COPY yarn.lock /usr/src/app/
-
-RUN yarn
-
 # RUN npm i --registry=https://registry.npm.taobao.org
 
 COPY . /usr/src/app
+
+RUN yarn && yarn build
 
 EXPOSE 7001
 
