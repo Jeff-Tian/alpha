@@ -21,4 +21,4 @@ COPY . /usr/src/app
 
 EXPOSE 7001
 
-CMD yarn start
+CMD yarn eggstart
