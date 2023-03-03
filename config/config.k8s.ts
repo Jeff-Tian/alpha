@@ -1,4 +1,5 @@
 import { EggAppConfig, PowerPartial } from 'egg';
+import redisUrlParse from 'redis-url-parse'
 
 export default () => {
   const config: PowerPartial<EggAppConfig> = {};
@@ -61,6 +62,19 @@ export default () => {
       queryName: '_csrf',
       bodyName: 'uniheart',
     },
+  };
+
+  const redisUri = process.env.REDIS_URI
+  const parsed = redisUrlParse(redisUri)
+
+  config.redis = {
+    client: {
+      port: parsed.port,
+      host: parsed.host,
+      password: parsed.password,
+      db: parsed.database,
+    },
+    agent: true,
   };
 
   return config;
