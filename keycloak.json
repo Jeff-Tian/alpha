@@ -1,6 +1,6 @@
 {
     "realm": "UniHeart",
-    "auth-server-url": "https://keycloak.jiwai.win/auth",
+    "auth-server-url": "https://keycloak.jiwai.win",
     "ssl-required": "external",
     "resource": "UniHeart-Client"
 }
