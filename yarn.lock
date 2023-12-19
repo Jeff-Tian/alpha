@@ -15565,7 +15565,7 @@ moment@2.22.2:
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.22.2.tgz#3c257f9839fc0e93ff53149632239eb90783ff66"
   integrity sha1-PCV/mDn8DpP/UxSWMiOeuQeD/2Y=
 
-moment@2.x, moment@^2.23.0, moment@^2.29.1, moment@^2.29.2:
+moment@2.x, moment@^2.23.0, moment@^2.26.0, moment@^2.29.1, moment@^2.29.2:
   version "2.29.4"
   resolved "https://registry.yarnpkg.com/moment/-/moment-2.29.4.tgz#3dbe052889fe7c1b2ed966fcb3a77328964ef108"
   integrity sha512-5LC9SOxjSc2HF6vO2CyuTDNivEdoz2IvyJJGj6X8DJ0eFyfszE0QiEd+iXmBvUP3WHxSjFH/vIsA0EN00cgr8w==
@@ -21204,6 +21204,11 @@ sequelize-pool@^2.3.0:
   resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-2.3.0.tgz#64f1fe8744228172c474f530604b6133be64993d"
   integrity sha512-Ibz08vnXvkZ8LJTiUOxRcj1Ckdn7qafNZ2t59jYHMX1VIebTAOYefWdRYFt6z6+hy52WGthAHAoLc9hvk3onqA==
 
+sequelize-pool@^6.0.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/sequelize-pool/-/sequelize-pool-6.1.0.tgz#caaa0c1e324d3c2c3a399fed2c7998970925d668"
+  integrity sha512-4YwEw3ZgK/tY/so+GfnSgXkdwIJJ1I32uZJztIEgZeAO6HMgj64OzySbWLgxj+tXhZCJnzRfkY9gINw8Ft8ZMg==
+
 sequelize-typescript@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/sequelize-typescript/-/sequelize-typescript-1.0.0.tgz#0301059cfcef117a5bf249cc2ea85233de2d3ee5"
@@ -21211,26 +21216,24 @@ sequelize-typescript@1.0.0:
   dependencies:
     glob "7.1.2"
 
-sequelize@5.21.2:
-  version "5.21.2"
-  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-5.21.2.tgz#0daeee9bef37d49490b72a2c6891d53044f65a18"
-  integrity sha512-MEqJ9NwQi4oy/ylLb2WkfPmhki/BOXC/gJfc8uWUUTETcpLwD1y/5bI1kqVh+qWcECHNsE9G4lmhj5hFbsxqvA==
+sequelize@6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/sequelize/-/sequelize-6.1.0.tgz#576eb95709142dbc96f4a8f2b166932cc2781f8d"
+  integrity sha512-8x603RQrj14QZ4dGpsYPMr3YGqsihNX9WPclNN83prwrhHAJH9LHfOG/pK2XUdrwYtbRz+2a7xKXK7rVdw3P2A==
   dependencies:
-    bluebird "^3.5.0"
-    cls-bluebird "^2.1.0"
     debug "^4.1.1"
     dottie "^2.0.0"
     inflection "1.12.0"
     lodash "^4.17.15"
-    moment "^2.24.0"
-    moment-timezone "^0.5.21"
+    moment "^2.26.0"
+    moment-timezone "^0.5.31"
     retry-as-promised "^3.2.0"
-    semver "^6.3.0"
-    sequelize-pool "^2.3.0"
+    semver "^7.3.2"
+    sequelize-pool "^6.0.0"
     toposort-class "^1.0.1"
-    uuid "^3.3.3"
+    uuid "^8.1.0"
     validator "^10.11.0"
-    wkx "^0.4.8"
+    wkx "^0.5.0"
 
 sequelize@^5.0.0:
   version "5.22.4"
@@ -23717,7 +23720,7 @@ uuid@^3.0.0, uuid@^3.0.1, uuid@^3.1.0, uuid@^3.3.2, uuid@^3.3.3:
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
 
-uuid@^8.3.0, uuid@^8.3.2:
+uuid@^8.1.0, uuid@^8.3.0, uuid@^8.3.2:
   version "8.3.2"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
   integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
@@ -24076,6 +24079,13 @@ wkx@^0.4.8:
   version "0.4.8"
   resolved "https://registry.yarnpkg.com/wkx/-/wkx-0.4.8.tgz#a092cf088d112683fdc7182fd31493b2c5820003"
   integrity sha512-ikPXMM9IR/gy/LwiOSqWlSL3X/J5uk9EO2hHNRXS41eTLXaUFEVw9fn/593jW/tE5tedNg8YjT5HkCa4FqQZyQ==
+  dependencies:
+    "@types/node" "*"
+
+wkx@^0.5.0:
+  version "0.5.0"
+  resolved "https://registry.yarnpkg.com/wkx/-/wkx-0.5.0.tgz#c6c37019acf40e517cc6b94657a25a3d4aa33e8c"
+  integrity sha512-Xng/d4Ichh8uN4l0FToV/258EjMGU9MGcA0HV2d9B/ZpZB3lqQm7nkOdZdm5GhKtLLhAE7PiVQwN4eN+2YJJUg==
   dependencies:
     "@types/node" "*"
 
