@@ -2,6 +2,7 @@ import { Controller } from 'egg'
 import querystring from 'querystring'
 import WechatOAuth from 'wechat-oauth-ts'
 import { KeySecretSelection } from '../validate/GetAccessTokenRequest'
+import convert from 'xml-js'
 
 export default class WechatDevController extends Controller {
   public async getAccessToken() {
@@ -88,6 +89,31 @@ export default class WechatDevController extends Controller {
 
     ctx.logger.info('get message from wechat: ', { message })
 
+    let jsonResults: any[] = [];
+    try {
+      const jsonClients = JSON.parse(
+        process.env.WECHAT_REDIRECT_CLIENTS_JSON || JSON.stringify([]),
+      )
+      const json = convert.xml2js(message);
+
+      jsonResults = (await Promise.all(
+        jsonClients.map(c =>
+          ctx.curl(c, {
+            method: 'POST',
+            contentType: 'application/json',
+            dataType: 'json',
+            data: json,
+            headers: {
+              'content-type': 'application/json',
+            },
+          })))
+      ).map((r: any) => r.status)
+
+      ctx.logger.info('redirect json results: ', jsonResults);
+    } catch (ex) {
+      ctx.logger.error('redirect json results error: ', ex);
+    }
+
     const clients = JSON.parse(
       process.env.WECHAT_REDIRECT_CLIENTS || JSON.stringify([]),
     )
@@ -108,7 +134,7 @@ export default class WechatDevController extends Controller {
 
     ctx.logger.info('redirect results: ', results)
 
-    ctx.body = { message, redirects: results }
+    ctx.body = { message, redirects: results, jsonRedirects: jsonResults }
   }
 
   public async code2Session() {
@@ -150,8 +176,8 @@ export default class WechatDevController extends Controller {
     if (referer) {
       ctx.redirect(
         referer +
-          (referer.indexOf('?') > 0 ? '&' : '?') +
-          querystring.stringify(accessTokenResult),
+                (referer.indexOf('?') > 0 ? '&' : '?') +
+                querystring.stringify(accessTokenResult),
       )
     } else {
       ctx.body = accessTokenResult
