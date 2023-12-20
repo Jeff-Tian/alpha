@@ -101,10 +101,9 @@ export default class WechatDevController extends Controller {
           ctx.curl(c, {
             method: 'POST',
             contentType: 'application/json',
-            dataType: 'json',
+            dataType: 'text',
             data: json,
             headers: {
-              'content-type': 'application/json',
               accept: 'text/plain',
             },
           })))
