@@ -2150,10 +2150,10 @@
     "@jridgewell/resolve-uri" "^3.0.3"
     "@jridgewell/sourcemap-codec" "^1.4.10"
 
-"@koa/cors@^3.0.0":
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/@koa/cors/-/cors-3.1.0.tgz#618bb073438cfdbd3ebd0e648a76e33b84f3a3b2"
-  integrity sha512-7ulRC1da/rBa6kj6P4g2aJfnET3z8Uf3SWu60cjbtxTA5g8lxRdX/Bd2P92EagGwwAhANeNw8T8if99rJliR6Q==
+"@koa/cors@^5.0.0":
+  version "5.0.0"
+  resolved "https://registry.yarnpkg.com/@koa/cors/-/cors-5.0.0.tgz#0029b5f057fa0d0ae0e37dd2c89ece315a0daffd"
+  integrity sha512-x/iUDjcS90W69PryLDIMgFyV21YLTnG9zOpPXS7Bkt2b8AsY3zZsIpOLBkYr9fBcF3HbkKaER5hOBZLfpLgYNw==
   dependencies:
     vary "^1.1.2"
 
@@ -9014,12 +9014,12 @@ egg-core@^4.26.1:
     ready-callback "^2.1.0"
     utility "^1.16.1"
 
-egg-cors@2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/egg-cors/-/egg-cors-2.2.0.tgz#d77a589546668247936a7ab4d17bb1bffa529119"
-  integrity sha512-MvDiMhntQkw7Nz+XIIVk2AbB1Nk1q/u2MX/vWjHhgUzcAwzEvuV7gzz/e9/okG0qqJHU7H9+5U3Wod2iTtzrnw==
+egg-cors@3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/egg-cors/-/egg-cors-3.0.0.tgz#f485937621d7454d818131671e73a958b7b7bdd8"
+  integrity sha512-CBV1zinNR/F9vEQYvEE9IEpfFZIZX4ii7kgj/8uiKxfCjWJgkrxXnq/bj0ewQk8PPKam3WnHDNkw36tDzMx37g==
   dependencies:
-    "@koa/cors" "^3.0.0"
+    "@koa/cors" "^5.0.0"
 
 egg-development@^2.7.0:
   version "2.7.0"
