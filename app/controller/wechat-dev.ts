@@ -107,7 +107,7 @@ export default class WechatDevController extends Controller {
               'content-type': 'application/json',
             },
           })))
-      ).map((r: any) => r.status)
+      ).map((r: any) => r.data)
 
       ctx.logger.info('redirect json results: ', jsonResults);
     } catch (ex) {
@@ -134,7 +134,11 @@ export default class WechatDevController extends Controller {
 
     ctx.logger.info('redirect results: ', results)
 
-    ctx.body = { message, redirects: results, jsonRedirects: jsonResults }
+    if (jsonResults && jsonResults.length > 0) {
+      ctx.body = jsonResults[0]
+    } else {
+      ctx.body = { message, redirects: results, jsonRedirects: jsonResults }
+    }
   }
 
   public async code2Session() {
