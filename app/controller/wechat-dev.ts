@@ -105,6 +105,7 @@ export default class WechatDevController extends Controller {
             data: json,
             headers: {
               'content-type': 'application/json',
+              accept: 'text/plain',
             },
           })))
       ).map((r: any) => r.data)
@@ -135,6 +136,7 @@ export default class WechatDevController extends Controller {
     ctx.logger.info('redirect results: ', results)
 
     if (jsonResults && jsonResults.length > 0) {
+      ctx.set('Content-Type', 'text/plain')
       ctx.body = jsonResults[0]
     } else {
       ctx.body = { message, redirects: results, jsonRedirects: jsonResults }
