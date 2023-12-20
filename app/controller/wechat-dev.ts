@@ -104,6 +104,7 @@ export default class WechatDevController extends Controller {
             dataType: 'text',
             data: json,
             headers: {
+              'content-type': 'application/json',
               accept: 'text/plain',
             },
           })))
