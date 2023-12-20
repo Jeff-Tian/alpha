@@ -72,5 +72,7 @@ declare module 'egg' {
       callbackURL?: string;
       proxy?: boolean;
     };
+
+    sequelize: any;
   }
 }

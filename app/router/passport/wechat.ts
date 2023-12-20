@@ -51,4 +51,10 @@ export default (app: Application) => {
     '/endpoints/wechat/message',
     controller.wechatDev.message,
   );
+
+  router.get(
+      'wechatDev.message',
+      '/endpoints/wechat/message',
+      controller.wechatDev.getMessage,
+  )
 };

@@ -73,6 +73,15 @@ export default class WechatDevController extends Controller {
     }
   }
 
+  public async getMessage() {
+    const { ctx } = this
+    const { signature, timestamp, nonce, echostr } = ctx.query
+
+    ctx.logger.info('get message from wechat: ', { signature, timestamp, nonce, echostr })
+    ctx.set('Content-Type', 'text/plain');
+    ctx.body = echostr
+  }
+
   public async message() {
     const { ctx } = this
     const message = ctx.request.body
